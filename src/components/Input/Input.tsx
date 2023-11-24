@@ -5,31 +5,67 @@ import {
   UseControllerProps
 } from 'react-hook-form';
 import React from 'react';
-import { TextField, TextFieldProps } from '@mui/material';
+import UilSearch from '@iconscout/react-unicons/icons/uil-search';
+import { InputStyleProps, styles } from './Input.styles';
+import { SearchInput } from './Search/SearchInput';
 
 type ControlledInputProps<T extends FieldValues> = UseControllerProps<T> &
   InputProps;
 
-const InputType = {
-  text: 'text',
-  number: 'number'
-};
+// const InputType = {
+//   text: 'text',
+//   number: 'number'
+// };
 
-type InputProps = TextFieldProps & {
+type InputProps = {
   errorText?: FieldError;
   label?: string;
-};
+  startAdornment?: React.ReactElement;
+} & InputStyleProps;
 
-export const Input: React.FC<InputProps> = ({ errorText, label, value }) => {
+export const Input: React.FC<InputProps> = ({
+  errorText,
+  label,
+  inputType,
+  startAdornment,
+  ...rest
+}) => {
+  const style = styles({ inputType });
   return (
-    <div>
-      <TextField
-        variant={'outlined'}
-        label={label}
-        error={errorText ? true : false}
-        helperText={errorText && errorText.message}
-      />
-    </div>
+    <>
+      {inputType === 'search' ? (
+        <>
+          {startAdornment ? (
+            <SearchInput
+              errorText={errorText}
+              label={label}
+              startAdornment={startAdornment}
+              inputType={'search'}
+            />
+          ) : (
+            <SearchInput
+              errorText={errorText}
+              label={label}
+              startAdornment={<UilSearch size="15" />}
+              inputType={'search'}
+            />
+          )}
+        </>
+      ) : (
+        <>
+          <input
+            {...rest}
+            placeholder={label || 'Email'}
+            style={style(errorText).inputComponent}
+          />
+          {errorText && (
+            <span style={{ color: 'red', fontSize: 12 }}>
+              {errorText.message}
+            </span>
+          )}
+        </>
+      )}
+    </>
   );
 };
 
@@ -42,10 +78,9 @@ export const ControlledInput = <T extends FieldValues>({
     <Controller
       control={control}
       name={name}
-      render={({
-        field: { onChange, ...restField },
-        fieldState: { error }
-      }) => <Input {...restField} {...rest} errorText={error} />}
+      render={({ field, fieldState }) => (
+        <Input {...field} {...rest} errorText={fieldState.error} />
+      )}
     />
   );
 };

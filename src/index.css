@@ -11,3 +11,44 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'InterRegular';
+  src: local('InterRegular'),
+    url('./fonts/inter/Inter-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'InterBold';
+  src: local('InterBold'),
+    url('./fonts/inter/Inter-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'InterLight';
+  src: local('InterLight'),
+    url('./fonts/inter/Inter-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'OxygenRegular';
+  src: local('OxygenRegular'),
+    url('./fonts/oxygen/Oxygen-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'OxygenBold';
+  src: local('OxygenBold'),
+    url('./fonts/oxygen/Oxygen-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'OxygenLight';
+  src: local('OxygenLight'),
+    url('./fonts/oxygen/Oxygen-Light.ttf') format('truetype');
+  font-weight: lighter;
+}
