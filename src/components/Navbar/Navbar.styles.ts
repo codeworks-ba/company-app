@@ -1,18 +1,20 @@
-export const styles = {
-  textColor: {
-    margin: 0,
-    fontFamily: 'OxygenBold',
-    fontSize: 36,
-    textDecoration: 'none',
-    color: 'black',
-    '&:hover': {
-      color: 'orange'
-    }
-  },
+import { makeStyles } from '../../style/theme/MakeStyles';
 
+export const styles = makeStyles({
   navContainer: {
-    backgroundColor: 'red',
-    justifyContent: 'space-between',
-    alignItems: 'stretch'
+    display: 'flex',
+    flexDirection: 'row',
+    height: '113px',
+    alignItems: 'center',
+    padding: '0px 180px',
+    gap: 46
+  },
+  titleWrapper: {
+    display: 'flex',
+    flex: 1
+  },
+  buttonsWrapper: {
+    display: 'flex',
+    gap: 12
   }
-};
+});

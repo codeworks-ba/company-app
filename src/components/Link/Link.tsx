@@ -22,7 +22,7 @@ export const Link: React.FC<LinkProps> = ({
 }) => {
   return (
     <a href={link} style={{ textDecoration: textDecoration }}>
-      <Typography text={text} font={font} size={size} color={color} />
+      <Typography>{text}</Typography>
     </a>
   );
 };

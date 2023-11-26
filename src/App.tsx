@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import { Routes } from './routes';
-import { RecoilRoot } from 'recoil';
+import { AppRoutes } from './routes';
+import { AuthProvider } from './providers/auth/authContext';
 
-export const App = () => {
+export const App: React.FC = () => {
   return (
-    <RecoilRoot>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
-    </RecoilRoot>
+    <BrowserRouter>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </BrowserRouter>
   );
 };

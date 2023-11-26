@@ -1,7 +1,7 @@
 import React from 'react';
 import { ControlledInput } from '../../components/Input/Input';
 import * as yup from 'yup';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { LoginUserDto } from '../../services/types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '../../components/Button/Button';
@@ -28,10 +28,9 @@ const validationSchema = yup.object({
 });
 
 export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
-  const { control, handleSubmit, setFocus, register, formState } =
-    useForm<LoginUserDto>({
-      resolver: yupResolver(validationSchema)
-    });
+  const { control, handleSubmit } = useForm<LoginUserDto>({
+    resolver: yupResolver(validationSchema)
+  });
 
   const onSubmit = (data: LoginUserDto) => {
     console.log('DATA: ', data.test3.toISOString());
@@ -137,12 +136,12 @@ export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
           alignItems: 'center'
         }}
       >
-        <Typography text="OxygenLight" size={'xs'} font={'OxygenLight'} />
-        <Typography text="OxygenLight" size={'s'} font={'OxygenLight'} />
-        <Typography text="OxygenLight" size={'m'} font={'OxygenLight'} />
-        <Typography text="OxygenLight" size={'l'} font={'OxygenLight'} />
-        <Typography text="OxygenLight" size={'xl'} font={'OxygenLight'} />
-        <Typography text="OxygenLight" size={'xxl'} font={'OxygenLight'} />
+        <Typography>OxygenLight</Typography>
+        <Typography>OxygenLight</Typography>
+        <Typography>OxygenLight</Typography>
+        <Typography>OxygenLight</Typography>
+        <Typography>OxygenLight</Typography>
+        <Typography>OxygenLight</Typography>
       </div>
       <div
         style={{
@@ -152,12 +151,12 @@ export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
           alignItems: 'center'
         }}
       >
-        <Typography text="OxygenRegular" size={'xs'} font={'OxygenRegular'} />
-        <Typography text="OxygenRegular" size={'s'} font={'OxygenRegular'} />
-        <Typography text="OxygenRegular" size={'m'} font={'OxygenRegular'} />
-        <Typography text="OxygenRegular" size={'l'} font={'OxygenRegular'} />
-        <Typography text="OxygenRegular" size={'xl'} font={'OxygenRegular'} />
-        <Typography text="OxygenRegular" size={'xxl'} font={'OxygenRegular'} />
+        <Typography>OxygenRegular</Typography>
+        <Typography>OxygenRegular</Typography>
+        <Typography>OxygenRegular</Typography>
+        <Typography>OxygenRegular</Typography>
+        <Typography>OxygenRegular</Typography>
+        <Typography>OxygenRegular</Typography>
       </div>
       <div
         style={{
@@ -167,12 +166,12 @@ export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
           alignItems: 'center'
         }}
       >
-        <Typography text="OxygenBold" size={'xs'} font={'OxygenBold'} />
-        <Typography text="OxygenBold" size={'s'} font={'OxygenBold'} />
-        <Typography text="OxygenBold" size={'m'} font={'OxygenBold'} />
-        <Typography text="OxygenBold" size={'l'} font={'OxygenBold'} />
-        <Typography text="OxygenBold" size={'xl'} font={'OxygenBold'} />
-        <Typography text="OxygenBold" size={'xxl'} font={'OxygenBold'} />
+        <Typography>OxygenBold</Typography>
+        <Typography>OxygenBold</Typography>
+        <Typography>OxygenBold</Typography>
+        <Typography>OxygenBold</Typography>
+        <Typography>OxygenBold</Typography>
+        <Typography>OxygenBold</Typography>
       </div>
       <div
         style={{
@@ -182,12 +181,12 @@ export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
           alignItems: 'center'
         }}
       >
-        <Typography text="InterRegular" size={'xs'} font={'InterRegular'} />
-        <Typography text="InterRegular" size={'s'} font={'InterRegular'} />
-        <Typography text="InterRegular" size={'m'} font={'InterRegular'} />
-        <Typography text="InterRegular" size={'l'} font={'InterRegular'} />
-        <Typography text="InterRegular" size={'xl'} font={'InterRegular'} />
-        <Typography text="InterRegular" size={'xxl'} font={'InterRegular'} />
+        <Typography>InterRegular</Typography>
+        <Typography>InterRegular</Typography>
+        <Typography>InterRegular</Typography>
+        <Typography>InterRegular</Typography>
+        <Typography>InterRegular</Typography>
+        <Typography>InterRegular</Typography>
       </div>
       <div
         style={{
@@ -197,12 +196,12 @@ export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
           alignItems: 'center'
         }}
       >
-        <Typography text="InterBold" size={'xs'} font={'InterBold'} />
-        <Typography text="InterBold" size={'s'} font={'InterBold'} />
-        <Typography text="InterBold" size={'m'} font={'InterBold'} />
-        <Typography text="InterBold" size={'l'} font={'InterBold'} />
-        <Typography text="InterBold" size={'xl'} font={'InterBold'} />
-        <Typography text="InterBold" size={'xxl'} font={'InterBold'} />
+        <Typography>InterBold</Typography>
+        <Typography>InterBold</Typography>
+        <Typography>InterBold</Typography>
+        <Typography>InterBold</Typography>
+        <Typography>InterBold</Typography>
+        <Typography>InterBold</Typography>
       </div>
       <div style={{ display: 'flex', flexDirection: 'row', gap: 10 }}>
         <div style={{ width: '304px', height: '304 px' }}>

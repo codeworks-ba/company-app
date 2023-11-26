@@ -37,12 +37,12 @@ export const ImageCard: React.FC<ImageCardProps> = ({
 
       {type === 'headerAndSubtitle' ? (
         <div style={style.imageCardComponent}>
-          <Typography text={headerText} font={'InterBold'} />
-          <Typography text={subtitleText} font={'InterRegular'} />
+          <Typography>{headerText}</Typography>
+          <Typography>{subtitleText}</Typography>
         </div>
       ) : (
         <div style={style.imageCardComponent}>
-          <Typography text={headerText} font={'InterRegular'} />
+          <Typography>{headerText}</Typography>
         </div>
       )}
     </div>

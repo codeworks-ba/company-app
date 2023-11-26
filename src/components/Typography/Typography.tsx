@@ -1,38 +1,29 @@
-import React from 'react';
-import { Font, Size } from './Typography.types';
-import { styles } from './Typography.styles';
+import React, { PropsWithChildren } from 'react';
+import { TypographyVariants, styles } from './Typography.styles';
+import { themeColors } from '../../style/theme/colors';
 
-type TypographyProps = {
-  size?: Size;
-  font?: Font;
-  text: string;
-  color?: string;
+const colorVariants = {
+  primary: themeColors.primaryTextColor,
+  secondary: themeColors.secondaryTextColor
 };
 
-export const Typography: React.FC<TypographyProps> = ({
-  size = 's',
-  font = 'InterRegular',
-  text,
-  color = 'black',
-  ...rest
-}) => {
-  const style = styles(color, font);
-  const calculateSize = () => {
-    switch (size) {
-      case 'xs':
-        return <h6 style={style.typographyComponent}>{text}</h6>;
-      case 's':
-        return <p style={style.typographyComponent}>{text}</p>;
-      case 'm':
-        return <h4 style={style.typographyComponent}>{text}</h4>;
-      case 'l':
-        return <h3 style={style.typographyComponent}>{text}</h3>;
-      case 'xl':
-        return <h2 style={style.typographyComponent}>{text}</h2>;
-      case 'xxl':
-        return <h1 style={style.typographyComponent}>{text}</h1>;
-    }
-  };
+export type ColorVariants = keyof typeof colorVariants;
 
-  return <>{calculateSize()}</>;
+type TypographyProps = {
+  variant?: TypographyVariants;
+  color?: ColorVariants;
+};
+
+export const Typography: React.FC<PropsWithChildren<TypographyProps>> = ({
+  variant = 'bodyNormal',
+  color = 'primary',
+  children
+}) => {
+  const style = styles();
+
+  return (
+    <div style={{ ...style[variant], color: colorVariants[color] }}>
+      {children}
+    </div>
+  );
 };

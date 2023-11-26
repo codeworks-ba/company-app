@@ -31,10 +31,9 @@ const validationSchema = yup.object({
 });
 
 export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
-  const { control, handleSubmit, setFocus, register, formState } =
-    useForm<CreateUserDto>({
-      resolver: yupResolver(validationSchema)
-    });
+  const { control, handleSubmit } = useForm<CreateUserDto>({
+    resolver: yupResolver(validationSchema)
+  });
 
   const onSubmit = (data: CreateUserDto) => {
     console.log('DATA: ', data);
@@ -56,21 +55,13 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
   return (
     <div style={styles.mainContainer}>
       <div style={styles.headerContainer}>
-        <Typography
-          text="Let's create your account!"
-          font={'InterBold'}
-          size="xxl"
-        />
+        <Typography>Kreirajmo tvoj profil!</Typography>
       </div>
       <div style={styles.flexColumn}>
         <div style={styles.flexRowWithGap20}>
           <div style={styles.profilePictureContainer}>
             <div style={{ width: '100%' }}>
-              <Typography
-                text="Upload profile picture"
-                size="m"
-                font="InterLight"
-              />
+              <Typography>Dodaj sliku profila</Typography>
             </div>
             <div style={styles.profilePicture}>
               {image ? (
@@ -94,14 +85,14 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
           </div>
           <div style={styles.flexColumnWithGap}>
             <div style={styles.alignStart}>
-              <Typography text="Introduction" size="m" font="InterLight" />
+              <Typography>Dodaj naslovnu sliku</Typography>
             </div>
             <div style={styles.flexRowWithGap10}>
               <div style={{ flex: 1 }}>
                 <ControlledInput
                   control={control}
                   name={'firstName'}
-                  label="First name"
+                  label="Ime"
                   inputType={'input'}
                 />
               </div>
@@ -109,7 +100,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                 <ControlledInput
                   control={control}
                   name={'lastName'}
-                  label="Last name"
+                  label="Prezime"
                   inputType={'input'}
                 />
               </div>
@@ -118,7 +109,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
               <ControlledDatePicker
                 control={control}
                 name={'dateOfBirth'}
-                label="Select Date of birth"
+                label="Datum rođenja"
               />
             </div>
             <div style={styles.flexRowWithGap10}>
@@ -126,7 +117,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                 <ControlledInput
                   control={control}
                   name={'email'}
-                  label="Email address"
+                  label="Email adresa"
                   inputType={'input'}
                 />
               </div>
@@ -142,11 +133,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
           </div>
         </div>
         <div style={styles.headerImageText}>
-          <Typography
-            text="Upload your header image"
-            size="m"
-            font="InterLight"
-          />
+          <Typography>Dodaj naslovnu sliku</Typography>
         </div>
         <div style={styles.headerImageContainer}>
           {image ? (
@@ -157,7 +144,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
         </div>
         <div style={{ width: '100%', marginTop: 15 }}>
           <ControlledMultilineInput
-            label="Short bio"
+            label="Kratka biografija"
             rows={6}
             control={control}
             name={'bio'}
@@ -170,7 +157,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
               <ControlledInput
                 control={control}
                 name={'address'}
-                label="Address"
+                label="Adresa"
                 inputType={'input'}
               />
             </div>
@@ -178,7 +165,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
               <ControlledInput
                 control={control}
                 name={'city'}
-                label="City"
+                label="Grad"
                 inputType={'input'}
               />
             </div>
@@ -190,7 +177,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
               <ControlledInput
                 control={control}
                 name={'occupation'}
-                label="Occupation"
+                label="Zanimanje"
                 inputType={'input'}
               />
             </div>
@@ -198,16 +185,16 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
               <ControlledInput
                 control={control}
                 name={'phone'}
-                label="Phone"
+                label="Telefon"
                 inputType={'input'}
               />
             </div>
           </div>
         </div>
       </div>
-      <div style={{ marginTop: 30, width: '10%' }}>
+      <div style={{ marginTop: 30 }}>
         <Button
-          text={'Create my account'}
+          text={'Kreiraj akaunt'}
           onClick={handleSubmit(onSubmit)}
           variant={'filled'}
         />

@@ -1,24 +1,45 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { styles } from './Navbar.styles';
-import { Link } from 'react-router-dom';
+import { TabGroup } from '../Tabs/TabGroup/TabGroup';
+import { Typography } from '../Typography/Typography';
+import { Button } from '../Button/Button';
+import { AuthContext } from '../../providers/auth/authContext';
+import { ProfileButton } from '../ProfileButton/ProfileButton';
+import { useNavigate } from 'react-router-dom';
 
 type NavbarProps = unknown;
 
 export const Navbar: React.FC<NavbarProps> = () => {
+  const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const tabs = user
+    ? ['Vijesti', 'Pretraga', 'Moj Biznis']
+    : ['Vijesti', 'Pretraga'];
+
   return (
     <nav style={styles.navContainer}>
-      <Link to={'/'} style={styles.textColor}>
-        Alumni
-      </Link>
-      <Link to={'/'} style={styles.textColor}>
-        Dashboard
-      </Link>
-      <Link to={'/explore'} style={styles.textColor}>
-        Explore
-      </Link>
-      <Link to={'/my-business'} style={styles.textColor}>
-        My Business
-      </Link>
+      <div style={styles.titleWrapper}>
+        <Typography variant={'headingBold'}>Alumni</Typography>
+      </div>
+      <TabGroup tabs={tabs} defaultTab={'Pretraga'} />
+      {user ? (
+        <ProfileButton onClick={() => {}} />
+      ) : (
+        <div style={styles.buttonsWrapper}>
+          <Button
+            variant={'filled'}
+            text="Registruj se"
+            onClick={() => navigate('register')}
+          />
+          <Button
+            variant={'outlined'}
+            text="Prijavi se"
+            onClick={() => navigate('login')}
+          />
+        </div>
+      )}
     </nav>
   );
 };

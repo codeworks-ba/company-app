@@ -17,7 +17,7 @@ export const Tag: React.FC<TagProps> = ({
 }) => {
   return (
     <div style={styles.tagContainer}>
-      <Typography text={text} font={textFont} size={textSize} />
+      <Typography>{text}</Typography>
     </div>
   );
 };

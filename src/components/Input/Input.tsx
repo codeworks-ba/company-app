@@ -12,11 +12,6 @@ import { SearchInput } from './Search/SearchInput';
 type ControlledInputProps<T extends FieldValues> = UseControllerProps<T> &
   InputProps;
 
-// const InputType = {
-//   text: 'text',
-//   number: 'number'
-// };
-
 type InputProps = {
   errorText?: FieldError;
   label?: string;
@@ -32,7 +27,7 @@ export const Input: React.FC<InputProps> = ({
 }) => {
   const style = styles({ inputType });
   return (
-    <>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       {inputType === 'search' ? (
         <>
           {startAdornment ? (
@@ -58,14 +53,19 @@ export const Input: React.FC<InputProps> = ({
             placeholder={label || 'Email'}
             style={style(errorText).inputComponent}
           />
-          {errorText && (
-            <span style={{ color: 'red', fontSize: 12 }}>
-              {errorText.message}
-            </span>
-          )}
+          <span
+            style={{
+              color: 'red',
+              fontSize: '12px',
+              lineHeight: '12px',
+              height: '12px'
+            }}
+          >
+            {errorText?.message ?? ''}
+          </span>
         </>
       )}
-    </>
+    </div>
   );
 };
 

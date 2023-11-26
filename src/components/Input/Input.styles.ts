@@ -36,7 +36,6 @@ export const styles =
         paddingTop: 10,
         paddingBottom: 10,
         paddingRight: 10,
-        width: '-webkit-fill-available',
         fontFamily: 'InterRegular',
         ...types(error)[inputType]
       }

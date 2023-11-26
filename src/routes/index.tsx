@@ -1,9 +1,12 @@
 import React from 'react';
-import { useRecoilState } from 'recoil';
-import { SplashScreen } from '../pages/SplashScreen/SplashScreen';
-import { LoggedInRoutes } from './LoggedInRoutes';
-import { LoggedOutRoutes } from './LoggedOutRoutes';
-import { logInState } from '../store/atoms/logInState';
+import { Route, Routes } from 'react-router-dom';
+import { Navbar } from '../components/Navbar/Navbar';
+import { WelcomeScreen } from '../pages/WelcomeScreen/WelcomeScreen';
+import { ExploreScreen } from '../pages/ExploreScreen/ExploreScreen';
+import { MyBusinessScreen } from '../pages/MyBusinessScreen/MyBusinessScreen';
+import { LoginScreen } from '../pages/LoginScreen/LoginScreen';
+import { RegisterScreen } from '../pages/RegisterScreen/RegisterScreen';
+import { DummyComponentScreen } from '../pages/DummyComponentScreen/DummyComponentScreen';
 
 export enum Status {
   LoggedIn,
@@ -11,27 +14,19 @@ export enum Status {
   Stale
 }
 
-export const Routes: React.FC = () => {
-  const [statusRecoilState] = useRecoilState(logInState);
-
-  if (Status.Stale === statusRecoilState || statusRecoilState === null) {
-    return <SplashScreen />;
-  }
-
-  const UserRoutes = () => {
-    switch (statusRecoilState) {
-      case Status.LoggedIn:
-        return <LoggedInRoutes />;
-      case Status.LoggedOut:
-        return <LoggedOutRoutes />;
-      default:
-        return <SplashScreen />;
-    }
-  };
-
+export const AppRoutes: React.FC = () => {
   return (
     <>
-      <UserRoutes />
+      <Navbar />
+      <Routes>
+        <Route path="*" element={<WelcomeScreen />} />
+        <Route path="/" element={<WelcomeScreen />} />
+        <Route path="/explore" element={<ExploreScreen />} />
+        <Route path="/my-business" element={<MyBusinessScreen />} />
+        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/register" element={<RegisterScreen />} />
+        <Route path="/components" element={<DummyComponentScreen />} />
+      </Routes>
     </>
   );
 };
