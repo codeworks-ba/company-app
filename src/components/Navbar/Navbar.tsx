@@ -14,7 +14,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
   const navigate = useNavigate();
 
-  const tabsTest: Record<string, string> = user
+  const tabs: Record<string, string> = user
     ? {
         vijesti: 'Vijesti',
         pretraga: 'Pretraga',
@@ -30,7 +30,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
       <div style={styles.titleWrapper}>
         <Typography variant={'headingBold'}>Alumni</Typography>
       </div>
-      <TabGroup tabs={tabsTest} defaultTab={'pretraga'} />
+      <TabGroup tabs={tabs} defaultTab={'pretraga'} />
       {user ? (
         <ProfileButton onClick={() => {}} />
       ) : (
