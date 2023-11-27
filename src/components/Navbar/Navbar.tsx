@@ -14,6 +14,17 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
   const navigate = useNavigate();
 
+  const tabsTest: Record<string, string> = user
+    ? {
+        vijesti: 'Vijesti',
+        pretraga: 'Pretraga',
+        'moj-biznis': 'Moj Biznis'
+      }
+    : {
+        vijesti: 'Vijesti',
+        pretraga: 'Pretraga'
+      };
+
   const tabs = user
     ? ['Vijesti', 'Pretraga', 'Moj Biznis']
     : ['Vijesti', 'Pretraga'];
@@ -23,7 +34,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
       <div style={styles.titleWrapper}>
         <Typography variant={'headingBold'}>Alumni</Typography>
       </div>
-      <TabGroup tabs={tabs} defaultTab={'Pretraga'} />
+      <TabGroup tabs={tabsTest} defaultTab={'pretraga'} />
       {user ? (
         <ProfileButton onClick={() => {}} />
       ) : (

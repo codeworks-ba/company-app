@@ -38,6 +38,7 @@ export const styles =
       buttonComponent: {
         padding: '14px 24px',
         borderRadius: 24,
+        cursor: 'pointer',
         ...variants(color)[variant]
       }
     });

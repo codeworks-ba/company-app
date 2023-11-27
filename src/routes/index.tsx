@@ -19,10 +19,11 @@ export const AppRoutes: React.FC = () => {
     <>
       <Navbar />
       <Routes>
-        <Route path="*" element={<WelcomeScreen />} />
-        <Route path="/" element={<WelcomeScreen />} />
-        <Route path="/explore" element={<ExploreScreen />} />
-        <Route path="/my-business" element={<MyBusinessScreen />} />
+        <Route path="*" element={<ExploreScreen />} />
+        <Route path="/" element={<ExploreScreen />} />
+        <Route path="/vijesti" element={<WelcomeScreen />} />
+        <Route path="/pretraga" element={<ExploreScreen />} />
+        <Route path="/moj-biznis" element={<MyBusinessScreen />} />
         <Route path="/login" element={<LoginScreen />} />
         <Route path="/register" element={<RegisterScreen />} />
         <Route path="/components" element={<DummyComponentScreen />} />
