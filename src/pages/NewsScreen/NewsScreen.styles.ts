@@ -52,22 +52,17 @@ export const styles = makeStyles({
     marginRight: '57px'
   },
   dateAndAuthorWrapper: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
     display: 'flex',
     flexDirection: 'row',
     gap: '12px',
     width: 'max-content'
   },
   categoryWrapper: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
     width: 'max-content'
   },
   secondaryNewsTextWrapper: {
     marginTop: '34px',
-    marginBottom: '34px'
+    marginBottom: '34px',
+    flex: 1
   }
 });

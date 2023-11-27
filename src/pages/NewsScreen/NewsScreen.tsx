@@ -1,5 +1,5 @@
 import React from 'react';
-import { styles } from './WelcomeScreen.styles';
+import { styles } from './NewsScreen.styles';
 import { Typography } from '../../components/Typography/Typography';
 import { useForm } from 'react-hook-form';
 import { ControlledInput } from '../../components/Input/Input';
@@ -8,9 +8,9 @@ import { ImageWithText } from '../../components/ImageWithText/ImageWithText';
 import blankImage from '../../images/blankImage.png';
 import { newsMainText, secondaryNews } from '../../dummyData/DummyData';
 
-type WelcomeScreenProps = unknown;
+type NewsScreenProps = unknown;
 
-export const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
+export const NewsScreen: React.FC<NewsScreenProps> = () => {
   const { control, handleSubmit } = useForm<any>({
     // resolver: yupResolver(validationSchema)
   });
@@ -64,19 +64,19 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
                 alt="failedToRender"
                 style={styles.secondaryImage}
               />
-              <div style={{ position: 'relative' }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <div style={styles.dateAndAuthorWrapper}>
                   <Typography variant={'bodyMedium'}>{news.date}</Typography>
                   <Typography variant={'bodyMedium'}>|</Typography>
                   <Typography variant={'bodyBold'}>Autor:</Typography>
                   <Typography variant={'bodyMedium'}>{news.author}</Typography>
                 </div>
+                <div style={styles.secondaryNewsTextWrapper}>
+                  <Typography variant={'headingBold'}>{news.text}</Typography>
+                </div>
                 <div style={styles.categoryWrapper}>
                   <Typography variant={'bodyMedium'}>Kategorija</Typography>
                 </div>
-              </div>
-              <div style={styles.secondaryNewsTextWrapper}>
-                <Typography variant={'headingBold'}>{news.text}</Typography>
               </div>
             </div>
           </div>

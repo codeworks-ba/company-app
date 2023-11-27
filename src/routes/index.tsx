@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Navbar } from '../components/Navbar/Navbar';
-import { WelcomeScreen } from '../pages/WelcomeScreen/WelcomeScreen';
+import { NewsScreen } from '../pages/NewsScreen/NewsScreen';
 import { ExploreScreen } from '../pages/ExploreScreen/ExploreScreen';
 import { MyBusinessScreen } from '../pages/MyBusinessScreen/MyBusinessScreen';
 import { LoginScreen } from '../pages/LoginScreen/LoginScreen';
@@ -21,7 +21,7 @@ export const AppRoutes: React.FC = () => {
       <Routes>
         <Route path="*" element={<ExploreScreen />} />
         <Route path="/" element={<ExploreScreen />} />
-        <Route path="/vijesti" element={<WelcomeScreen />} />
+        <Route path="/vijesti" element={<NewsScreen />} />
         <Route path="/pretraga" element={<ExploreScreen />} />
         <Route path="/moj-biznis" element={<MyBusinessScreen />} />
         <Route path="/login" element={<LoginScreen />} />
