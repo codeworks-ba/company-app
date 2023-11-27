@@ -18,9 +18,9 @@ export const ImageWithText: React.FC<ImageWithTextProps> = ({
     <div style={styles.imageContainer}>
       <img src={image} alt="imageFailedToRender" style={styles.imageStyle} />
       <div style={styles.textContainer}>
-        <div style={{ marginLeft: '10%' }}>
-          <Typography>{header}</Typography>
-          <Typography>{subtitle}</Typography>
+        <div>
+          <Typography variant={'headingBold'}>{header}</Typography>
+          <Typography variant={'bodyNormal'}>{subtitle}</Typography>
         </div>
       </div>
     </div>

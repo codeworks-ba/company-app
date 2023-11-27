@@ -12,12 +12,11 @@ export const styles = makeStyles({
     objectFit: 'cover'
   },
   textContainer: {
-    width: '100%',
-    height: '30%',
     position: 'absolute',
-    bottom: 0,
+    bottom: '50px',
+    left: '50px',
+    right: '50px',
     display: 'flex',
-    alignItems: 'center',
     background: `linear-gradient(0deg, rgba(235,235,235,1) 0%, rgba(255,255,255,0) 100%)`
   }
 });

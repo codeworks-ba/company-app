@@ -85,7 +85,7 @@ export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
         </div>
       </div>
       <br />
-      <div style={{ width: '20%' }}>
+      <div style={{ width: '100%' }}>
         <ControlledInput
           control={control}
           name={'test3'}
