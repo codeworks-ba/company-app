@@ -25,10 +25,6 @@ export const Navbar: React.FC<NavbarProps> = () => {
         pretraga: 'Pretraga'
       };
 
-  const tabs = user
-    ? ['Vijesti', 'Pretraga', 'Moj Biznis']
-    : ['Vijesti', 'Pretraga'];
-
   return (
     <nav style={styles.navContainer}>
       <div style={styles.titleWrapper}>
