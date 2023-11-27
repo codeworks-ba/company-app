@@ -7,6 +7,7 @@ export const styles = ({ selected }: { selected: boolean }) =>
       display: 'flex',
       alignItems: 'center',
       height: '100%',
+      cursor: 'pointer',
       ...(selected
         ? {
             borderBottom: `4px solid ${themeColors.primaryColor}`
