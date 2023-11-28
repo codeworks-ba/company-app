@@ -43,3 +43,55 @@ export const secondaryNews = [
     text: 'eget est lorem ipsum dolor sit amet consectetur adipiscing elit'
   }
 ];
+
+export const companies = [
+  {
+    header: 'Naziv biznisa',
+    subtitle: 'Kategorija'
+  },
+  {
+    header: 'Naziv biznisa',
+    subtitle: 'Kategorija'
+  },
+  {
+    header: 'Naziv biznisa',
+    subtitle: 'Kategorija'
+  },
+  {
+    header: 'Naziv biznisa',
+    subtitle: 'Kategorija'
+  },
+
+  {
+    header: 'Naziv biznisa',
+    subtitle: 'Kategorija'
+  },
+  {
+    header: 'Naziv biznisa',
+    subtitle: 'Kategorija'
+  },
+  {
+    header: 'Naziv biznisa',
+    subtitle: 'Kategorija'
+  },
+  {
+    header: 'Naziv biznisa',
+    subtitle: 'Kategorija'
+  },
+  {
+    header: 'Naziv biznisa',
+    subtitle: 'Kategorija'
+  },
+  {
+    header: 'Naziv biznisa',
+    subtitle: 'Kategorija'
+  },
+  {
+    header: 'Naziv biznisa',
+    subtitle: 'Kategorija'
+  },
+  {
+    header: 'Naziv biznisa',
+    subtitle: 'Kategorija'
+  }
+];
