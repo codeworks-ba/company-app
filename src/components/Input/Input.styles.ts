@@ -20,24 +20,25 @@ const types = (error?: FieldError): { [key in Type]: React.CSSProperties } => {
     },
     input: {
       border: error ? '1px solid red' : '1px solid #D4D4D4',
-      borderRadius: 6,
+      borderRadius: '25px',
       paddingLeft: 16
     }
   };
 };
 
 export type InputStyleProps = {
-  inputType: Type;
+  inputType?: Type;
 };
 
 export const styles =
-  ({ inputType }: InputStyleProps) =>
+  ({ inputType = 'input' }: InputStyleProps) =>
   (error?: FieldError) =>
     makeStyles({
       inputComponent: {
         paddingTop: 10,
         paddingBottom: 10,
         paddingRight: 10,
+        width: '-webkit-fill-available',
         fontFamily: 'InterRegular',
         ...types(error)[inputType]
       }

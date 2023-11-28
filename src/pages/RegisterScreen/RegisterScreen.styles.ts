@@ -7,17 +7,22 @@ export const styles = makeStyles({
     alignItems: 'center'
   },
   headerContainer: {
-    marginTop: '5%',
-    marginBottom: '3%'
+    marginTop: '46px',
+    marginBottom: '64px'
   },
   flexColumn: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    width: 'min-content'
   },
-  flexRowWithGap20: {
+  flexRow: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  flexRowWithGap60: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 20
+    gap: '60px'
   },
   flexRowWithGap10: {
     display: 'flex',
@@ -27,7 +32,7 @@ export const styles = makeStyles({
   flexColumnWithGap: {
     display: 'flex',
     flexDirection: 'column',
-    gap: 20
+    gap: '12px'
   },
   profilePictureContainer: {
     display: 'flex',
@@ -40,8 +45,8 @@ export const styles = makeStyles({
     backgroundColor: '#EBEBEB',
     border: '1px solid #D4D4D4',
     borderRadius: 100,
-    height: 150,
-    width: 150,
+    height: '150px',
+    width: '150px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

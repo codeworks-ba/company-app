@@ -30,14 +30,15 @@ const CustomDatePicker: React.FC<DatePickerProps> = ({
             transform: 'translate(14px, -9px) scale(0.75);'
           },
           '& .MuiInputLabel-root': {
-            transform: 'translate(14px, 9px) scale(1)'
+            transform: 'translate(14px, 12px) scale(1)',
+            fontSize: '13px'
           },
           '.MuiInputLabel-shrink': {
             transform: 'translate(14px, -9px)scale(0.75);'
           },
           '& .MuiOutlinedInput-root': {
             height: '38px',
-            borderRadius: '6px'
+            borderRadius: '25px'
           }
         }}
         label={label}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ControlledInput } from '../../components/Input/Input';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
@@ -15,6 +15,7 @@ import { ImageWithText } from '../../components/ImageWithText/ImageWithText';
 import { Link } from '../../components/Link/Link';
 import { Tag } from '../../components/Tag/Tag';
 import { ControlledDatePicker } from '../../components/DatePicker/DatePicker';
+import { RadioButton } from '../../components/RadioButton/RadioButton';
 
 type LoginScreenProps = unknown;
 const validationSchema = yup.object({
@@ -32,9 +33,15 @@ export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
     resolver: yupResolver(validationSchema)
   });
 
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+
   const onSubmit = (data: LoginUserDto) => {
     console.log('DATA: ', data.test3.toISOString());
   };
+
+  useEffect(() => {
+    console.log('IS CHECKED: ', isChecked);
+  }, [isChecked]);
 
   return (
     <div style={{ padding: 12 }}>
@@ -244,6 +251,10 @@ export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
       </div>
       <br />
       <Link text={'Go to google'} link={'https://www.google.com/'} />
+      <br />
+      <div style={{ width: '100px', height: '100px' }}>
+        <RadioButton onChange={(value) => setIsChecked(value)} />
+      </div>
       <br />
       <div style={{ width: '20%' }}>
         <Button
