@@ -146,6 +146,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                   name={'password'}
                   label="Password"
                   inputType={'input'}
+                  textType={'password'}
                 />
               </div>
             </div>

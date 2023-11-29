@@ -4,7 +4,7 @@ import {
   FieldValues,
   UseControllerProps
 } from 'react-hook-form';
-import React from 'react';
+import React, { HTMLInputTypeAttribute } from 'react';
 import UilSearch from '@iconscout/react-unicons/icons/uil-search';
 import { InputStyleProps, styles } from './Input.styles';
 import { SearchInput } from './Search/SearchInput';
@@ -17,6 +17,7 @@ type InputProps = {
   errorText?: FieldError;
   label?: string;
   startAdornment?: React.ReactElement;
+  textType?: HTMLInputTypeAttribute;
 } & InputStyleProps;
 
 export const Input: React.FC<InputProps> = ({
@@ -24,6 +25,7 @@ export const Input: React.FC<InputProps> = ({
   label,
   inputType,
   startAdornment,
+  textType = 'text',
   ...rest
 }) => {
   const style = styles({ inputType });
@@ -51,6 +53,7 @@ export const Input: React.FC<InputProps> = ({
         <>
           <input
             {...rest}
+            type={textType}
             placeholder={label || 'Email'}
             style={style(errorText).inputComponent}
           />

@@ -1,20 +1,12 @@
 import React from 'react';
 import { ControlledInput } from '../../components/Input/Input';
 import * as yup from 'yup';
-import { Controller, useForm } from 'react-hook-form';
-import { LoginUserDto } from '../../services/types';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Button } from '../../components/Button/Button';
+import { useForm } from 'react-hook-form';
+import { styles } from './LoginScreen.styles';
 import { Typography } from '../../components/Typography/Typography';
-import blankImage from '../../images/blankImage.png';
-import templateImage from '../../images/templateImage.png';
-import { ImageCard } from '../../components/ImageCard/ImageCard';
-import { ControlledSelect } from '../../components/Select/Select';
-import { ControlledMultilineInput } from '../../components/Input/Multiline/MultilineInput';
-import { ImageWithText } from '../../components/ImageWithText/ImageWithText';
+import { Button } from '../../components/Button/Button';
 import { Link } from '../../components/Link/Link';
-import { Tag } from '../../components/Tag/Tag';
-import { ControlledDatePicker } from '../../components/DatePicker/DatePicker';
+import google from '../../images/google.png';
 
 type LoginScreenProps = unknown;
 const validationSchema = yup.object({
@@ -27,18 +19,66 @@ const validationSchema = yup.object({
 });
 
 export const LoginScreen: React.FC<LoginScreenProps> = () => {
-  const { control, handleSubmit, setFocus, register, formState } =
-    useForm<LoginUserDto>({
+  const { control, handleSubmit, setFocus, register, formState } = useForm<any>(
+    {
       // resolver: yupResolver(validationSchema)
-    });
+    }
+  );
 
-  const onSubmit = (data: LoginUserDto) => {
+  const onSubmit = (data: any) => {
     console.log('DATA: ', data.test3.toISOString());
   };
 
   return (
-    <div style={{ padding: 12 }}>
-      <h1>LOGIN SCREEN</h1>
+    <div style={styles.mainContainer}>
+      <div style={styles.headerContainer}>
+        <Typography variant={'headingBold'}>Dobrodošli nazad!</Typography>
+      </div>
+      <div style={{ marginBottom: '16px' }}>
+        <Typography>Pristupite računu putem email-a:</Typography>
+      </div>
+      <div style={styles.mainWidth}>
+        <ControlledInput control={control} label="Email" name="email" />
+        <ControlledInput
+          control={control}
+          label="Lozinka"
+          name="password"
+          textType={'password'}
+        />
+        <div style={styles.buttonWrapper}>
+          <Button
+            text="Prijavi se"
+            onClick={() => {}}
+            variant={'filled'}
+            textVariant={'smallButtonText'}
+            customStyle={{ width: '100%', height: '38px' }}
+          />
+        </div>
+      </div>
+      <Link text="Zaboravljena lozinka?" link="" textDecoration={'underline'} />
+      <div style={{ margin: '46px 0px', width: '344px' }}>
+        <div style={styles.lineWrapper}>
+          <div
+            style={{ flex: 1, height: '1px', backgroundColor: '#D4D4D4' }}
+          ></div>
+          <Typography>ili</Typography>
+          <div
+            style={{ flex: 1, height: '1px', backgroundColor: '#D4D4D4' }}
+          ></div>
+        </div>
+      </div>
+      <div style={styles.googleWrapper}>
+        <div style={styles.googleContainer}>
+          <img
+            src={google}
+            alt="failedToRender"
+            style={{ height: '25px', width: '25px' }}
+          />
+          <Typography variant={'bodySmall'}>
+            Prijava sa Google računom
+          </Typography>
+        </div>
+      </div>
     </div>
   );
 };
