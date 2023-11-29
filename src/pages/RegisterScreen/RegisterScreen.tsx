@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Typography } from '../../components/Typography/Typography';
 import plusCircle from '../../images/plusCircle.svg';
 import { ControlledInput } from '../../components/Input/Input';
@@ -12,23 +12,27 @@ import axios from 'axios';
 import { styles } from './RegisterScreen.styles';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ControlledRadioInput } from '../../components/Input/RadioInput/RadioInput';
+import { AuthContext } from '../../providers/auth/authContext';
 
 type RegisterScreenProps = unknown;
 
 const validationSchema = yup.object({
   email: yup
     .string()
-    .email('Use correct email format!')
-    .required('This field is required!'),
-  firstName: yup.string().required('This field is required!'),
-  lastName: yup.string().required('This field is required!'),
-  bio: yup.string().required('This field is required!'),
-  city: yup.string().required('This field is required!'),
-  address: yup.string().required('This field is required!'),
-  phone: yup.string().required('This field is required!'),
-  password: yup.string().required('This field is required!'),
-  occupation: yup.string().required('This field is required!'),
-  dateOfBirth: yup.date().required('This field is required!')
+    .email('Molimo koristite ispravan email format!')
+    .required('Ovo polje je obavezno!'),
+  firstName: yup.string().required('Ovo polje je obavezno!'),
+  lastName: yup.string().required('Ovo polje je obavezno!'),
+  bio: yup.string().optional(),
+  city: yup.string().required('Ovo polje je obavezno!'),
+  address: yup.string().required('Ovo polje je obavezno!'),
+  phone: yup.string().required('Ovo polje je obavezno!'),
+  password: yup.string().required('Ovo polje je obavezno!'),
+  occupation: yup.string().required('Ovo polje je obavezno!'),
+  dateOfBirth: yup.date().required('Ovo polje je obavezno!'),
+  shouldHideEmail: yup.boolean().optional(),
+  shouldHideAddress: yup.boolean().optional(),
+  shouldHidePhone: yup.boolean().optional()
 });
 
 export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
@@ -37,24 +41,21 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
     useState<boolean>(false);
   const [telRadioSelected, setTelRadioSelected] = useState<boolean>(false);
 
+  const { signUp } = useContext(AuthContext);
+
   const { control, handleSubmit } = useForm<CreateUserDto>({
     resolver: yupResolver(validationSchema)
   });
 
   const onSubmit = (data: CreateUserDto) => {
     console.log('DATA: ', data);
-    axios
-      .post('http://localhost:3000/auth/', data)
-      .then(function (response) {
-        if (response.data.user) {
-          console.log('GOOD: ', response.data);
-        } else {
-          console.log('NOT GOOD');
-        }
-      })
-      .catch(function (error) {
-        console.log('Error');
-      });
+    const userData: CreateUserDto = {
+      ...data,
+      shouldHideAddress: addressRadioSelected,
+      shouldHideEmail: mailRadioSelected,
+      shouldHidePhone: telRadioSelected
+    };
+    signUp(userData);
   };
 
   const image = null;
@@ -79,7 +80,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                   style={{
                     height: '100%',
                     width: '100%',
-                    objectFit: 'contain'
+                    objectFit: 'cover'
                   }}
                 />
               ) : (

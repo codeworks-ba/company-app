@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ControlledInput } from '../../components/Input/Input';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
@@ -7,26 +7,28 @@ import { Typography } from '../../components/Typography/Typography';
 import { Button } from '../../components/Button/Button';
 import { Link } from '../../components/Link/Link';
 import google from '../../images/google.png';
+import { LoginUserDto } from '../../services/types';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { AuthContext } from '../../providers/auth/authContext';
 
 type LoginScreenProps = unknown;
 const validationSchema = yup.object({
   email: yup
     .string()
-    .email('Use correct email format!')
-    .required('This field is required!'),
-  test: yup.string().required('This field is required!'),
-  test2: yup.string().required('This field is required!')
+    .email('Molimo koristite ispravan email format!')
+    .required('Ovo polje je obavezno!'),
+  password: yup.string().required('Ovo polje je obavezno!')
 });
 
 export const LoginScreen: React.FC<LoginScreenProps> = () => {
-  const { control, handleSubmit, setFocus, register, formState } = useForm<any>(
-    {
-      // resolver: yupResolver(validationSchema)
-    }
-  );
+  const { control, handleSubmit } = useForm<LoginUserDto>({
+    resolver: yupResolver(validationSchema)
+  });
 
-  const onSubmit = (data: any) => {
-    console.log('DATA: ', data.test3.toISOString());
+  const { signIn } = useContext(AuthContext);
+
+  const onSubmit = (data: LoginUserDto) => {
+    signIn(data);
   };
 
   return (
@@ -48,7 +50,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = () => {
         <div style={styles.buttonWrapper}>
           <Button
             text="Prijavi se"
-            onClick={() => {}}
+            onClick={handleSubmit(onSubmit)}
             variant={'filled'}
             textVariant={'smallButtonText'}
             customStyle={{ width: '100%', height: '38px' }}

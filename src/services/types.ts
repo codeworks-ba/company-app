@@ -11,9 +11,7 @@ export type UserDto = {
 
 export type LoginUserDto = {
   email: string;
-  test: string;
-  test2: string;
-  test3: Date;
+  password: string;
 };
 
 export type CreateUserDto = {
@@ -21,10 +19,36 @@ export type CreateUserDto = {
   lastName: string;
   dateOfBirth: Date;
   email: string;
-  bio: string;
+  bio?: string;
   address: string;
   city: string;
   occupation: string;
   phone: string;
   password: string;
+  shouldHideEmail?: boolean;
+  shouldHideAddress?: boolean;
+  shouldHidePhone?: boolean;
+};
+
+export type AuthUser = {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+  createdAccountTimestamp: string;
+  bio: string;
+  dateOfBirth: string;
+  address: string;
+  city: string;
+  occupation: string;
+  phone: string;
+  shouldHideEmail: boolean;
+  shouldHideAddress: boolean;
+  shouldHidePhone: boolean;
+};
+
+export type AuthResponseDto = {
+  user: AuthUser;
+  token: string;
 };

@@ -29,13 +29,13 @@ const validationSchema = yup.object({
 });
 
 export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
-  const { control, handleSubmit } = useForm<LoginUserDto>({
+  const { control, handleSubmit } = useForm<any>({
     resolver: yupResolver(validationSchema)
   });
 
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
-  const onSubmit = (data: LoginUserDto) => {
+  const onSubmit = (data: any) => {
     console.log('DATA: ', data.test3.toISOString());
   };
 

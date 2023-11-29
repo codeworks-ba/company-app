@@ -39,6 +39,7 @@ export const styles =
         paddingBottom: 10,
         paddingRight: 10,
         width: '-webkit-fill-available',
+        color: themeColors.primaryTextColor,
         fontFamily: 'InterRegular',
         ...types(error)[inputType]
       }
