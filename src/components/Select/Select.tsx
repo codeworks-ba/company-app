@@ -14,7 +14,7 @@ const CustomSelect: React.FC<SelectProps> = ({ label, options, ...rest }) => {
   return (
     <FormControl sx={{ minWidth: '100%' }} size="small">
       <InputLabel id="label">{label}</InputLabel>
-      <Select label={label} {...rest} sx={{ borderRadius: 2 }}>
+      <Select label={label} {...rest} sx={{ borderRadius: '25px' }}>
         {options.map((option) => (
           <MenuItem key={option.value} value={option.value}>
             {option.label}
