@@ -32,49 +32,22 @@ export const styles = makeStyles({
     width: '100%',
     height: '100%'
   },
-  nameAndTagsWrapper: {
+  nameAndProfessionContainer: {
     marginLeft: '60px',
     marginTop: '44px',
     width: '64%'
   },
-  tagWrapper: {
-    marginTop: '16px',
-    display: 'flex',
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    gap: '7px'
-  },
-  socialMediaWrapper: {
+  dataAndBusinessesWrapper: {
     display: 'flex',
     flexDirection: 'row',
-    gap: '15px',
-    flexWrap: 'wrap'
-  },
-  socialMediaContainer: {
-    width: '70px',
-    height: '70px'
-  },
-  socialMediaImageStyle: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 200,
-    border: '1px solid #707070'
-  },
-  servicesWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    gap: '34px',
-    flexWrap: 'wrap'
-  },
-  serviceStyle: {
-    height: '250px',
-    width: '232px'
+    gap: '45px',
+    marginBottom: '36px'
   },
   mainInformationWrapper: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: '70px',
+    gap: '100px',
     marginBottom: '36px'
   },
   informationContainer: {
@@ -87,5 +60,15 @@ export const styles = makeStyles({
     flexDirection: 'column',
     flex: 1,
     gap: '40px'
+  },
+  myBusinessesContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: '34px',
+    flexWrap: 'wrap'
+  },
+  businessStyle: {
+    height: '250px',
+    width: '232px'
   }
 });

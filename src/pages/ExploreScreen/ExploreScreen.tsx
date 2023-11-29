@@ -9,6 +9,7 @@ import { ControlledSelect } from '../../components/Select/Select';
 import { ImageCard } from '../../components/ImageCard/ImageCard';
 import blankImage from '../../images/blankImage.png';
 import { companies } from '../../dummyData/DummyData';
+import { useNavigate } from 'react-router-dom';
 
 type ExploreScreenProps = unknown;
 
@@ -16,6 +17,8 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
   const { control, handleSubmit } = useForm<any>({
     // resolver: yupResolver(validationSchema)
   });
+
+  const navigate = useNavigate();
 
   return (
     <div
@@ -142,7 +145,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
                     image={blankImage}
                     headerText={company.header}
                     subtitleText={company.subtitle}
-                    onClick={() => {}}
+                    onClick={() => navigate('/biznis')}
                     type={'headerAndSubtitle'}
                   />
                 </div>

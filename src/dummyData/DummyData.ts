@@ -95,3 +95,36 @@ export const companies = [
     subtitle: 'Kategorija'
   }
 ];
+
+export const services = [
+  {
+    text: 'Naziv usluge'
+  },
+  {
+    text: 'Naziv usluge'
+  },
+  {
+    text: 'Naziv usluge'
+  },
+  {
+    text: 'Naziv usluge'
+  },
+  {
+    text: 'Naziv usluge'
+  }
+];
+
+export const businesses = [
+  {
+    text: 'Naziv biznisa'
+  },
+  {
+    text: 'Naziv biznisa'
+  },
+  {
+    text: 'Naziv biznisa'
+  },
+  {
+    text: 'Naziv biznisa'
+  }
+];
