@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { styles } from './Navbar.styles';
 import { TabGroup } from '../Tabs/TabGroup/TabGroup';
 import { Typography } from '../Typography/Typography';
@@ -10,9 +10,13 @@ import { useNavigate } from 'react-router-dom';
 type NavbarProps = unknown;
 
 export const Navbar: React.FC<NavbarProps> = () => {
-  const { user } = useContext(AuthContext);
+  const { user, getMe } = useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getMe();
+  }, []);
 
   const tabs: Record<string, string> = user
     ? {

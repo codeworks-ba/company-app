@@ -7,6 +7,7 @@ import { MyBusinessScreen } from '../pages/MyBusinessScreen/MyBusinessScreen';
 import { LoginScreen } from '../pages/LoginScreen/LoginScreen';
 import { RegisterScreen } from '../pages/RegisterScreen/RegisterScreen';
 import { DummyComponentScreen } from '../pages/DummyComponentScreen/DummyComponentScreen';
+import { BusinessScreen } from '../pages/BusinessScreen/BusinessScreen';
 
 export enum Status {
   LoggedIn,
@@ -24,6 +25,7 @@ export const AppRoutes: React.FC = () => {
         <Route path="/vijesti" element={<NewsScreen />} />
         <Route path="/pretraga" element={<ExploreScreen />} />
         <Route path="/moj-biznis" element={<MyBusinessScreen />} />
+        <Route path="/biznis" element={<BusinessScreen />} />
         <Route path="/login" element={<LoginScreen />} />
         <Route path="/register" element={<RegisterScreen />} />
         <Route path="/components" element={<DummyComponentScreen />} />

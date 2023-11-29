@@ -38,7 +38,7 @@ export const MultiLineInput: React.FC<MultiLineInputProps> = ({
         }}
       />
       <div style={styles.inputStyle}>
-        <Typography>{`${charCount}/${characterLimit}`}</Typography>
+        <Typography variant="bodyMedium">{`${charCount}/${characterLimit}`}</Typography>
       </div>
     </div>
   );

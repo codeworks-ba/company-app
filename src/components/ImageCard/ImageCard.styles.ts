@@ -47,7 +47,7 @@ export const styles = ({ type }: ImageCardStyleProps) =>
     imageStyle: {
       width: '100%',
       height: '100%',
-      objectFit: 'fill'
+      objectFit: 'cover'
     },
     addImageContainer: {
       width: '100%',

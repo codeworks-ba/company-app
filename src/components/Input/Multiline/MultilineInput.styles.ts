@@ -15,8 +15,8 @@ export const styles = makeStyles({
   },
   inputStyle: {
     position: 'absolute',
-    bottom: '8px',
-    right: '8px',
+    bottom: '15px',
+    right: '15px',
     color: 'gray'
   }
 });

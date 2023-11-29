@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Typography } from '../../components/Typography/Typography';
 import plusCircle from '../../images/plusCircle.svg';
 import { ControlledInput } from '../../components/Input/Input';
@@ -11,57 +11,66 @@ import * as yup from 'yup';
 import axios from 'axios';
 import { styles } from './RegisterScreen.styles';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { ControlledRadioInput } from '../../components/Input/RadioInput/RadioInput';
+import { AuthContext } from '../../providers/auth/authContext';
 
 type RegisterScreenProps = unknown;
 
 const validationSchema = yup.object({
   email: yup
     .string()
-    .email('Use correct email format!')
-    .required('This field is required!'),
-  firstName: yup.string().required('This field is required!'),
-  lastName: yup.string().required('This field is required!'),
-  bio: yup.string().required('This field is required!'),
-  city: yup.string().required('This field is required!'),
-  address: yup.string().required('This field is required!'),
-  phone: yup.string().required('This field is required!'),
-  password: yup.string().required('This field is required!'),
-  occupation: yup.string().required('This field is required!'),
-  dateOfBirth: yup.date().required('This field is required!')
+    .email('Molimo koristite ispravan email format!')
+    .required('Ovo polje je obavezno!'),
+  firstName: yup.string().required('Ovo polje je obavezno!'),
+  lastName: yup.string().required('Ovo polje je obavezno!'),
+  bio: yup.string().optional(),
+  city: yup.string().required('Ovo polje je obavezno!'),
+  address: yup.string().required('Ovo polje je obavezno!'),
+  phone: yup.string().required('Ovo polje je obavezno!'),
+  password: yup.string().required('Ovo polje je obavezno!'),
+  occupation: yup.string().required('Ovo polje je obavezno!'),
+  dateOfBirth: yup.date().required('Ovo polje je obavezno!'),
+  shouldHideEmail: yup.boolean().optional(),
+  shouldHideAddress: yup.boolean().optional(),
+  shouldHidePhone: yup.boolean().optional()
 });
 
 export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
+  const [mailRadioSelected, setMailRadioSelected] = useState<boolean>(false);
+  const [addressRadioSelected, setAddressRadioSelected] =
+    useState<boolean>(false);
+  const [telRadioSelected, setTelRadioSelected] = useState<boolean>(false);
+
+  const { signUp } = useContext(AuthContext);
+
   const { control, handleSubmit } = useForm<CreateUserDto>({
     resolver: yupResolver(validationSchema)
   });
 
   const onSubmit = (data: CreateUserDto) => {
     console.log('DATA: ', data);
-    axios
-      .post('http://localhost:3000/auth/', data)
-      .then(function (response) {
-        if (response.data.user) {
-          console.log('GOOD: ', response.data);
-        } else {
-          console.log('NOT GOOD');
-        }
-      })
-      .catch(function (error) {
-        console.log('Error');
-      });
+    const userData: CreateUserDto = {
+      ...data,
+      shouldHideAddress: addressRadioSelected,
+      shouldHideEmail: mailRadioSelected,
+      shouldHidePhone: telRadioSelected
+    };
+    signUp(userData);
   };
 
   const image = null;
   return (
     <div style={styles.mainContainer}>
       <div style={styles.headerContainer}>
-        <Typography>Kreirajmo tvoj profil!</Typography>
+        <Typography variant={'headingBold'}>Kreirajmo tvoj profil!</Typography>
       </div>
       <div style={styles.flexColumn}>
-        <div style={styles.flexRowWithGap20}>
+        <div style={styles.flexRowWithGap60}>
           <div style={styles.profilePictureContainer}>
             <div style={{ width: '100%' }}>
-              <Typography>Dodaj sliku profila</Typography>
+              <Typography variant={'bodyNormal'}>
+                Dodaj sliku profila
+              </Typography>
             </div>
             <div style={styles.profilePicture}>
               {image ? (
@@ -71,7 +80,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                   style={{
                     height: '100%',
                     width: '100%',
-                    objectFit: 'contain'
+                    objectFit: 'cover'
                   }}
                 />
               ) : (
@@ -83,11 +92,20 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
               )}
             </div>
           </div>
-          <div style={styles.flexColumnWithGap}>
+          <div style={styles.flexColumn}>
             <div style={styles.alignStart}>
-              <Typography>Dodaj naslovnu sliku</Typography>
+              <Typography variant={'bodyNormal'}>
+                Osnovne informacije
+              </Typography>
             </div>
-            <div style={styles.flexRowWithGap10}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                gap: 10,
+                marginTop: '12px'
+              }}
+            >
               <div style={{ flex: 1 }}>
                 <ControlledInput
                   control={control}
@@ -105,7 +123,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                 />
               </div>
             </div>
-            <div style={{ width: '100%' }}>
+            <div style={{ width: '100%', marginBottom: '12px' }}>
               <ControlledDatePicker
                 control={control}
                 name={'dateOfBirth'}
@@ -114,11 +132,13 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
             </div>
             <div style={styles.flexRowWithGap10}>
               <div style={{ flex: 1 }}>
-                <ControlledInput
+                <ControlledRadioInput
                   control={control}
                   name={'email'}
                   label="Email adresa"
-                  inputType={'input'}
+                  onRadioPress={(value) => {
+                    setMailRadioSelected(value);
+                  }}
                 />
               </div>
               <div style={{ flex: 1 }}>
@@ -127,6 +147,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                   name={'password'}
                   label="Password"
                   inputType={'input'}
+                  textType={'password'}
                 />
               </div>
             </div>
@@ -142,7 +163,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
             <img src={plusCircle} alt="" style={{ height: 80, width: 80 }} />
           )}
         </div>
-        <div style={{ width: '100%', marginTop: 15 }}>
+        <div style={{ width: '100%', marginTop: '12px' }}>
           <ControlledMultilineInput
             label="Kratka biografija"
             rows={6}
@@ -151,14 +172,16 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
             characterLimit={240}
           />
         </div>
-        <div style={{ marginTop: 15 }}>
+        <div style={{ marginTop: '12px' }}>
           <div style={styles.flexRowWithGap10}>
             <div style={{ flex: 1 }}>
-              <ControlledInput
+              <ControlledRadioInput
                 control={control}
                 name={'address'}
                 label="Adresa"
-                inputType={'input'}
+                onRadioPress={(value) => {
+                  setAddressRadioSelected(value);
+                }}
               />
             </div>
             <div style={{ flex: 1 }}>
@@ -171,7 +194,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
             </div>
           </div>
         </div>
-        <div style={{ marginTop: 15 }}>
+        <div>
           <div style={styles.flexRowWithGap10}>
             <div style={{ flex: 1 }}>
               <ControlledInput
@@ -182,17 +205,38 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
               />
             </div>
             <div style={{ flex: 1 }}>
-              <ControlledInput
+              <ControlledRadioInput
                 control={control}
                 name={'phone'}
                 label="Telefon"
-                inputType={'input'}
+                onRadioPress={(value) => {
+                  setTelRadioSelected(value);
+                }}
               />
             </div>
           </div>
         </div>
+        <div
+          style={{
+            marginTop: '12px',
+            borderRadius: '25px',
+            backgroundColor: '#E0F3F7',
+            padding: '14px 24px'
+          }}
+        >
+          <Typography variant="bodyNormal">
+            {
+              <div style={{ color: '#787878' }}>
+                <b>NAPOMENA:</b> U skladu sa zakonima o ličnim podacima online,
+                u predviđenim poljima označenim sa plavim krugom možete ukloniti
+                prikaz ovih informacija javno. Ovu opciju možete uvijek naknadno
+                mijenjati u postavkama profila.
+              </div>
+            }
+          </Typography>
+        </div>
       </div>
-      <div style={{ marginTop: 30 }}>
+      <div style={{ marginTop: 30, marginBottom: '46px' }}>
         <Button
           text={'Kreiraj akaunt'}
           onClick={handleSubmit(onSubmit)}
