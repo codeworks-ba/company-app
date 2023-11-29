@@ -11,10 +11,16 @@ export const styles = makeStyles({
   },
   titleWrapper: {
     display: 'flex',
-    flex: 1
+    flex: 1,
+    alignItems: 'center'
   },
   buttonsWrapper: {
     display: 'flex',
     gap: 12
+  },
+  logoStyle: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'contain'
   }
 });

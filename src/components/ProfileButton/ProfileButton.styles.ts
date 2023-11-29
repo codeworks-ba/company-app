@@ -8,7 +8,8 @@ export const styles = makeStyles({
     padding: 12,
     boxSizing: 'border-box',
     border: '2px solid #0A0908',
-    background: 'unset'
+    background: 'unset',
+    cursor: 'pointer'
   },
   img: {
     width: '100%',

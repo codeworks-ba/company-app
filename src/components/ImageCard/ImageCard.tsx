@@ -42,7 +42,7 @@ export const ImageCard: React.FC<ImageCardProps> = ({
         </div>
       ) : (
         <div style={style.imageCardComponent}>
-          <Typography variant={'bodyBold'}>{headerText}</Typography>
+          <Typography variant={'bodyNormal'}>{headerText}</Typography>
         </div>
       )}
     </div>
