@@ -7,6 +7,7 @@ import { Button } from '../../components/Button/Button';
 import { ImageWithText } from '../../components/ImageWithText/ImageWithText';
 import blankImage from '../../images/blankImage.png';
 import { newsMainText, secondaryNews } from '../../dummyData/DummyData';
+import { ScreenWrapper } from '../../components/ScreenWrapper/ScreenWrapper';
 
 type NewsScreenProps = unknown;
 
@@ -16,8 +17,8 @@ export const NewsScreen: React.FC<NewsScreenProps> = () => {
   });
 
   return (
-    <div style={styles.newsWrapper}>
-      <div style={{ width: '100%' }}>
+    <ScreenWrapper>
+      <div style={styles.newsWrapper}>
         <div style={styles.searchWrapper}>
           <div style={{ display: 'flex', width: '30%' }}>
             <Typography variant={'headingBold'}>Vijesti</Typography>
@@ -58,30 +59,28 @@ export const NewsScreen: React.FC<NewsScreenProps> = () => {
         </div>
         {secondaryNews.map((news) => (
           <div style={styles.secondaryNewsWrapper}>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <img
-                src={blankImage}
-                alt="failedToRender"
-                style={styles.secondaryImage}
-              />
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <div style={styles.dateAndAuthorWrapper}>
-                  <Typography variant={'bodyMedium'}>{news.date}</Typography>
-                  <Typography variant={'bodyMedium'}>|</Typography>
-                  <Typography variant={'bodyBold'}>Autor:</Typography>
-                  <Typography variant={'bodyMedium'}>{news.author}</Typography>
-                </div>
-                <div style={styles.secondaryNewsTextWrapper}>
-                  <Typography variant={'headingBold'}>{news.text}</Typography>
-                </div>
-                <div style={styles.categoryWrapper}>
-                  <Typography variant={'bodyMedium'}>Kategorija</Typography>
-                </div>
+            <img
+              src={blankImage}
+              alt="failedToRender"
+              style={styles.secondaryImage}
+            />
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div style={styles.dateAndAuthorWrapper}>
+                <Typography variant={'bodyMedium'}>{news.date}</Typography>
+                <Typography variant={'bodyMedium'}>|</Typography>
+                <Typography variant={'bodyBold'}>Autor:</Typography>
+                <Typography variant={'bodyMedium'}>{news.author}</Typography>
+              </div>
+              <div style={styles.secondaryNewsTextWrapper}>
+                <Typography variant={'headingBold'}>{news.text}</Typography>
+              </div>
+              <div style={styles.categoryWrapper}>
+                <Typography variant={'bodyMedium'}>Kategorija</Typography>
               </div>
             </div>
           </div>
         ))}
       </div>
-    </div>
+    </ScreenWrapper>
   );
 };

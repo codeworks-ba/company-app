@@ -18,7 +18,7 @@ export enum Status {
 
 export const AppRoutes: React.FC = () => {
   return (
-    <>
+    <div style={{ width: '100%', height: '100vh' }}>
       <Navbar />
       <Routes>
         <Route path="*" element={<ExploreScreen />} />
@@ -32,6 +32,6 @@ export const AppRoutes: React.FC = () => {
         <Route path="/components" element={<DummyComponentScreen />} />
         <Route path="/profile" element={<ProfileScreen />} />
       </Routes>
-    </>
+    </div>
   );
 };

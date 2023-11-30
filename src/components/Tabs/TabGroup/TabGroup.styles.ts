@@ -5,6 +5,7 @@ export const styles = makeStyles({
     display: 'flex',
     gap: 46,
     height: '100%',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    boxSizing: 'border-box'
   }
 });

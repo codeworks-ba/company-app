@@ -2,7 +2,11 @@ import { makeStyles } from '../../style/theme/MakeStyles';
 
 export const styles = makeStyles({
   newsWrapper: {
-    padding: '0px 180px 34px'
+    width: '100%',
+    height: '100%',
+    boxSizing: 'border-box',
+    padding: '0px 180px 34px',
+    overflow: 'scroll'
   },
   searchWrapper: {
     width: '55%',
@@ -40,9 +44,9 @@ export const styles = makeStyles({
     alignItems: 'center'
   },
   secondaryNewsWrapper: {
-    marginTop: '62px',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
+    marginTop: '62px',
     width: '100%'
   },
   secondaryImage: {
