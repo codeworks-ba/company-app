@@ -1,6 +1,10 @@
 import { makeStyles } from '../../style/theme/MakeStyles';
 
 export const styles = makeStyles({
+  entireScreenContainer: {
+    height: '100%',
+    overflow: 'scroll'
+  },
   mainContainer: {
     padding: '0px 180px'
   },
