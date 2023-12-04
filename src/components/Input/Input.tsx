@@ -8,7 +8,7 @@ import React, { HTMLInputTypeAttribute } from 'react';
 import UilSearch from '@iconscout/react-unicons/icons/uil-search';
 import { InputStyleProps, styles } from './Input.styles';
 import { SearchInput } from './Search/SearchInput';
-import { RadioButton } from '../RadioButton/RadioButton';
+import './Input.styled.css';
 
 type ControlledInputProps<T extends FieldValues> = UseControllerProps<T> &
   InputProps;
@@ -56,6 +56,7 @@ export const Input: React.FC<InputProps> = ({
             type={textType}
             placeholder={label || 'Email'}
             style={style(errorText).inputComponent}
+            className="input"
           />
           <span
             style={{

@@ -1,5 +1,4 @@
 import React from 'react';
-import { styles } from './NewsScreen.styles';
 import { Typography } from '../../components/Typography/Typography';
 import { useForm } from 'react-hook-form';
 import { ControlledInput } from '../../components/Input/Input';
@@ -8,6 +7,7 @@ import { ImageWithText } from '../../components/ImageWithText/ImageWithText';
 import blankImage from '../../images/blankImage.png';
 import { newsMainText, secondaryNews } from '../../dummyData/DummyData';
 import { ScreenWrapper } from '../../components/ScreenWrapper/ScreenWrapper';
+import styles from './NewsScreenStyles.module.css';
 
 type NewsScreenProps = unknown;
 
@@ -18,12 +18,12 @@ export const NewsScreen: React.FC<NewsScreenProps> = () => {
 
   return (
     <ScreenWrapper>
-      <div style={styles.newsWrapper}>
-        <div style={styles.searchWrapper}>
+      <div className={styles.newsWrapper}>
+        <div className={styles.searchWrapper}>
           <div style={{ display: 'flex', width: '30%' }}>
             <Typography variant={'headingBold'}>Vijesti</Typography>
           </div>
-          <div style={styles.searchInputWrapper}>
+          <div className={styles.searchInputWrapper}>
             <div style={{ width: '70%' }}>
               <ControlledInput
                 control={control}
@@ -40,17 +40,17 @@ export const NewsScreen: React.FC<NewsScreenProps> = () => {
             />
           </div>
         </div>
-        <div style={styles.mainImageWrapper}>
-          <div style={styles.mainImage}>
+        <div className={styles.mainImageWrapper}>
+          <div className={styles.mainImage}>
             <ImageWithText
               header="Lorem ipsum dolor sit amet, consectetur adipiscing"
               subtitle="Kategorija"
               image={blankImage}
             />
           </div>
-          <div style={styles.mainTextWrapper}>
+          <div className={styles.mainTextWrapper}>
             {newsMainText.map((text, index) => (
-              <div style={styles.textWrapper}>
+              <div className={styles.textWrapper}>
                 <Typography variant={'subHeadingBold'}>{index + 1}</Typography>
                 <Typography variant={'subHeadingBold'}>{text.text}</Typography>
               </div>
@@ -58,23 +58,23 @@ export const NewsScreen: React.FC<NewsScreenProps> = () => {
           </div>
         </div>
         {secondaryNews.map((news) => (
-          <div style={styles.secondaryNewsWrapper}>
+          <div className={styles.secondaryNewsWrapper}>
             <img
               src={blankImage}
               alt="failedToRender"
-              style={styles.secondaryImage}
+              className={styles.secondaryImage}
             />
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div style={styles.dateAndAuthorWrapper}>
+              <div className={styles.dateAndAuthorWrapper}>
                 <Typography variant={'bodyMedium'}>{news.date}</Typography>
                 <Typography variant={'bodyMedium'}>|</Typography>
                 <Typography variant={'bodyBold'}>Autor:</Typography>
                 <Typography variant={'bodyMedium'}>{news.author}</Typography>
               </div>
-              <div style={styles.secondaryNewsTextWrapper}>
+              <div className={styles.secondaryNewsTextWrapper}>
                 <Typography variant={'headingBold'}>{news.text}</Typography>
               </div>
-              <div style={styles.categoryWrapper}>
+              <div className={styles.categoryWrapper}>
                 <Typography variant={'bodyMedium'}>Kategorija</Typography>
               </div>
             </div>

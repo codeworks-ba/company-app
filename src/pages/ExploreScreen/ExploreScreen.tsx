@@ -1,5 +1,5 @@
 import React from 'react';
-import { styles } from './ExploreScreen.styles';
+import styles from './ExploreScreenStyles.module.css';
 import { Typography } from '../../components/Typography/Typography';
 import { useForm } from 'react-hook-form';
 import { ControlledInput } from '../../components/Input/Input';
@@ -22,35 +22,12 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
 
   return (
     <ScreenWrapper>
-      <div
-        style={{
-          width: '100%',
-          background: 'white',
-          height: '100%',
-          padding: '0px 180px',
-          boxSizing: 'border-box'
-        }}
-      >
-        <div
-          style={{
-            padding: '64px 275px',
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center'
-          }}
-        >
-          <div style={{ display: 'flex', width: '30%' }}>
+      <div className={styles.mainContainer}>
+        <div className={styles.searchWrapper}>
+          <div className={styles.textContainer}>
             <Typography variant={'headingBold'}>Pretraga</Typography>
           </div>
-          <div
-            style={{
-              width: '70%',
-              display: 'flex',
-              flexDirection: 'row',
-              gap: '12px',
-              justifyContent: 'flex-end'
-            }}
-          >
+          <div className={styles.searchInputWrapper}>
             <div style={{ width: '100%' }}>
               <ControlledInput
                 label="Ukucaj pojam, kategoriju, servis ili naziv..."
@@ -67,24 +44,12 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
             />
           </div>
         </div>
-        <div
-          style={{
-            display: 'flex',
-            height: '70%',
-            gap: '88px'
-          }}
-        >
+        <div className={styles.filterAndCompanyWrapper}>
           <div style={{ width: '187px' }}>
             <div style={{ marginBottom: '31px' }}>
               <Typography variant={'subHeadingBold'}>Filteri</Typography>
             </div>
-            <div
-              style={{
-                display: 'flex',
-                gap: '12px',
-                flexDirection: 'column'
-              }}
-            >
+            <div className={styles.flexColumn}>
               <ControlledSelect
                 control={control}
                 name="kategorije"
@@ -137,18 +102,9 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
               />
             </div>
           </div>
-          <div
-            style={{
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              gap: '23px',
-              overflow: 'scroll'
-            }}
-          >
+          <div className={styles.companyContainer}>
             {companies.map((company) => (
-              <div style={{ width: '305px', height: '305px' }}>
+              <div className={styles.imageCardStyle}>
                 <ImageCard
                   image={blankImage}
                   headerText={company.header}

@@ -7,6 +7,7 @@ import {
 import React from 'react';
 import { InputStyleProps, styles } from '../Input.styles';
 import { RadioButton } from '../../RadioButton/RadioButton';
+import '../Input.styled.css';
 
 type ControlledRadioInputProps<T extends FieldValues> = UseControllerProps<T> &
   InputProps;
@@ -48,6 +49,7 @@ export const Input: React.FC<InputProps> = ({
           {...rest}
           placeholder={label || 'Email'}
           style={style(errorText).inputComponent}
+          className="input"
         />
       </div>
       <span

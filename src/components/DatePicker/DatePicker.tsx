@@ -34,7 +34,8 @@ const CustomDatePicker: React.FC<DatePickerProps> = ({
           fontFamily: 'InterRegular',
           width: '100%',
           '& .MuiInputLabel-root.Mui-focused': {
-            transform: 'translate(14px, -9px) scale(0.75);'
+            transform: 'translate(14px, -9px) scale(0.75);',
+            color: '#009FB7'
           },
           '& .MuiInputLabel-root': {
             transform: 'translate(14px, 12px) scale(1)',
@@ -47,6 +48,9 @@ const CustomDatePicker: React.FC<DatePickerProps> = ({
             border: errorText?.message && '1px solid red',
             height: '38px',
             borderRadius: '25px'
+          },
+          '& .Mui-focused fieldset.MuiOutlinedInput-notchedOutline': {
+            borderColor: '#009FB7'
           }
         }}
         label={label}
