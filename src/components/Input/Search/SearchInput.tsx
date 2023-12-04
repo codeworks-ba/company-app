@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldError } from 'react-hook-form';
 import { InputStyleProps, styles } from '../Input.styles';
+import '../Input.styled.css';
 
 type SearchInputProps = {
   errorText?: FieldError;
@@ -33,6 +34,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
           {...rest}
           placeholder={label || 'Type anything to search...'}
           style={style(errorText).inputComponent}
+          className="input"
         />
         {errorText && <span style={{ color: 'red' }}>{errorText.message}</span>}
       </div>

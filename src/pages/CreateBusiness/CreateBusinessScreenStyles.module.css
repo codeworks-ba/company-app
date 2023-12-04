@@ -1,0 +1,104 @@
+.createScreenWrapper {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0px 180px 34px;
+  overflow: scroll;
+}
+
+.headerContainer {
+  margin: 46px 0px 64px 0px;
+}
+
+.flexColumnWithGap {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.mainInformationWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 52px;
+  justify-content: space-between;
+}
+
+.imagesAndBioWrapper {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.imagesWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 65px;
+}
+
+.headerImageWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.headerImageContainer {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  background-color: #ebebeb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d4d4d4;
+}
+
+.logoImageWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.logoImageContainer {
+  width: 150px;
+  height: 150px;
+  border-radius: 100px;
+  background-color: #ebebeb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d4d4d4;
+}
+
+.imageCardWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 34px;
+  flex-wrap: wrap;
+}
+
+.imageCardStyle {
+  height: 250px;
+  width: 232px;
+}
+
+.businessDataWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 34px;
+  flex-wrap: wrap;
+}
+
+.flexColumnFlex1 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.dayContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 34px;
+  justify-content: space-between;
+}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Controller, FieldValues, UseControllerProps } from 'react-hook-form';
 import { Typography } from '../../Typography/Typography';
 import { styles } from './MultilineInput.styles';
+import '../Input.styled.css';
 
 type MultilineInputProps<T extends FieldValues> = UseControllerProps<T> &
   Partial<MultiLineInputProps>;
@@ -27,6 +28,7 @@ export const MultiLineInput: React.FC<MultiLineInputProps> = ({
       <textarea
         {...rest}
         style={styles.inputContainerStyle}
+        className="input"
         rows={rows}
         placeholder={label || ''}
         onChange={(e) => {

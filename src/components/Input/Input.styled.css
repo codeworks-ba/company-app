@@ -1,0 +1,6 @@
+.input {
+}
+
+.input:focus {
+  outline: auto #009fb7;
+}

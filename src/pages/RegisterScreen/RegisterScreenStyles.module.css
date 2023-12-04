@@ -1,0 +1,87 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.headerContainer {
+  margin-top: 46px;
+  margin-bottom: 64px;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  width: min-content;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexRowWithGap60 {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+}
+
+.flexRowWithGap10 {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.flexColumnWithGap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profilePictureContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+
+.alignStart {
+  display: flex;
+  align-items: flex-start;
+}
+.profilePicture {
+  background-color: #ebebeb;
+  border: 1px solid #d4d4d4;
+  border-radius: 100px;
+  height: 150px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.headerImageText {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.headerImageContainer {
+  background-color: #ebebeb;
+  border: 1px solid #d4d4d4;
+  border-radius: 10px;
+  height: 150px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.headerImage {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}

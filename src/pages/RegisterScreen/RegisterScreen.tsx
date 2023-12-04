@@ -8,11 +8,10 @@ import { ControlledDatePicker } from '../../components/DatePicker/DatePicker';
 import { ControlledMultilineInput } from '../../components/Input/Multiline/MultilineInput';
 import { Button } from '../../components/Button/Button';
 import * as yup from 'yup';
-import axios from 'axios';
-import { styles } from './RegisterScreen.styles';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ControlledRadioInput } from '../../components/Input/RadioInput/RadioInput';
 import { AuthContext } from '../../providers/auth/authContext';
+import styles from './RegisterScreenStyles.module.css';
 
 type RegisterScreenProps = unknown;
 
@@ -60,19 +59,19 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
 
   const image = null;
   return (
-    <div style={styles.mainContainer}>
-      <div style={styles.headerContainer}>
+    <div className={styles.mainContainer}>
+      <div className={styles.headerContainer}>
         <Typography variant={'headingBold'}>Kreirajmo tvoj profil!</Typography>
       </div>
-      <div style={styles.flexColumn}>
-        <div style={styles.flexRowWithGap60}>
-          <div style={styles.profilePictureContainer}>
+      <div className={styles.flexColumn}>
+        <div className={styles.flexRowWithGap60}>
+          <div className={styles.profilePictureContainer}>
             <div style={{ width: '100%' }}>
               <Typography variant={'bodyNormal'}>
                 Dodaj sliku profila
               </Typography>
             </div>
-            <div style={styles.profilePicture}>
+            <div className={styles.profilePicture}>
               {image ? (
                 <img
                   src={image}
@@ -92,8 +91,8 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
               )}
             </div>
           </div>
-          <div style={styles.flexColumn}>
-            <div style={styles.alignStart}>
+          <div className={styles.flexColumn}>
+            <div className={styles.alignStart}>
               <Typography variant={'bodyNormal'}>
                 Osnovne informacije
               </Typography>
@@ -130,7 +129,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                 label="Datum rođenja"
               />
             </div>
-            <div style={styles.flexRowWithGap10}>
+            <div className={styles.flexRowWithGap10}>
               <div style={{ flex: 1 }}>
                 <ControlledRadioInput
                   control={control}
@@ -153,12 +152,12 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
             </div>
           </div>
         </div>
-        <div style={styles.headerImageText}>
+        <div className={styles.headerImageText}>
           <Typography>Dodaj naslovnu sliku</Typography>
         </div>
-        <div style={styles.headerImageContainer}>
+        <div className={styles.headerImageContainer}>
           {image ? (
-            <img src={image} alt="" style={styles.headerImage} />
+            <img src={image} alt="" className={styles.headerImage} />
           ) : (
             <img src={plusCircle} alt="" style={{ height: 80, width: 80 }} />
           )}
@@ -173,7 +172,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
           />
         </div>
         <div style={{ marginTop: '12px' }}>
-          <div style={styles.flexRowWithGap10}>
+          <div className={styles.flexRowWithGap10}>
             <div style={{ flex: 1 }}>
               <ControlledRadioInput
                 control={control}
@@ -195,7 +194,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
           </div>
         </div>
         <div>
-          <div style={styles.flexRowWithGap10}>
+          <div className={styles.flexRowWithGap10}>
             <div style={{ flex: 1 }}>
               <ControlledInput
                 control={control}
