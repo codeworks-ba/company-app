@@ -1,0 +1,8 @@
+.textContainer {
+}
+
+@media screen and (max-width: 850px) {
+  .textContainer {
+    display: none;
+  }
+}

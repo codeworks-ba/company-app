@@ -25,10 +25,11 @@ export const Input: React.FC<InputProps> = ({
   label,
   inputType,
   startAdornment,
+  customStyle,
   textType = 'text',
   ...rest
 }) => {
-  const style = styles({ inputType });
+  const style = styles({ inputType, customStyle });
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       {inputType === 'search' ? (

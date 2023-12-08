@@ -7,19 +7,33 @@
 }
 
 .searchWrapper {
-  padding: 64px 275px;
+  padding: 64px 0px;
+  gap: 36px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+}
+
+.textAndFilterContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
 }
 
 .textContainer {
-  display: flex;
-  width: 30%;
+  flex: 1;
+}
+
+.filterContainer {
+  display: none;
+}
+
+.leftFiltersContainer {
+  width: 187px;
 }
 
 .searchInputWrapper {
-  width: 70%;
   display: flex;
   flex-direction: row;
   gap: 12px;
@@ -49,4 +63,55 @@
 .imageCardStyle {
   width: 305px;
   height: 305px;
+}
+
+.searchContainer {
+  width: 400px;
+}
+
+@media screen and (max-width: 1380px) {
+  .searchWrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .textContainer {
+    width: 400px;
+  }
+  .filterContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+  }
+  .leftFiltersContainer {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1130px) {
+  .mainContainer {
+    padding: 0px 34px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .textContainer {
+    width: 100%;
+  }
+  .searchContainer {
+    width: 100%;
+  }
+  .searchWrapper {
+    width: 100%;
+  }
+  .textAndFilterContainer {
+    width: 100%;
+  }
+  .searchInputWrapper {
+    width: 100%;
+  }
+  .imageCardStyle {
+    width: 99%;
+  }
 }

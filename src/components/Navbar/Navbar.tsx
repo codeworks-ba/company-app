@@ -1,24 +1,40 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { styles } from './Navbar.styles';
-import { TabGroup } from '../Tabs/TabGroup/TabGroup';
-import { Typography } from '../Typography/Typography';
-import { Button } from '../Button/Button';
+import styles from './NavbarStyles.module.css';
 import { AuthContext } from '../../providers/auth/authContext';
-import { ProfileButton } from '../ProfileButton/ProfileButton';
 import { useLocation, useNavigate } from 'react-router-dom';
-import logo from '../../images/logo.png';
-import { ChevronLeft } from 'react-feather';
 import { AuthNavbar } from './AuthNavbar';
+import { DesktopNavbar } from './DesktopNavbar';
+import { MobileNavbar } from './MobileNavbar/MobileNavbar';
+import { MyBusiness, MyBusinessItems, NavbarItems } from '../../services/types';
+import { myBusinesses } from '../../dummyData/DummyData';
 
 type NavbarProps = unknown;
 
 export const Navbar: React.FC<NavbarProps> = () => {
   const [isAuthScreen, setIsAuthScreen] = useState<boolean>(false);
+  const [userBusinesses, setUserBusinesses] = useState<MyBusinessItems[]>([]);
 
   const { user, getMe } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const getMyBusinesses = () => {
+    const myBusinessesArray: MyBusinessItems[] = [];
+    myBusinesses.forEach((business) => {
+      myBusinessesArray.push({
+        key: business.key,
+        value: business.value
+      });
+    });
+    setUserBusinesses(myBusinessesArray);
+  };
+
+  useEffect(() => {
+    if (user) {
+      getMyBusinesses();
+    }
+  }, [user]);
 
   useEffect(() => {
     getMe();
@@ -30,45 +46,60 @@ export const Navbar: React.FC<NavbarProps> = () => {
     );
   }, [location.pathname]);
 
-  const tabs: Record<string, string> = user
+  const tabs: Record<string, NavbarItems | MyBusiness> = user
     ? {
-        vijesti: 'Vijesti',
-        pretraga: 'Pretraga',
-        'moj-biznis': 'Moj Biznis'
+        vijesti: {
+          value: 'Vijesti'
+        },
+        pretraga: {
+          value: 'Pretraga'
+        },
+        'moj-biznis': {
+          title: 'Moj Biznis',
+          submenuItems: userBusinesses
+        },
+        ...(user.role === 'admin' && {
+          admin: {
+            value: 'Admin Panel'
+          }
+        })
       }
     : {
-        vijesti: 'Vijesti',
-        pretraga: 'Pretraga'
+        vijesti: {
+          value: 'Vijesti'
+        },
+        pretraga: {
+          value: 'Pretraga'
+        }
       };
 
   return (
-    <nav style={styles.navContainer}>
+    <nav className={styles.navContainer}>
       {isAuthScreen ? (
-        <AuthNavbar onClick={() => navigate('')} />
+        <div className={styles.authNavContainer}>
+          <AuthNavbar onClick={() => navigate('')} />
+        </div>
       ) : (
         <>
-          <div style={styles.titleWrapper}>
-            <div style={{ width: '248px' }}>
-              <img src={logo} alt="Alumni" style={styles.logoStyle} />
-            </div>
+          <div className={styles.desktopNavbar}>
+            <DesktopNavbar
+              user={user}
+              tabs={tabs}
+              onLoginClick={() => navigate('/login')}
+              onProfileClick={() => navigate('/profile')}
+              onRegisterClick={() => navigate('/register')}
+            />
           </div>
-          <TabGroup tabs={tabs} defaultTab={'pretraga'} />
-          {user ? (
-            <ProfileButton onClick={() => navigate('/profile')} />
-          ) : (
-            <div style={styles.buttonsWrapper}>
-              <Button
-                variant={'filled'}
-                text="Registruj se"
-                onClick={() => navigate('register')}
-              />
-              <Button
-                variant={'outlined'}
-                text="Prijavi se"
-                onClick={() => navigate('login')}
-              />
-            </div>
-          )}
+          <div className={styles.mobileNavbar}>
+            <MobileNavbar
+              user={user}
+              tabs={tabs}
+              defaultTab="pretraga"
+              onLoginClick={() => navigate('/login')}
+              onProfileClick={() => navigate('/profile')}
+              onRegisterClick={() => navigate('/register')}
+            />
+          </div>
         </>
       )}
     </nav>

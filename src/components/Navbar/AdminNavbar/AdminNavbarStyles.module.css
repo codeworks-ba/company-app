@@ -1,0 +1,18 @@
+.navContainer {
+  width: 365px;
+  height: 100%;
+  padding: 160px 0px 36px 180px;
+}
+
+.navOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 36px;
+}
+
+@media screen and (max-width: 1130px) {
+  .navContainer {
+    padding: 100px 0px 36px 34px;
+  }
+}

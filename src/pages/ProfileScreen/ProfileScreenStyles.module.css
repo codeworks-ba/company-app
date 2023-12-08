@@ -12,7 +12,12 @@
   flex-direction: column;
 }
 
-.flexRow {
+.nameAndProfession {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageAndNameWrapper {
   display: flex;
   flex-direction: row;
 }
@@ -44,7 +49,7 @@
 .nameAndProfessionContainer {
   margin-left: 60px;
   margin-top: 44px;
-  width: 64%;
+  flex: 1;
 }
 
 .dataAndBusinessesWrapper {
@@ -52,6 +57,7 @@
   flex-direction: row;
   gap: 45px;
   margin-bottom: 36px;
+  margin-top: -86px;
 }
 
 .mainInformationWrapper {
@@ -84,5 +90,50 @@
 
 .businessStyle {
   height: 250px;
-  width: 232px;
+  width: 220px;
+}
+
+.bioContainer {
+  margin-bottom: 36px;
+}
+
+.lineContainer {
+  height: 1px;
+}
+
+@media screen and (max-width: 1130px) {
+  .mainContainer {
+    padding: 0px 34px;
+  }
+  .imageAndNameWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .nameAndProfessionContainer {
+    margin: 0px;
+    text-align: center;
+  }
+  .nameAndProfession {
+    margin-top: -70px;
+  }
+  .lineContainer {
+    display: none;
+  }
+  .dataAndBusinessesWrapper {
+    flex-direction: column;
+    margin-top: 23px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .mainInformationWrapper {
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+@media screen and (max-width: 565px) {
+  .businessStyle {
+    width: 100%;
+  }
 }

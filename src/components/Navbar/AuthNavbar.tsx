@@ -2,7 +2,8 @@ import React from 'react';
 import logo from '../../images/logo.png';
 import { ChevronLeft } from 'react-feather';
 import { Typography } from '../Typography/Typography';
-import { styles } from './Navbar.styles';
+import styles from './NavbarStyles.module.css';
+import styled from './AuthNavbarStyles.module.css';
 
 type AuthNavbarProps = {
   onClick: () => void;
@@ -22,11 +23,11 @@ export const AuthNavbar: React.FC<AuthNavbarProps> = ({ onClick }) => {
         onClick={onClick}
       >
         <ChevronLeft size={'30px'} />
-        <Typography variant={'subHeadingNormal'}>Nazad</Typography>
+        <div className={styled.textContainer}>
+          <Typography variant={'subHeadingNormal'}>Nazad</Typography>
+        </div>
       </div>
-      <div style={{ width: '248px' }}>
-        <img src={logo} alt="Alumni" style={styles.logoStyle} />
-      </div>
+      <img src={logo} alt="Alumni" className={styles.logoStyle} />
       <div style={{ flex: 1 }}></div>
     </>
   );

@@ -12,7 +12,20 @@
 .flexColumn {
   display: flex;
   flex-direction: column;
-  width: min-content;
+  width: 764px;
+}
+
+.firstAndLastNameContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.basicDataWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .flexRow {
@@ -20,13 +33,13 @@
   flex-direction: row;
 }
 
-.flexRowWithGap60 {
+.profilePictureAndBasicDataContainer {
   display: flex;
   flex-direction: row;
   gap: 60px;
 }
 
-.flexRowWithGap10 {
+.emailAndPasswordContainer {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -45,7 +58,7 @@
   align-items: center;
 }
 
-.alignStart {
+.basicDataTextContainer {
   display: flex;
   align-items: flex-start;
 }
@@ -84,4 +97,46 @@
   height: 100%;
   width: 100%;
   object-fit: contain;
+}
+
+.addProfileTextContainer {
+  width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .flexColumn {
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .mainContainer {
+    padding: 0px 55px;
+  }
+  .flexColumn {
+    width: auto;
+  }
+  .profilePictureAndBasicDataContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+  }
+  .profilePicture {
+    height: 171px;
+    width: 171px;
+  }
+  .addProfileTextContainer {
+    text-align: center;
+  }
+  .basicDataTextContainer {
+    align-items: center;
+  }
+  .firstAndLastNameContainer {
+    flex-direction: column;
+    gap: 0px;
+  }
+  .emailAndPasswordContainer {
+    flex-direction: column;
+    gap: 0px;
+  }
 }

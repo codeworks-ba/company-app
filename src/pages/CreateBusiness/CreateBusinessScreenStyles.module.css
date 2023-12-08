@@ -30,6 +30,10 @@
   gap: 12px;
 }
 
+.basicDataWrapper {
+  width: 35%;
+}
+
 .imagesWrapper {
   display: flex;
   flex-direction: row;
@@ -101,4 +105,42 @@
   flex-direction: row;
   gap: 34px;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 1130px) {
+  .createScreenWrapper {
+    padding: 0px 34px 34px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .headerContainer {
+    text-align: center;
+  }
+  .mainInformationWrapper {
+    flex-direction: column;
+  }
+  .basicDataWrapper {
+    width: 100%;
+  }
+  .businessDataWrapper {
+    flex-direction: column;
+  }
+  .imagesAndBioWrapper {
+    width: 100%;
+  }
+  .imagesWrapper {
+    flex-direction: column;
+  }
+  .headerImageWrapper {
+    order: 2;
+  }
+  .logoImageWrapper {
+    align-items: center;
+    order: 1;
+  }
+  .logoImageContainer {
+    height: 170px;
+    width: 170px;
+  }
 }

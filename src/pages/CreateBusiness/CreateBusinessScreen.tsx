@@ -28,13 +28,12 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
         </div>
         <div className={styles.flexColumnWithGap}>
           <div className={styles.mainInformationWrapper}>
-            <div style={{ width: '35%' }}>
+            <div className={styles.basicDataWrapper}>
               <div style={{ marginBottom: '16px' }}>
                 <Typography variant="bodyNormal">
                   Osnovne informacije
                 </Typography>
               </div>
-
               <ControlledInput
                 name="name"
                 control={control}

@@ -26,7 +26,7 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
             />
           </div>
           <div className={styles.mainContainer}>
-            <div className={styles.flexRow}>
+            <div className={styles.mainNameAndTagsWrapper}>
               <div className={styles.profilePictureContainer}>
                 <img
                   src={whiteImage}
@@ -35,67 +35,65 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
                 />
               </div>
               <div className={styles.nameAndTagsWrapper}>
-                <div className={styles.flexRow}>
-                  <div style={{ flex: 1 }}>
-                    <div className={styles.flexColumn}>
-                      <Typography variant={'headingBold'}>
-                        Naziv biznisa
-                      </Typography>
-                      <Typography variant={'subHeadingBold'}>
-                        Kategorija
-                      </Typography>
-                      <div className={styles.tagWrapper}>
-                        <div style={{ width: '65px', height: '36px' }}>
-                          <Tag text="TAG" />
-                        </div>
-                        <div style={{ width: '65px', height: '36px' }}>
-                          <Tag text="TAG" />
-                        </div>
-                        <div style={{ width: '65px', height: '36px' }}>
-                          <Tag text="TAG" />
-                        </div>
-                        <div style={{ width: '65px', height: '36px' }}>
-                          <Tag text="TAG" />
-                        </div>
+                <div className={styles.nameAndTagsContainer}>
+                  <div className={styles.flexColumn}>
+                    <Typography variant={'headingBold'}>
+                      Naziv biznisa
+                    </Typography>
+                    <Typography variant={'subHeadingBold'}>
+                      Kategorija
+                    </Typography>
+                    <div className={styles.tagWrapper}>
+                      <div style={{ width: '65px', height: '36px' }}>
+                        <Tag text="TAG" />
+                      </div>
+                      <div style={{ width: '65px', height: '36px' }}>
+                        <Tag text="TAG" />
+                      </div>
+                      <div style={{ width: '65px', height: '36px' }}>
+                        <Tag text="TAG" />
+                      </div>
+                      <div style={{ width: '65px', height: '36px' }}>
+                        <Tag text="TAG" />
                       </div>
                     </div>
                   </div>
-                  <div className={styles.socialMediaWrapper}>
-                    <div className={styles.socialMediaContainer}>
-                      <img
-                        src={whiteImage}
-                        alt="failedToRender"
-                        className={styles.socialMediaImageStyle}
-                      />
-                    </div>
-                    <div className={styles.socialMediaContainer}>
-                      <img
-                        src={whiteImage}
-                        alt="failedToRender"
-                        className={styles.socialMediaImageStyle}
-                      />
-                    </div>
-                    <div className={styles.socialMediaContainer}>
-                      <img
-                        src={whiteImage}
-                        alt="failedToRender"
-                        className={styles.socialMediaImageStyle}
-                      />
-                    </div>
-                    <div className={styles.socialMediaContainer}>
-                      <img
-                        src={whiteImage}
-                        alt="failedToRender"
-                        className={styles.socialMediaImageStyle}
-                      />
-                    </div>
-                    <div className={styles.socialMediaContainer}>
-                      <img
-                        src={whiteImage}
-                        alt="failedToRender"
-                        className={styles.socialMediaImageStyle}
-                      />
-                    </div>
+                </div>
+                <div className={styles.socialMediaWrapper}>
+                  <div className={styles.socialMediaContainer}>
+                    <img
+                      src={whiteImage}
+                      alt="failedToRender"
+                      className={styles.socialMediaImageStyle}
+                    />
+                  </div>
+                  <div className={styles.socialMediaContainer}>
+                    <img
+                      src={whiteImage}
+                      alt="failedToRender"
+                      className={styles.socialMediaImageStyle}
+                    />
+                  </div>
+                  <div className={styles.socialMediaContainer}>
+                    <img
+                      src={whiteImage}
+                      alt="failedToRender"
+                      className={styles.socialMediaImageStyle}
+                    />
+                  </div>
+                  <div className={styles.socialMediaContainer}>
+                    <img
+                      src={whiteImage}
+                      alt="failedToRender"
+                      className={styles.socialMediaImageStyle}
+                    />
+                  </div>
+                  <div className={styles.socialMediaContainer}>
+                    <img
+                      src={whiteImage}
+                      alt="failedToRender"
+                      className={styles.socialMediaImageStyle}
+                    />
                   </div>
                 </div>
               </div>
@@ -113,8 +111,10 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
                 nulla pariatur. Excepteur sint occaecat cupidatat non proident,
                 sunt in culpa qui officia deserunt mollit anim.
               </Typography>
-              <Line />
-              <div style={{ marginBottom: '16px' }}>
+              <div className={styles.lineContainer}>
+                <Line />
+              </div>
+              <div style={{ marginBottom: '16px', marginTop: '36px' }}>
                 <Typography variant={'subHeadingBold'}>Usluge</Typography>
               </div>
               <div className={styles.servicesWrapper}>
@@ -129,8 +129,10 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
                   </div>
                 ))}
               </div>
-              <Line />
-              <div style={{ marginBottom: '36px' }}>
+              <div className={styles.lineContainer}>
+                <Line />
+              </div>
+              <div style={{ marginBottom: '36px', marginTop: '36px' }}>
                 <Typography variant={'subHeadingBold'}>Kontakt</Typography>
               </div>
               <div className={styles.mainInformationWrapper}>

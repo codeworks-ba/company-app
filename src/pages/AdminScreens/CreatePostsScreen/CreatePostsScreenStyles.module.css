@@ -1,0 +1,62 @@
+.mainContainer {
+  padding: 64px 180px 34px 0px;
+  width: 100%;
+}
+
+.businessWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 51px;
+  margin-bottom: 51px;
+}
+
+.businessContainer {
+  width: -webkit-fill-available;
+  padding: 17px 36px;
+  border: 1px solid #707070;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.businessDataContainer {
+  flex: 1;
+}
+
+.acceptAndDenyContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-left: 43px;
+  align-items: center;
+}
+
+.profilePictureContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.addProfileTextContainer {
+  width: 100%;
+}
+
+.profilePicture {
+  background-color: #ebebeb;
+  border: 1px solid #d4d4d4;
+  border-radius: 28px;
+  height: 150px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 1130px) {
+  .mainContainer {
+    padding: 64px 34px 34px 0px;
+  }
+}
