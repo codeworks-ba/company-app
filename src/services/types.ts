@@ -52,3 +52,17 @@ export type AuthResponseDto = {
   user: AuthUser;
   token: string;
 };
+
+export type NavbarItems = {
+  value: string;
+};
+
+export type MyBusinessItems = {
+  key: string;
+  value: string;
+};
+
+export type MyBusiness = {
+  title: string;
+  submenuItems: MyBusinessItems[];
+};

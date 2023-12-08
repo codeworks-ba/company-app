@@ -1,0 +1,56 @@
+.mainContainer {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 50%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.menuItemsWrapper {
+  position: absolute;
+  bottom: 0px;
+  top: 27px;
+  z-index: 999;
+  width: -webkit-fill-available;
+  padding-right: 36px;
+}
+
+.menuItemsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  background-color: #ebebeb;
+  border-radius: 10px;
+  border: 2px solid #d4d4d4;
+  padding: 18px;
+}
+
+.menuItemContainer {
+  padding: 4px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.menuItem {
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line {
+  margin-top: 4px;
+  width: 30px;
+  height: 2px;
+  background-color: black;
+  transition: width 1s;
+}

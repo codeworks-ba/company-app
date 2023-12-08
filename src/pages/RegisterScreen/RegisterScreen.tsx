@@ -64,9 +64,9 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
         <Typography variant={'headingBold'}>Kreirajmo tvoj profil!</Typography>
       </div>
       <div className={styles.flexColumn}>
-        <div className={styles.flexRowWithGap60}>
+        <div className={styles.profilePictureAndBasicDataContainer}>
           <div className={styles.profilePictureContainer}>
-            <div style={{ width: '100%' }}>
+            <div className={styles.addProfileTextContainer}>
               <Typography variant={'bodyNormal'}>
                 Dodaj sliku profila
               </Typography>
@@ -91,20 +91,13 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
               )}
             </div>
           </div>
-          <div className={styles.flexColumn}>
-            <div className={styles.alignStart}>
+          <div className={styles.basicDataWrapper}>
+            <div className={styles.basicDataTextContainer}>
               <Typography variant={'bodyNormal'}>
                 Osnovne informacije
               </Typography>
             </div>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                gap: 10,
-                marginTop: '12px'
-              }}
-            >
+            <div className={styles.firstAndLastNameContainer}>
               <div style={{ flex: 1 }}>
                 <ControlledInput
                   control={control}
@@ -129,7 +122,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                 label="Datum rođenja"
               />
             </div>
-            <div className={styles.flexRowWithGap10}>
+            <div className={styles.emailAndPasswordContainer}>
               <div style={{ flex: 1 }}>
                 <ControlledRadioInput
                   control={control}
@@ -172,7 +165,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
           />
         </div>
         <div style={{ marginTop: '12px' }}>
-          <div className={styles.flexRowWithGap10}>
+          <div className={styles.emailAndPasswordContainer}>
             <div style={{ flex: 1 }}>
               <ControlledRadioInput
                 control={control}
@@ -194,7 +187,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
           </div>
         </div>
         <div>
-          <div className={styles.flexRowWithGap10}>
+          <div className={styles.emailAndPasswordContainer}>
             <div style={{ flex: 1 }}>
               <ControlledInput
                 control={control}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Navbar } from '../components/Navbar/Navbar';
 import { NewsScreen } from '../pages/NewsScreen/NewsScreen';
@@ -10,14 +10,17 @@ import { DummyComponentScreen } from '../pages/DummyComponentScreen/DummyCompone
 import { BusinessScreen } from '../pages/BusinessScreen/BusinessScreen';
 import { ProfileScreen } from '../pages/ProfileScreen/ProfileScreen';
 import { CreateBusinessScreen } from '../pages/CreateBusiness/CreateBusinessScreen';
-
-export enum Status {
-  LoggedIn,
-  LoggedOut,
-  Stale
-}
+import { TestingScreen } from '../pages/DummyComponentScreen/TestingScreen';
+import { AdminRoutes } from './adminRoutes';
+import { AuthContext } from '../providers/auth/authContext';
 
 export const AppRoutes: React.FC = () => {
+  const { user, getMe } = useContext(AuthContext);
+
+  useEffect(() => {
+    getMe();
+  }, []);
+
   return (
     <div style={{ width: '100%', height: '100vh' }}>
       <Navbar />
@@ -33,6 +36,10 @@ export const AppRoutes: React.FC = () => {
         <Route path="/register" element={<RegisterScreen />} />
         <Route path="/components" element={<DummyComponentScreen />} />
         <Route path="/profile" element={<ProfileScreen />} />
+        <Route path="/testing" element={<TestingScreen />} />
+        {user && user.role === 'admin' && (
+          <Route path="/admin/*" element={<AdminRoutes />} />
+        )}
       </Routes>
     </div>
   );

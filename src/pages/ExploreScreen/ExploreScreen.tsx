@@ -7,6 +7,7 @@ import { Button } from '../../components/Button/Button';
 import { ControlledSelect } from '../../components/Select/Select';
 import { ImageCard } from '../../components/ImageCard/ImageCard';
 import blankImage from '../../images/blankImage.png';
+import filterLogo from '../../images/filter.svg';
 import { companies } from '../../dummyData/DummyData';
 import { useNavigate } from 'react-router-dom';
 import { ScreenWrapper } from '../../components/ScreenWrapper/ScreenWrapper';
@@ -24,11 +25,21 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
     <ScreenWrapper>
       <div className={styles.mainContainer}>
         <div className={styles.searchWrapper}>
-          <div className={styles.textContainer}>
-            <Typography variant={'headingBold'}>Pretraga</Typography>
+          <div className={styles.textAndFilterContainer}>
+            <div className={styles.textContainer}>
+              <Typography variant={'headingBold'}>Pretraga</Typography>
+            </div>
+            <div className={styles.filterContainer}>
+              <img
+                src={filterLogo}
+                alt="filter"
+                style={{ height: '30px', width: '30px' }}
+              />
+              <Typography variant={'bodySmall'}>FILTERI</Typography>
+            </div>
           </div>
           <div className={styles.searchInputWrapper}>
-            <div style={{ width: '100%' }}>
+            <div className={styles.searchContainer}>
               <ControlledInput
                 label="Ukucaj pojam, kategoriju, servis ili naziv..."
                 control={control}
@@ -45,7 +56,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
           </div>
         </div>
         <div className={styles.filterAndCompanyWrapper}>
-          <div style={{ width: '187px' }}>
+          <div className={styles.leftFiltersContainer}>
             <div style={{ marginBottom: '31px' }}>
               <Typography variant={'subHeadingBold'}>Filteri</Typography>
             </div>

@@ -1,3 +1,5 @@
+import { MyBusinessItems } from '../services/types';
+
 export const newsMainText = [
   {
     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod'
@@ -35,7 +37,7 @@ export const secondaryNews = [
   {
     date: '19.11.2023',
     author: 'John Q. Public',
-    text: 'aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet risus nullam eget felis eget nunc lobortis mattis aliquam'
+    text: 'aliquam ut porttitor leo a diam sollicitudin tempor id eu nisl'
   },
   {
     date: '05.11.2023',
@@ -126,5 +128,28 @@ export const businesses = [
   },
   {
     text: 'Naziv biznisa'
+  }
+];
+
+export const myBusinesses: MyBusinessItems[] = [
+  {
+    key: 'biznis1',
+    value: 'Biznis 1'
+  },
+  {
+    key: 'biznis2',
+    value: 'Biznis 2'
+  },
+  {
+    key: 'biznis3',
+    value: 'Biznis 3'
+  },
+  {
+    key: 'biznis4',
+    value: 'Biznis 4'
+  },
+  {
+    key: 'biznis5',
+    value: 'Biznis 5'
   }
 ];

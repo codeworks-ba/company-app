@@ -1,0 +1,59 @@
+.mainContainer {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.menuItemsWrapper {
+  position: absolute;
+  bottom: 0px;
+  top: 90px;
+  z-index: 999;
+}
+
+.menuItemsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 170px;
+  border-radius: 10px;
+  border: 1px solid #d4d4d4;
+  background-color: #ebebeb;
+  padding: 18px;
+}
+
+.menuItemContainer {
+  padding: 4px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.menuItem {
+  font-size: 18px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line {
+  margin-top: 4px;
+  width: 30px;
+  height: 2px;
+  background-color: black;
+  transition: width 1s;
+}
+
+.menuItemContainer:hover {
+  .line {
+    width: 95%;
+  }
+}

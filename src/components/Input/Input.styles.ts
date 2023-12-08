@@ -28,10 +28,11 @@ const types = (error?: FieldError): { [key in Type]: React.CSSProperties } => {
 
 export type InputStyleProps = {
   inputType?: Type;
+  customStyle?: React.CSSProperties;
 };
 
 export const styles =
-  ({ inputType = 'input' }: InputStyleProps) =>
+  ({ inputType = 'input', customStyle = {} }: InputStyleProps) =>
   (error?: FieldError) =>
     makeStyles({
       inputComponent: {
@@ -41,6 +42,7 @@ export const styles =
         width: '-webkit-fill-available',
         color: themeColors.primaryTextColor,
         fontFamily: 'InterRegular',
+        ...customStyle,
         ...types(error)[inputType]
       }
     });

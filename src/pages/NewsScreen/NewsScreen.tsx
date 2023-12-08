@@ -1,5 +1,4 @@
 import React from 'react';
-import { Typography } from '../../components/Typography/Typography';
 import { useForm } from 'react-hook-form';
 import { ControlledInput } from '../../components/Input/Input';
 import { Button } from '../../components/Button/Button';
@@ -8,6 +7,7 @@ import blankImage from '../../images/blankImage.png';
 import { newsMainText, secondaryNews } from '../../dummyData/DummyData';
 import { ScreenWrapper } from '../../components/ScreenWrapper/ScreenWrapper';
 import styles from './NewsScreenStyles.module.css';
+import { Typography } from '../../components/Typography/Typography';
 
 type NewsScreenProps = unknown;
 
@@ -20,11 +20,11 @@ export const NewsScreen: React.FC<NewsScreenProps> = () => {
     <ScreenWrapper>
       <div className={styles.newsWrapper}>
         <div className={styles.searchWrapper}>
-          <div style={{ display: 'flex', width: '30%' }}>
+          <div className={styles.searchTextWrapper}>
             <Typography variant={'headingBold'}>Vijesti</Typography>
           </div>
           <div className={styles.searchInputWrapper}>
-            <div style={{ width: '70%' }}>
+            <div className={styles.searchInputContainer}>
               <ControlledInput
                 control={control}
                 name="search"
@@ -51,8 +51,8 @@ export const NewsScreen: React.FC<NewsScreenProps> = () => {
           <div className={styles.mainTextWrapper}>
             {newsMainText.map((text, index) => (
               <div className={styles.textWrapper}>
-                <Typography variant={'subHeadingBold'}>{index + 1}</Typography>
-                <Typography variant={'subHeadingBold'}>{text.text}</Typography>
+                <div className={styles.subHeadingBold}>{index + 1}</div>
+                <div className={styles.subHeadingBold}>{text.text}</div>
               </div>
             ))}
           </div>
@@ -64,18 +64,22 @@ export const NewsScreen: React.FC<NewsScreenProps> = () => {
               alt="failedToRender"
               className={styles.secondaryImage}
             />
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className={styles.secondaryNewsMainWrapper}>
               <div className={styles.dateAndAuthorWrapper}>
-                <Typography variant={'bodyMedium'}>{news.date}</Typography>
-                <Typography variant={'bodyMedium'}>|</Typography>
-                <Typography variant={'bodyBold'}>Autor:</Typography>
-                <Typography variant={'bodyMedium'}>{news.author}</Typography>
+                <div className={styles.bodyMedium}>{news.date}</div>
+                <div className={styles.straightLine}>
+                  <div className={styles.bodyMedium}>|</div>
+                </div>
+                <div className={styles.authorContainer}>
+                  <div className={styles.bodyBold}>Autor:</div>
+                  <div className={styles.bodyMedium}>{news.author}</div>
+                </div>
               </div>
               <div className={styles.secondaryNewsTextWrapper}>
-                <Typography variant={'headingBold'}>{news.text}</Typography>
+                <div className={styles.headingBold}>{news.text}</div>
               </div>
               <div className={styles.categoryWrapper}>
-                <Typography variant={'bodyMedium'}>Kategorija</Typography>
+                <div className={styles.bodyMedium}>Kategorija</div>
               </div>
             </div>
           </div>

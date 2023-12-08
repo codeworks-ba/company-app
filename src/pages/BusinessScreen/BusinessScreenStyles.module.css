@@ -12,7 +12,7 @@
   flex-direction: column;
 }
 
-.flexRow {
+.mainNameAndTagsWrapper {
   display: flex;
   flex-direction: row;
 }
@@ -44,15 +44,21 @@
 .nameAndTagsWrapper {
   margin-left: 60px;
   margin-top: 44px;
-  width: 64%;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 64px;
 }
 
 .tagWrapper {
   margin-top: 16px;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: row;
   gap: 7px;
+}
+
+.nameAndTagsContainer {
+  flex: 1;
 }
 
 .socialMediaWrapper {
@@ -105,4 +111,58 @@
   flex-direction: column;
   flex: 1;
   gap: 40px;
+}
+
+.lineContainer {
+  height: 1px;
+}
+
+@media screen and (max-width: 1524px) {
+  .nameAndTagsWrapper {
+    flex-direction: column;
+    gap: 34px;
+  }
+  .nameAndTagsContainer {
+    flex: 0;
+  }
+}
+
+@media screen and (max-width: 1180px) {
+  .mainNameAndTagsWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .nameAndTagsWrapper {
+    align-items: center;
+    text-align: center;
+    margin-left: 0px;
+    margin-top: -130px;
+    margin-bottom: 23px;
+  }
+}
+
+@media screen and (max-width: 1130px) {
+  .mainContainer {
+    padding: 0px 34px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .lineContainer {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .mainInformationWrapper {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .serviceStyle {
+    width: 100%;
+  }
+  .socialMediaContainer {
+    width: 55px;
+    height: 55px;
+  }
 }

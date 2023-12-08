@@ -1,6 +1,6 @@
 import React from 'react';
 import { styles } from './ImageWithText.styles';
-import { Typography } from '../Typography/Typography';
+import styled from './ImageWithTextStyles.module.css';
 
 type ImageWithTextProps = {
   image: string;
@@ -19,8 +19,8 @@ export const ImageWithText: React.FC<ImageWithTextProps> = ({
       <img src={image} alt="imageFailedToRender" style={styles.imageStyle} />
       <div style={styles.textContainer}>
         <div>
-          <Typography variant={'headingBold'}>{header}</Typography>
-          <Typography variant={'bodyNormal'}>{subtitle}</Typography>
+          <div className={styled.headingBold}>{header}</div>
+          <div className={styled.bodyNormal}>{subtitle}</div>
         </div>
       </div>
     </div>

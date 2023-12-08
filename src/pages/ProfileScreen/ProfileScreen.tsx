@@ -24,7 +24,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
             />
           </div>
           <div className={styles.mainContainer}>
-            <div className={styles.flexRow}>
+            <div className={styles.imageAndNameWrapper}>
               <div className={styles.profilePictureContainer}>
                 <img
                   src={whiteImage}
@@ -33,7 +33,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 />
               </div>
               <div className={styles.nameAndProfessionContainer}>
-                <div className={styles.flexColumn}>
+                <div className={styles.nameAndProfession}>
                   <Typography variant={'headingBold'}>Ime Prezime</Typography>
                   <Typography variant={'subHeadingBold'}>Zanimanje</Typography>
                 </div>
@@ -54,8 +54,10 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                   cupidatat non proident, sunt in culpa qui officia deserunt
                   mollit anim.
                 </Typography>
-                <Line />
-                <div style={{ marginBottom: '36px' }}>
+                <div className={styles.lineContainer}>
+                  <Line />
+                </div>
+                <div style={{ marginBottom: '36px', marginTop: '36px' }}>
                   <Typography variant={'subHeadingBold'}>Kontakt</Typography>
                 </div>
                 <div className={styles.mainInformationWrapper}>
@@ -77,7 +79,9 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                     <TitleAndText title="Email:" text="company@mail.com" />
                   </div>
                 </div>
-                <Line />
+                <div className={styles.lineContainer}>
+                  <Line />
+                </div>
               </div>
               <div style={{ flex: 1 }}>
                 <div style={{ marginBottom: '16px' }}>

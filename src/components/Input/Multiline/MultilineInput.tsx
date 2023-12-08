@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { Controller, FieldValues, UseControllerProps } from 'react-hook-form';
+import {
+  Controller,
+  FieldError,
+  FieldValues,
+  UseControllerProps
+} from 'react-hook-form';
 import { Typography } from '../../Typography/Typography';
-import { styles } from './MultilineInput.styles';
+import { MultileInputStyleProps, styles } from './MultilineInput.styles';
 import '../Input.styled.css';
 
 type MultilineInputProps<T extends FieldValues> = UseControllerProps<T> &
@@ -12,22 +17,26 @@ type MultiLineInputProps = {
   characterLimit?: number;
   rows?: number;
   onChange: (value: string) => void;
-};
+  errorText?: FieldError;
+} & MultileInputStyleProps;
 
 export const MultiLineInput: React.FC<MultiLineInputProps> = ({
   label,
+  errorText,
   characterLimit = 100,
   rows = 4,
+  customStyle,
   onChange,
   ...rest
 }) => {
   const [charCount, setCharCount] = useState(0);
+  const style = styles({ customStyle });
 
   return (
-    <div style={styles.multilineContainer}>
+    <div style={style().multilineContainer}>
       <textarea
         {...rest}
-        style={styles.inputContainerStyle}
+        style={style().inputContainerStyle}
         className="input"
         rows={rows}
         placeholder={label || ''}
@@ -39,7 +48,7 @@ export const MultiLineInput: React.FC<MultiLineInputProps> = ({
           }
         }}
       />
-      <div style={styles.inputStyle}>
+      <div style={style().inputStyle}>
         <Typography variant="bodyMedium">{`${charCount}/${characterLimit}`}</Typography>
       </div>
     </div>
@@ -55,8 +64,13 @@ export const ControlledMultilineInput = <T extends FieldValues>({
     <Controller
       control={control}
       name={name}
-      render={({ field: { onChange, ...restField } }) => (
-        <MultiLineInput {...restField} {...rest} onChange={onChange} />
+      render={({ field: { onChange, ...restField }, fieldState }) => (
+        <MultiLineInput
+          {...restField}
+          {...rest}
+          onChange={onChange}
+          errorText={fieldState.error}
+        />
       )}
     />
   );
