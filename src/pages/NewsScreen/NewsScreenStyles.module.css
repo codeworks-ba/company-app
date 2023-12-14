@@ -40,13 +40,14 @@
 .mainImage {
   width: 55%;
   height: 55%;
+  cursor: pointer;
 }
 
 .mainTextWrapper {
   width: 38%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 55px;
 }
 
 .textWrapper {
@@ -54,6 +55,7 @@
   flex-direction: row;
   gap: 48px;
   align-items: center;
+  cursor: pointer;
 }
 
 .secondaryNewsWrapper {
@@ -68,6 +70,7 @@
   height: 305px;
   object-fit: cover;
   margin-right: 57px;
+  cursor: pointer;
 }
 
 .dateAndAuthorWrapper {
@@ -85,6 +88,7 @@
   margin-top: 34px;
   margin-bottom: 34px;
   flex: 1;
+  cursor: pointer;
 }
 
 .headingBold {
@@ -136,6 +140,12 @@
   gap: 12px;
 }
 
+@media screen and (max-width: 1800px) {
+  .mainTextWrapper {
+    gap: 10px;
+  }
+}
+
 @media screen and (max-width: 1400px) {
   .headingBold {
     font-size: 28px;
@@ -181,7 +191,7 @@
   }
 }
 
-@media screen and (max-width: 1130px) {
+@media screen and (max-width: 1230px) {
   .newsWrapper {
     padding: 0px 34px 34px;
   }
@@ -223,7 +233,7 @@
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .secondaryImage {
     width: 206px;
     height: 135px;

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { Typography } from '../../components/Typography/Typography';
 import plusCircle from '../../images/plusCircle.svg';
 import { ControlledInput } from '../../components/Input/Input';
@@ -12,6 +12,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { ControlledRadioInput } from '../../components/Input/RadioInput/RadioInput';
 import { AuthContext } from '../../providers/auth/authContext';
 import styles from './RegisterScreenStyles.module.css';
+import { ControlledImageInput } from '../../components/CircularImage/CircularImage';
+import { RadioButton } from '../../components/RadioButton/RadioButton';
 
 type RegisterScreenProps = unknown;
 
@@ -22,7 +24,7 @@ const validationSchema = yup.object({
     .required('Ovo polje je obavezno!'),
   firstName: yup.string().required('Ovo polje je obavezno!'),
   lastName: yup.string().required('Ovo polje je obavezno!'),
-  bio: yup.string().optional(),
+  bio: yup.string().required('Ovo polje je obavezno!'),
   city: yup.string().required('Ovo polje je obavezno!'),
   address: yup.string().required('Ovo polje je obavezno!'),
   phone: yup.string().required('Ovo polje je obavezno!'),
@@ -31,7 +33,9 @@ const validationSchema = yup.object({
   dateOfBirth: yup.date().required('Ovo polje je obavezno!'),
   shouldHideEmail: yup.boolean().optional(),
   shouldHideAddress: yup.boolean().optional(),
-  shouldHidePhone: yup.boolean().optional()
+  shouldHidePhone: yup.boolean().optional(),
+  profilePicture: yup.string().required('Profilna slika je obavezna!'),
+  headerImage: yup.string().required('Naslovna slika je obavezna')
 });
 
 export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
@@ -42,7 +46,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
 
   const { signUp } = useContext(AuthContext);
 
-  const { control, handleSubmit } = useForm<CreateUserDto>({
+  const { control, handleSubmit, setValue } = useForm<CreateUserDto>({
     resolver: yupResolver(validationSchema)
   });
 
@@ -57,7 +61,47 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
     signUp(userData);
   };
 
-  const image = null;
+  // THIS IS FOR LOGO IMAGE
+  const [profilePicture, setProfilePicture] = useState<string>();
+  const profilePictureRef = useRef(null);
+
+  const handleProfilePictureChange = (event: any) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setProfilePicture(e.target!!.result as string);
+        setValue('profilePicture', e.target!!.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleProfilePictureButtonClick = () => {
+    //@ts-ignore
+    profilePictureRef.current!!.click();
+  };
+  //THIS IS FOR HEADER IMAGE
+  const [headerImage, setHeaderImage] = useState<string>();
+  const headerImageRef = useRef(null);
+
+  const handleHeaderImageChange = (event: any) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setHeaderImage(e.target!!.result as string);
+        setValue('headerImage', e.target!!.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleHeaderImageButtonClick = () => {
+    //@ts-ignore
+    headerImageRef.current!!.click();
+  };
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.headerContainer}>
@@ -72,23 +116,11 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
               </Typography>
             </div>
             <div className={styles.profilePicture}>
-              {image ? (
-                <img
-                  src={image}
-                  alt=""
-                  style={{
-                    height: '100%',
-                    width: '100%',
-                    objectFit: 'cover'
-                  }}
-                />
-              ) : (
-                <img
-                  src={plusCircle}
-                  alt=""
-                  style={{ height: 80, width: 80 }}
-                />
-              )}
+              <ControlledImageInput
+                control={control}
+                name={'profilePicture'}
+                borderRadius="100px"
+              />
             </div>
           </div>
           <div className={styles.basicDataWrapper}>
@@ -103,7 +135,6 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                   control={control}
                   name={'firstName'}
                   label="Ime"
-                  inputType={'input'}
                 />
               </div>
               <div style={{ flex: 1 }}>
@@ -111,7 +142,6 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                   control={control}
                   name={'lastName'}
                   label="Prezime"
-                  inputType={'input'}
                 />
               </div>
             </div>
@@ -138,7 +168,6 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                   control={control}
                   name={'password'}
                   label="Password"
-                  inputType={'input'}
                   textType={'password'}
                 />
               </div>
@@ -149,11 +178,11 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
           <Typography>Dodaj naslovnu sliku</Typography>
         </div>
         <div className={styles.headerImageContainer}>
-          {image ? (
-            <img src={image} alt="" className={styles.headerImage} />
-          ) : (
-            <img src={plusCircle} alt="" style={{ height: 80, width: 80 }} />
-          )}
+          <ControlledImageInput
+            control={control}
+            name={'headerImage'}
+            borderRadius="10px"
+          />
         </div>
         <div style={{ width: '100%', marginTop: '12px' }}>
           <ControlledMultilineInput
@@ -177,12 +206,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
               />
             </div>
             <div style={{ flex: 1 }}>
-              <ControlledInput
-                control={control}
-                name={'city'}
-                label="Grad"
-                inputType={'input'}
-              />
+              <ControlledInput control={control} name={'city'} label="Grad" />
             </div>
           </div>
         </div>
@@ -193,7 +217,6 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                 control={control}
                 name={'occupation'}
                 label="Zanimanje"
-                inputType={'input'}
               />
             </div>
             <div style={{ flex: 1 }}>
@@ -218,11 +241,26 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
         >
           <Typography variant="bodyNormal">
             {
-              <div style={{ color: '#787878' }}>
+              <div
+                style={{
+                  position: 'relative',
+                  display: 'inline-block',
+                  color: '#787878'
+                }}
+              >
                 <b>NAPOMENA:</b> U skladu sa zakonima o ličnim podacima online,
-                u predviđenim poljima označenim sa plavim krugom možete ukloniti
-                prikaz ovih informacija javno. Ovu opciju možete uvijek naknadno
-                mijenjati u postavkama profila.
+                u predviđenim poljima označenim sa "
+                <div
+                  style={{
+                    display: 'inline-block',
+                    verticalAlign: 'middle',
+                    width: '16px'
+                  }}
+                >
+                  <RadioButton onChange={() => {}} disabled />
+                </div>
+                " možete ukloniti prikaz ovih informacija javno. Ovu opciju
+                možete uvijek naknadno mijenjati u postavkama profila.
               </div>
             }
           </Typography>

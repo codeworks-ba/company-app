@@ -1,4 +1,11 @@
-import { MyBusinessItems } from '../services/types';
+import {
+  AuthUser,
+  CompanyDto,
+  MyBusinessItems,
+  NewsDto,
+  PaginatedCompanyDto,
+  SearchWithFilters
+} from '../services/types';
 
 export const newsMainText = [
   {
@@ -153,3 +160,107 @@ export const myBusinesses: MyBusinessItems[] = [
     value: 'Biznis 5'
   }
 ];
+
+export const templateBusiness: CompanyDto = {
+  _id: 'null',
+  name: 'Naziv biznisa',
+  category: 'Kategorija',
+  tags: ['TAG', 'TAG', 'TAG', 'TAG'],
+  zip: '75000',
+  about:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.',
+  address: 'Simple Address 5; ZIP Code, City',
+  country: 'Naziv drzave',
+  city: 'Naziv grada',
+  phone: '+387 33 111 111',
+  email: 'name@company.com',
+  web: 'www.mywebsite.com',
+  program: 'EU4BBusiness',
+  otherSiteLink: 'www.google.com',
+  monWorkTime: '09:00 - 17:00',
+  tueWorkTime: '09:00 - 17:00',
+  wedWorkTime: '09:00 - 17:00',
+  thuWorkTime: '09:00 - 17:00',
+  friWorkTime: '09:00 - 17:00',
+  year: 2023,
+  userId: 'null'
+};
+
+export const templateBusinessArray: PaginatedCompanyDto = {
+  count: 1,
+  data: [
+    {
+      _id: 'null',
+      name: 'Naziv biznisa',
+      category: 'Kategorija',
+      tags: ['TAG', 'TAG', 'TAG', 'TAG'],
+      zip: '75000',
+      about:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.',
+      address: 'Simple Address 5; ZIP Code, City',
+      country: 'Naziv drzave',
+      city: 'Naziv grada',
+      phone: '+387 33 111 111',
+      email: 'name@company.com',
+      web: 'www.mywebsite.com',
+      program: 'EU4BBusiness',
+      otherSiteLink: 'www.google.com',
+      monWorkTime: '09:00 - 17:00',
+      tueWorkTime: '09:00 - 17:00',
+      wedWorkTime: '09:00 - 17:00',
+      thuWorkTime: '09:00 - 17:00',
+      friWorkTime: '09:00 - 17:00',
+      year: 2023,
+      userId: 'null'
+    }
+  ]
+};
+
+export const templateFilterData: SearchWithFilters = {
+  input: '',
+  category: '',
+  city: '',
+  service: '',
+  tag: '',
+  program: ''
+};
+
+export const tempateUser: AuthUser = {
+  firstName: 'Ime',
+  lastName: 'Prezime',
+  bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim.',
+  address: 'Simple Address 5',
+  phone: '+387 33 111 111',
+  email: 'name@company.com',
+  city: 'Naziv grada',
+  _id: 'null',
+  createdAccountTimestamp: 'null',
+  role: 'null',
+  dateOfBirth: 'null',
+  occupation: 'Zanimanje',
+  shouldHideAddress: false,
+  shouldHideEmail: false,
+  shouldHidePhone: false
+};
+
+export const tempateNews: NewsDto[] = [
+  {
+    _id: 'klj',
+    title: 'Lorem ipsum dolor sit amet',
+    text: 'Test',
+    category: 'Kategorija',
+    userId: 'blabla',
+    createdAt: '2023-12-10T09:42:21.430Z',
+    imageUrl: 'null'
+  }
+];
+
+export const templateStory: NewsDto = {
+  _id: 'klj',
+  title: 'Lorem ipsum dolor sit amet',
+  text: 'Test',
+  category: 'Kategorija',
+  userId: 'blabla',
+  createdAt: '2023-12-10T09:42:21.430Z',
+  imageUrl: 'null'
+};

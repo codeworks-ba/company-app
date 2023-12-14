@@ -13,6 +13,7 @@ import { CreateBusinessScreen } from '../pages/CreateBusiness/CreateBusinessScre
 import { TestingScreen } from '../pages/DummyComponentScreen/TestingScreen';
 import { AdminRoutes } from './adminRoutes';
 import { AuthContext } from '../providers/auth/authContext';
+import { ReadPostScreen } from '../pages/ReadPostScreen/ReadPostScreen';
 
 export const AppRoutes: React.FC = () => {
   const { user, getMe } = useContext(AuthContext);
@@ -28,12 +29,17 @@ export const AppRoutes: React.FC = () => {
         <Route path="*" element={<ExploreScreen />} />
         <Route path="/" element={<ExploreScreen />} />
         <Route path="/vijesti" element={<NewsScreen />} />
+        <Route path="/vijesti/:id" element={<ReadPostScreen />} />
         <Route path="/pretraga" element={<ExploreScreen />} />
         <Route path="/moj-biznis" element={<MyBusinessScreen />} />
-        <Route path="/biznis" element={<BusinessScreen />} />
+        <Route path="/biznis/:id" element={<BusinessScreen />} />
         <Route path="/biznis/novi" element={<CreateBusinessScreen />} />
-        <Route path="/login" element={<LoginScreen />} />
-        <Route path="/register" element={<RegisterScreen />} />
+        {!user && (
+          <>
+            <Route path="/login" element={<LoginScreen />} />
+            <Route path="/register" element={<RegisterScreen />} />
+          </>
+        )}
         <Route path="/components" element={<DummyComponentScreen />} />
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/testing" element={<TestingScreen />} />

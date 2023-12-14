@@ -15,6 +15,8 @@ export const Tab: React.FC<PropsWithChildren<TabProps>> = ({
 }) => {
   const style = styles({ selected });
 
+  console.log({ selected, text }, 'test 12');
+
   return (
     <div style={style.wrapper} onClick={onClick}>
       <Typography variant={'subHeadingBold'}>{text}</Typography>

@@ -37,20 +37,20 @@
   align-items: center;
 }
 
-@media screen and (max-width: 1130px) {
+@media screen and (max-width: 1230px) {
   .mainContainer {
     padding: 64px 34px 34px 0px;
   }
 }
 
-@media screen and (max-width: 1130px) {
+@media screen and (max-width: 1230px) {
   .acceptAndDenyContainer {
     gap: 0px;
     margin-left: 0px;
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .businessContainer {
     flex-direction: column;
   }

@@ -5,9 +5,7 @@ import {
   UseControllerProps
 } from 'react-hook-form';
 import React, { HTMLInputTypeAttribute } from 'react';
-import UilSearch from '@iconscout/react-unicons/icons/uil-search';
 import { InputStyleProps, styles } from './Input.styles';
-import { SearchInput } from './Search/SearchInput';
 import './Input.styled.css';
 
 type ControlledInputProps<T extends FieldValues> = UseControllerProps<T> &
@@ -23,54 +21,33 @@ type InputProps = {
 export const Input: React.FC<InputProps> = ({
   errorText,
   label,
-  inputType,
   startAdornment,
   customStyle,
   textType = 'text',
   ...rest
 }) => {
-  const style = styles({ inputType, customStyle });
+  const style = styles({ customStyle });
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {inputType === 'search' ? (
-        <>
-          {startAdornment ? (
-            <SearchInput
-              errorText={errorText}
-              label={label}
-              startAdornment={startAdornment}
-              inputType={'search'}
-            />
-          ) : (
-            <SearchInput
-              errorText={errorText}
-              label={label}
-              startAdornment={<UilSearch size="15" />}
-              inputType={'search'}
-            />
-          )}
-        </>
-      ) : (
-        <>
-          <input
-            {...rest}
-            type={textType}
-            placeholder={label || 'Email'}
-            style={style(errorText).inputComponent}
-            className="input"
-          />
-          <span
-            style={{
-              color: 'red',
-              fontSize: '12px',
-              lineHeight: '12px',
-              height: '12px'
-            }}
-          >
-            {errorText?.message ?? ''}
-          </span>
-        </>
-      )}
+      <input
+        {...rest}
+        type={textType}
+        placeholder={label || 'Email'}
+        style={style(errorText).inputComponent}
+        className="input"
+      />
+      <span
+        style={{
+          color: 'red',
+          fontSize: '12px',
+          lineHeight: '12px',
+          height: '12px'
+        }}
+      >
+        {errorText?.message ?? ''}
+      </span>
+      {/* </>
+      )} */}
     </div>
   );
 };

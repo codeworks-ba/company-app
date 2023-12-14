@@ -56,11 +56,7 @@ export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
         }}
       >
         <div style={{ flex: 1 }}>
-          <ControlledInput
-            control={control}
-            name={'email'}
-            inputType={'input'}
-          />
+          <ControlledInput control={control} name={'email'} />
         </div>
         <div style={{ flex: 1 }}>
           <ControlledDatePicker
@@ -93,11 +89,7 @@ export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
       </div>
       <br />
       <div style={{ width: '100%' }}>
-        <ControlledInput
-          control={control}
-          name={'test3'}
-          inputType={'search'}
-        />
+        <ControlledInput control={control} name={'test3'} />
       </div>
 
       <br />

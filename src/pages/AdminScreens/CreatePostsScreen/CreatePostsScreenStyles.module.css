@@ -55,7 +55,7 @@
   overflow: hidden;
 }
 
-@media screen and (max-width: 1130px) {
+@media screen and (max-width: 1230px) {
   .mainContainer {
     padding: 64px 34px 34px 0px;
   }

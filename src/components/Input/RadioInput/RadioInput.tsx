@@ -21,22 +21,26 @@ type InputProps = {
 export const Input: React.FC<InputProps> = ({
   errorText,
   label,
-  inputType,
   onRadioPress,
   ...rest
 }) => {
-  const style = styles({ inputType });
+  const style = styles({});
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column'
+      }}
+    >
       <div style={{ position: 'relative' }}>
         <div
           style={{
             position: 'absolute',
-            height: '6px',
-            width: '6px',
-            right: '24px',
-            top: '35%',
-            transform: 'translateY(-50%)'
+            display: 'flex',
+            right: '8px',
+            height: '100%',
+            width: '16px',
+            alignItems: 'center'
           }}
         >
           <RadioButton
@@ -48,7 +52,7 @@ export const Input: React.FC<InputProps> = ({
         <input
           {...rest}
           placeholder={label || 'Email'}
-          style={style(errorText).inputComponent}
+          style={{ ...style(errorText).inputComponent, paddingRight: '32px' }}
           className="input"
         />
       </div>
