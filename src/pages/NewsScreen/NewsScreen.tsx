@@ -155,15 +155,23 @@ export const NewsScreen: React.FC<NewsScreenProps> = () => {
                   />
                 </div>
                 <div className={styles.mainTextWrapper}>
-                  {newsArray.map((data, index) => (
-                    <div
-                      className={styles.textWrapper}
-                      onClick={() => navigate(`${data._id}`)}
-                    >
-                      <div className={styles.subHeadingBold}>{index + 1}</div>
-                      <div className={styles.subHeadingBold}>{data.title}</div>
-                    </div>
-                  ))}
+                  {newsArray.map((data, index) => {
+                    if (index < 5) {
+                      return (
+                        <div
+                          className={styles.textWrapper}
+                          onClick={() => navigate(`${data._id}`)}
+                        >
+                          <div className={styles.subHeadingBold}>
+                            {index + 1}
+                          </div>
+                          <div className={styles.subHeadingBold}>
+                            {data.title}
+                          </div>
+                        </div>
+                      );
+                    }
+                  })}
                 </div>
               </div>
             )}

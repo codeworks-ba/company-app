@@ -145,7 +145,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                 />
               </div>
             </div>
-            <div style={{ width: '100%', marginBottom: '12px' }}>
+            <div style={{ width: '100%', marginBottom: '20px' }}>
               <ControlledDatePicker
                 control={control}
                 name={'dateOfBirth'}

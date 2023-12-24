@@ -3,5 +3,6 @@ export const themeColors = {
   primaryTextColor: '#0A0908',
   secondaryTextColor: '#FFFFFF',
   secondaryColor: 'yellow',
-  warningColor: 'red'
+  warningColor: 'red',
+  focusedColor: '#009FB7'
 };

@@ -20,6 +20,7 @@ import {
 import axios from 'axios';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { ControlledAutocomplete } from '../../components/Autocomplete/Autocomplete';
 
 type ExploreScreenProps = unknown;
 
@@ -186,54 +187,54 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
               <Typography variant={'subHeadingBold'}>Filteri</Typography>
             </div>
             <div className={styles.flexColumn}>
-              <ControlledSelect
+              <ControlledAutocomplete
                 control={control}
                 name="category"
                 label="Kategorije"
                 options={[
-                  { label: 'Ten', value: 10 },
-                  { label: 'Twenty', value: 20 },
-                  { label: 'Thirty', value: 30 }
+                  { label: 'Ten', value: '10' },
+                  { label: 'Twenty', value: '20' },
+                  { label: 'Thirty', value: '30' }
                 ]}
               />
-              <ControlledSelect
+              <ControlledAutocomplete
                 control={control}
                 name="service"
                 label="Usluga"
                 options={[
-                  { label: 'Ten', value: 10 },
-                  { label: 'Twenty', value: 20 },
-                  { label: 'Thirty', value: 30 }
+                  { label: 'Ten', value: '10' },
+                  { label: 'Twenty', value: '20' },
+                  { label: 'Thirty', value: '30' }
                 ]}
               />
-              <ControlledSelect
+              <ControlledAutocomplete
                 control={control}
                 name="tag"
                 label="Tag"
                 options={[
-                  { label: 'Ten', value: 10 },
-                  { label: 'Twenty', value: 20 },
-                  { label: 'Thirty', value: 30 }
+                  { label: 'Ten', value: '10' },
+                  { label: 'Twenty', value: '20' },
+                  { label: 'Thirty', value: '30' }
                 ]}
               />
-              <ControlledSelect
+              <ControlledAutocomplete
                 control={control}
                 name="city"
                 label="Grad"
                 options={[
-                  { label: 'Ten', value: 10 },
-                  { label: 'Twenty', value: 20 },
-                  { label: 'Thirty', value: 30 }
+                  { label: 'Ten', value: '10' },
+                  { label: 'Twenty', value: '20' },
+                  { label: 'Thirty', value: '30' }
                 ]}
               />
-              <ControlledSelect
+              <ControlledAutocomplete
                 control={control}
                 name="program"
                 label="Program"
                 options={[
-                  { label: 'Ten', value: 10 },
-                  { label: 'Twenty', value: 20 },
-                  { label: 'Thirty', value: 30 }
+                  { label: 'Ten', value: '10' },
+                  { label: 'Twenty', value: '20' },
+                  { label: 'Thirty', value: '30' }
                 ]}
               />
             </div>
