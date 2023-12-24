@@ -57,6 +57,11 @@
   gap: 7px;
 }
 
+.tagStyle {
+  width: 150px;
+  height: 40px;
+}
+
 .nameAndTagsContainer {
   flex: 1;
 }
@@ -66,6 +71,10 @@
   flex-direction: row;
   gap: 15px;
   flex-wrap: wrap;
+}
+
+.mainDataWrapper {
+  margin-top: -86px;
 }
 
 .socialMediaContainer {
@@ -139,15 +148,18 @@
     margin-top: -130px;
     margin-bottom: 23px;
   }
+  .mainDataWrapper {
+    margin-top: 23px;
+  }
 }
 
-@media screen and (max-width: 1130px) {
+@media screen and (max-width: 1230px) {
   .mainContainer {
     padding: 0px 34px;
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   .lineContainer {
     display: none;
   }
@@ -164,5 +176,11 @@
   .socialMediaContainer {
     width: 55px;
     height: 55px;
+  }
+  .tagWrapper {
+    flex-direction: column;
+  }
+  .tagStyle {
+    width: 300px;
   }
 }

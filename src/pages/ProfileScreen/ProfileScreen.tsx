@@ -1,17 +1,65 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import blankImage from '../../images/blankImage.png';
 import whiteImage from '../../images/whiteImage.png';
 import styles from './ProfileScreenStyles.module.css';
 import { Typography } from '../../components/Typography/Typography';
-import { businesses } from '../../dummyData/DummyData';
+import { tempateUser } from '../../dummyData/DummyData';
 import { ImageCard } from '../../components/ImageCard/ImageCard';
 import { TitleAndText } from '../../components/TitleAndText/TitleAndText';
 import { Line } from '../../components/Line/Line';
 import { ScreenWrapper } from '../../components/ScreenWrapper/ScreenWrapper';
+import { AuthContext } from '../../providers/auth/authContext';
+import axios from 'axios';
+import {
+  AuthUser,
+  CompanyDto,
+  PaginatedCompanyDto
+} from '../../services/types';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../../components/Button/Button';
 
 type ProfileScreenProps = unknown;
 
 export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
+  const { user, getMe, signOut } = useContext(AuthContext);
+  const [userCompanies, setUserCompanies] = useState<CompanyDto[]>([]);
+  const [authUser, setAuthUser] = useState<AuthUser>(tempateUser);
+
+  const navigate = useNavigate();
+
+  const signOutOfProfile = () => {
+    signOut();
+    navigate('/pretraga');
+  };
+
+  const getUserCompanies = () => {
+    axios
+      .get('http://localhost:3000/companies', {
+        params: { userId: user?._id }
+      })
+      .then(function (response) {
+        if (response.data) {
+          setUserCompanies((response.data as PaginatedCompanyDto).data);
+        } else {
+          console.log('NOT GOOD');
+        }
+      })
+      .catch(function (error) {
+        console.log('Error: ', error);
+      });
+  };
+
+  useEffect(() => {
+    if (user) {
+      setAuthUser(user);
+      getUserCompanies();
+    }
+  }, [user]);
+
+  useEffect(() => {
+    getMe();
+  }, []);
+
   return (
     <ScreenWrapper>
       <div className={styles.screenWrapper}>
@@ -34,8 +82,12 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
               </div>
               <div className={styles.nameAndProfessionContainer}>
                 <div className={styles.nameAndProfession}>
-                  <Typography variant={'headingBold'}>Ime Prezime</Typography>
-                  <Typography variant={'subHeadingBold'}>Zanimanje</Typography>
+                  <Typography
+                    variant={'headingBold'}
+                  >{`${authUser.firstName} ${authUser.lastName}`}</Typography>
+                  <Typography variant={'subHeadingBold'}>
+                    {authUser.occupation}
+                  </Typography>
                 </div>
               </div>
             </div>
@@ -44,16 +96,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 <div style={{ marginBottom: '16px' }}>
                   <Typography variant="subHeadingBold">Kratki bio</Typography>
                 </div>
-                <Typography variant={'bodyNormal'}>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim.
-                </Typography>
+                <Typography variant={'bodyNormal'}>{authUser.bio}</Typography>
                 <div className={styles.lineContainer}>
                   <Line />
                 </div>
@@ -62,21 +105,27 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                 </div>
                 <div className={styles.mainInformationWrapper}>
                   <div className={styles.informationContainer}>
-                    <div style={{ marginBottom: '19px' }}>
+                    <div style={{ marginBottom: '40px' }}>
                       <TitleAndText
                         title="Adresa:"
-                        text="Simple Address 5"
-                        secondText="ZIP Code, City"
+                        text={
+                          authUser.shouldHideAddress ? '-' : authUser.address
+                        }
                       />
                     </div>
                     <div style={{ marginBottom: '40px' }}>
-                      <TitleAndText title="Grad:" text="Naziv grada" />
+                      <TitleAndText title="Grad:" text={authUser.city} />
                     </div>
-                    <TitleAndText title="Država:" text="Naziv drżave" />
                   </div>
                   <div className={styles.informationContainerWithGap}>
-                    <TitleAndText title="Telefon:" text="+387 33 11 111" />
-                    <TitleAndText title="Email:" text="company@mail.com" />
+                    <TitleAndText
+                      title="Telefon:"
+                      text={authUser.shouldHidePhone ? '-' : authUser.phone}
+                    />
+                    <TitleAndText
+                      title="Email:"
+                      text={authUser.shouldHideEmail ? '-' : authUser.email}
+                    />
                   </div>
                 </div>
                 <div className={styles.lineContainer}>
@@ -88,18 +137,32 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
                   <Typography variant="subHeadingBold">Moji Biznisi</Typography>
                 </div>
                 <div className={styles.myBusinessesContainer}>
-                  {businesses.map((service) => (
+                  {userCompanies.map((service) => (
                     <div className={styles.businessStyle}>
                       <ImageCard
                         image={blankImage}
                         type={'header'}
-                        headerText={service.text}
-                        onClick={() => {}}
+                        headerText={service.name}
+                        onClick={() => navigate(`/biznis/${service._id}`)}
                       />
                     </div>
                   ))}
+                  <div className={styles.businessStyle}>
+                    <ImageCard
+                      type={'header'}
+                      headerText={'Dodaj novi'}
+                      onClick={() => navigate('/biznis/novi')}
+                    />
+                  </div>
                 </div>
               </div>
+            </div>
+            <div style={{ marginBottom: '34px' }}>
+              <Button
+                text="Log out"
+                variant="filled"
+                onClick={signOutOfProfile}
+              />
             </div>
           </div>
         </div>

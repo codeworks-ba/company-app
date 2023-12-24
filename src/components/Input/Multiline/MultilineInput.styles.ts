@@ -17,7 +17,7 @@ export const styles =
         width: '-webkit-fill-available',
         padding: '8px',
         borderRadius: 8,
-        border: '1px solid #D4D4D4',
+        border: error ? '1px solid red' : '1px solid #D4D4D4',
         resize: 'none',
         fontFamily: 'InterRegular',
         ...customStyle

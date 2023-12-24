@@ -9,11 +9,13 @@ type DropdownProps = {
   selected?: boolean;
   text: string;
   dropdownItems: MyBusinessItems[];
+  onClick: (id: string) => void;
 };
 
 export const DropdownTab: React.FC<DropdownProps> = ({
   selected,
   text,
+  onClick,
   dropdownItems
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -40,7 +42,11 @@ export const DropdownTab: React.FC<DropdownProps> = ({
         <div className={styles.menuItemsWrapper}>
           <div className={styles.menuItemsContainer}>
             {dropdownItems.map((item) => (
-              <div className={styles.menuItemContainer} key={item.key}>
+              <div
+                className={styles.menuItemContainer}
+                key={item.key}
+                onClick={() => onClick(item.key)}
+              >
                 <div className={styles.menuItem}>{item.value}</div>
                 <div className={styles.line}></div>
               </div>
