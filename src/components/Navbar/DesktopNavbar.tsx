@@ -21,8 +21,7 @@ export const DesktopNavbar: React.FC<DesktopNavbarProps> = ({
   onLoginClick,
   onProfileClick,
   onRegisterClick,
-  user,
-  ...rest
+  user
 }) => {
   return (
     <>

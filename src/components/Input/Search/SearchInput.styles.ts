@@ -1,24 +1,26 @@
 import React from 'react';
-import { makeStyles } from '../../style/theme/MakeStyles';
 import { FieldError } from 'react-hook-form';
-import { themeColors } from '../../style/theme/colors';
+import { themeColors } from '../../../style/theme/colors';
+import { makeStyles } from '../../../style/theme/MakeStyles';
 
-export type InputStyleProps = {
+export type SearchInputStyleProps = {
   customStyle?: React.CSSProperties;
 };
 
 export const styles =
-  ({ customStyle = {} }: InputStyleProps) =>
+  ({ customStyle = {} }: SearchInputStyleProps) =>
   (error?: FieldError) =>
     makeStyles({
       inputComponent: {
         paddingTop: 10,
         paddingBottom: 10,
         paddingRight: 10,
-        border: error ? '1px solid red' : '1px solid #D4D4D4',
-        borderRadius: '25px',
-        paddingLeft: 16,
+        border: error
+          ? '1px solid red'
+          : `1px solid ${themeColors.primaryColor}`,
+        borderRadius: 23,
         width: '-webkit-fill-available',
+        paddingLeft: 36,
         color: themeColors.primaryTextColor,
         fontFamily: 'InterRegular',
         ...customStyle

@@ -36,7 +36,7 @@ export const MultiLineInput: React.FC<MultiLineInputProps> = ({
     <div style={style().multilineContainer}>
       <textarea
         {...rest}
-        style={style().inputContainerStyle}
+        style={style(errorText).inputContainerStyle}
         className="input"
         rows={rows}
         placeholder={label || ''}
@@ -51,6 +51,19 @@ export const MultiLineInput: React.FC<MultiLineInputProps> = ({
       <div style={style().inputStyle}>
         <Typography variant="bodyMedium">{`${charCount}/${characterLimit}`}</Typography>
       </div>
+      <span
+        style={{
+          position: 'absolute',
+          bottom: '-10px',
+          left: '0px',
+          color: 'red',
+          fontSize: '12px',
+          lineHeight: '12px',
+          height: '12px'
+        }}
+      >
+        {errorText?.message ?? ''}
+      </span>
     </div>
   );
 };

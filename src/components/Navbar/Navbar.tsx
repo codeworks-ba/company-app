@@ -5,14 +5,20 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthNavbar } from './AuthNavbar';
 import { DesktopNavbar } from './DesktopNavbar';
 import { MobileNavbar } from './MobileNavbar/MobileNavbar';
-import { MyBusiness, MyBusinessItems, NavbarItems } from '../../services/types';
-import { myBusinesses } from '../../dummyData/DummyData';
+import {
+  MyBusiness,
+  MyBusinessItems,
+  NavbarItems,
+  PaginatedCompanyDto
+} from '../../services/types';
+import axios from 'axios';
 
 type NavbarProps = unknown;
 
 export const Navbar: React.FC<NavbarProps> = () => {
   const [isAuthScreen, setIsAuthScreen] = useState<boolean>(false);
   const [userBusinesses, setUserBusinesses] = useState<MyBusinessItems[]>([]);
+  const [currentTab, setCurrentTab] = useState<string>();
 
   const { user, getMe } = useContext(AuthContext);
 
@@ -21,13 +27,26 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
   const getMyBusinesses = () => {
     const myBusinessesArray: MyBusinessItems[] = [];
-    myBusinesses.forEach((business) => {
-      myBusinessesArray.push({
-        key: business.key,
-        value: business.value
+    axios
+      .get('http://localhost:3000/companies', {
+        params: { userId: user?._id }
+      })
+      .then(function (response) {
+        if (response.data) {
+          (response.data as PaginatedCompanyDto).data.forEach((business) => {
+            myBusinessesArray.push({
+              key: business._id,
+              value: business.name
+            });
+          });
+          setUserBusinesses(myBusinessesArray);
+        } else {
+          console.log('NOT GOOD');
+        }
+      })
+      .catch(function (error) {
+        console.log('Error: ', error);
       });
-    });
-    setUserBusinesses(myBusinessesArray);
   };
 
   useEffect(() => {
@@ -42,9 +61,11 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
   useEffect(() => {
     setIsAuthScreen(
-      location.pathname === '/register' || location.pathname === '/login'
+      !user &&
+        (location.pathname === '/register' || location.pathname === '/login')
     );
-  }, [location.pathname]);
+    setCurrentTab(location.pathname?.split('/')[1]);
+  }, [location.pathname, user]);
 
   const tabs: Record<string, NavbarItems | MyBusiness> = user
     ? {
@@ -85,6 +106,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
             <DesktopNavbar
               user={user}
               tabs={tabs}
+              defaultTab={currentTab}
               onLoginClick={() => navigate('/login')}
               onProfileClick={() => navigate('/profile')}
               onRegisterClick={() => navigate('/register')}

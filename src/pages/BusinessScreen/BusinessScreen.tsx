@@ -1,19 +1,74 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './BusinessScreenStyles.module.css';
 import blankImage from '../../images/blankImage.png';
 import whiteImage from '../../images/whiteImage.png';
 import { Typography } from '../../components/Typography/Typography';
 import { Tag } from '../../components/Tag/Tag';
 import { ImageCard } from '../../components/ImageCard/ImageCard';
-import { services } from '../../dummyData/DummyData';
+import { services, templateBusiness } from '../../dummyData/DummyData';
 import { TitleAndText } from '../../components/TitleAndText/TitleAndText';
 import { Link } from '../../components/Link/Link';
 import { Line } from '../../components/Line/Line';
 import { ScreenWrapper } from '../../components/ScreenWrapper/ScreenWrapper';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { CompanyDto } from '../../services/types';
+import instagram from '../../images/instagram.webp';
+import facebook from '../../images/facebook.png';
+import twitter from '../../images/twitter.png';
+import linkedIn from '../../images/linkedIn.png';
 
 type BusinessScreenProps = unknown;
 
 export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
+  const [business, setBusiness] = useState<CompanyDto>(templateBusiness);
+
+  const { id } = useParams();
+
+  const modifyBusinessLinks = (data: CompanyDto) => {
+    if (data.instagram && !data.instagram.includes('https://')) {
+      data.instagram = `https://${data.instagram}`;
+    }
+    if (data.facebook && !data.facebook.includes('https://')) {
+      data.facebook = `https://${data.facebook}`;
+    }
+    if (data.twitter && !data.twitter.includes('https://')) {
+      data.twitter = `https://${data.twitter}`;
+    }
+    if (data.linkedIn && !data.linkedIn.includes('https://')) {
+      data.linkedIn = `https://${data.linkedIn}`;
+    }
+    if (data.otherSiteLink && !data.otherSiteLink.includes('https://')) {
+      data.otherSiteLink = `https://${data.otherSiteLink}`;
+    }
+    if (data.web && !data.web.includes('https://')) {
+      data.web = `https://${data.web}`;
+    }
+    setBusiness(data);
+  };
+
+  const getBusiness = () => {
+    axios
+      .get(`http://localhost:3000/companies/get/${id}`)
+      .then(function (response) {
+        if (response.data) {
+          modifyBusinessLinks(response.data as CompanyDto);
+        } else {
+          console.log('NOT GOOD');
+        }
+      })
+      .catch(function (error) {
+        console.log('Error: ', error);
+      });
+  };
+
+  useEffect(() => {
+    console.log('ID: ', id);
+    if (id) {
+      getBusiness();
+    }
+  }, [id]);
+
   return (
     <ScreenWrapper>
       <div className={styles.screenWrapper}>
@@ -38,79 +93,73 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
                 <div className={styles.nameAndTagsContainer}>
                   <div className={styles.flexColumn}>
                     <Typography variant={'headingBold'}>
-                      Naziv biznisa
+                      {business.name}
                     </Typography>
                     <Typography variant={'subHeadingBold'}>
-                      Kategorija
+                      {business.category}
                     </Typography>
                     <div className={styles.tagWrapper}>
-                      <div style={{ width: '65px', height: '36px' }}>
-                        <Tag text="TAG" />
-                      </div>
-                      <div style={{ width: '65px', height: '36px' }}>
-                        <Tag text="TAG" />
-                      </div>
-                      <div style={{ width: '65px', height: '36px' }}>
-                        <Tag text="TAG" />
-                      </div>
-                      <div style={{ width: '65px', height: '36px' }}>
-                        <Tag text="TAG" />
-                      </div>
+                      {business.tags.map((tag) => (
+                        <div className={styles.tagStyle}>
+                          <Tag text={tag} />
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
                 <div className={styles.socialMediaWrapper}>
-                  <div className={styles.socialMediaContainer}>
-                    <img
-                      src={whiteImage}
-                      alt="failedToRender"
-                      className={styles.socialMediaImageStyle}
-                    />
-                  </div>
-                  <div className={styles.socialMediaContainer}>
-                    <img
-                      src={whiteImage}
-                      alt="failedToRender"
-                      className={styles.socialMediaImageStyle}
-                    />
-                  </div>
-                  <div className={styles.socialMediaContainer}>
-                    <img
-                      src={whiteImage}
-                      alt="failedToRender"
-                      className={styles.socialMediaImageStyle}
-                    />
-                  </div>
-                  <div className={styles.socialMediaContainer}>
-                    <img
-                      src={whiteImage}
-                      alt="failedToRender"
-                      className={styles.socialMediaImageStyle}
-                    />
-                  </div>
-                  <div className={styles.socialMediaContainer}>
-                    <img
-                      src={whiteImage}
-                      alt="failedToRender"
-                      className={styles.socialMediaImageStyle}
-                    />
-                  </div>
+                  {business.instagram && (
+                    <div className={styles.socialMediaContainer}>
+                      <a href={business.instagram}>
+                        <img
+                          src={instagram}
+                          alt="failedToRender"
+                          className={styles.socialMediaImageStyle}
+                        />
+                      </a>
+                    </div>
+                  )}
+                  {business.facebook && (
+                    <div className={styles.socialMediaContainer}>
+                      <a href={business.facebook}>
+                        <img
+                          src={facebook}
+                          alt="failedToRender"
+                          className={styles.socialMediaImageStyle}
+                        />
+                      </a>
+                    </div>
+                  )}
+                  {business.twitter && (
+                    <div className={styles.socialMediaContainer}>
+                      <a href={business.twitter}>
+                        <img
+                          src={twitter}
+                          alt="failedToRender"
+                          className={styles.socialMediaImageStyle}
+                        />
+                      </a>
+                    </div>
+                  )}
+                  {business.linkedIn && (
+                    <div className={styles.socialMediaContainer}>
+                      <a href={business.linkedIn}>
+                        <img
+                          src={linkedIn}
+                          alt="failedToRender"
+                          className={styles.socialMediaImageStyle}
+                        />
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
-            <div>
+            <div className={styles.mainDataWrapper}>
               <div style={{ marginBottom: '16px' }}>
                 <Typography variant={'subHeadingBold'}>O biznisu</Typography>
               </div>
-              <Typography variant={'bodyNormal'}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim.
-              </Typography>
+              <Typography variant={'bodyNormal'}>{business.about}</Typography>
               <div className={styles.lineContainer}>
                 <Line />
               </div>
@@ -140,33 +189,43 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
                   <div style={{ marginBottom: '19px' }}>
                     <TitleAndText
                       title="Adresa:"
-                      text="Simple Address 5"
-                      secondText="ZIP Code, City"
+                      text={business.address}
+                      secondText={business.zip}
                     />
                   </div>
                   <div style={{ marginBottom: '40px' }}>
-                    <TitleAndText title="Grad:" text="Naziv grada" />
+                    <TitleAndText title="Grad:" text={business.city} />
                   </div>
-                  <TitleAndText title="Država:" text="Naziv drżave" />
+                  <TitleAndText title="Država:" text={business.country} />
                 </div>
                 <div className={styles.informationContainerWithGap}>
-                  <TitleAndText title="Telefon:" text="+387 33 11 111" />
-                  <TitleAndText title="Email:" text="company@mail.com" />
-                  <TitleAndText title="Web:" text="www.mywebsite.com" />
+                  <TitleAndText title="Telefon:" text={business.phone} />
+                  <TitleAndText title="Email:" text={business.email} />
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: '10px'
+                    }}
+                  >
+                    <div style={{ flex: 1 }}>
+                      <Typography variant="bodyBold">Web:</Typography>
+                    </div>
+                    <Link link={business.web} text="Our website" />
+                  </div>
                 </div>
                 <div className={styles.informationContainer}>
                   <div style={{ marginBottom: '19px' }}>
                     <TitleAndText
-                      title="Radno vrijeme:"
-                      text="8 - 5 (Ponedjeljak - Petak)"
-                      secondText="Vikend i praznici neradni"
+                      title="Godina osnivanja:"
+                      text={business.year.toString()}
                     />
                   </div>
-                  <TitleAndText title="Program:" text="EU4Business" />
+                  <TitleAndText title="Program:" text={business.program} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <div style={{ marginBottom: '26px' }}>
-                    <Typography variant="bodyBold">Linkovi:</Typography>
+                    <Typography variant="bodyBold">Radno vrijeme:</Typography>
                   </div>
                   <div
                     style={{
@@ -175,12 +234,41 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
                       gap: '5px'
                     }}
                   >
-                    <Link text="Link 1" link="www.google.com" />
-                    <Link text="Link 2" link="www.google.com" />
-                    <Link text="Link 3" link="www.google.com" />
-                    <Link text="Link 4" link="www.google.com" />
+                    <TitleAndText
+                      title="Ponedjeljak:"
+                      text={business.monWorkTime}
+                    />
+                    <TitleAndText title="Utorak:" text={business.tueWorkTime} />
+                    <TitleAndText
+                      title="Srijeda:"
+                      text={business.wedWorkTime}
+                    />
+                    <TitleAndText
+                      title="Četvrtal:"
+                      text={business.thuWorkTime}
+                    />
+                    <TitleAndText title="Petak:" text={business.friWorkTime} />
+                    <Typography variant="bodyNormal">
+                      Vikend i praznici neradni
+                    </Typography>
                   </div>
                 </div>
+                {business.otherSiteLink && (
+                  <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <div style={{ marginBottom: '26px' }}>
+                      <Typography variant="bodyBold">Linkovi:</Typography>
+                    </div>
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '5px'
+                      }}
+                    >
+                      <Link text="Link 1" link={business.otherSiteLink} />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
