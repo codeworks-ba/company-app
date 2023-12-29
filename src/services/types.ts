@@ -165,6 +165,13 @@ export type SearchWithFilters = {
   program?: string | undefined;
 };
 
+export type Filters = {
+  categories: string[];
+  tags: string[];
+  programs: string[];
+  cities: string[];
+};
+
 export type Service = {
   services: { service: string; image?: string }[];
 };

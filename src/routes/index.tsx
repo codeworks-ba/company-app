@@ -26,6 +26,13 @@ export const AppRoutes: React.FC = () => {
     <div style={{ width: '100%', height: '100vh' }}>
       <Navbar />
       <Routes>
+        {!user && (
+          <>
+            <Route path="/" element={<LoginScreen />} />
+            <Route path="/login" element={<LoginScreen />} />
+            <Route path="/register" element={<RegisterScreen />} />
+          </>
+        )}
         <Route path="*" element={<ExploreScreen />} />
         <Route path="/" element={<ExploreScreen />} />
         <Route path="/vijesti" element={<NewsScreen />} />
@@ -34,12 +41,6 @@ export const AppRoutes: React.FC = () => {
         <Route path="/moj-biznis" element={<MyBusinessScreen />} />
         <Route path="/biznis/:id" element={<BusinessScreen />} />
         <Route path="/biznis/novi" element={<CreateBusinessScreen />} />
-        {!user && (
-          <>
-            <Route path="/login" element={<LoginScreen />} />
-            <Route path="/register" element={<RegisterScreen />} />
-          </>
-        )}
         <Route path="/components" element={<DummyComponentScreen />} />
         <Route path="/profile" element={<ProfileScreen />} />
         <Route path="/testing" element={<TestingScreen />} />

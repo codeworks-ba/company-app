@@ -16,12 +16,14 @@ type ImageInputProps = {
   error?: FieldError;
   borderRadius: string;
   onChange?: (image: string) => void;
+  onFileChange?: (file: File) => void;
 };
 
 const ImageInput: React.FC<ImageInputProps> = ({
   image,
   error,
   onChange,
+  onFileChange,
   borderRadius
 }) => {
   const [uploadedImage, setUploadedImage] = useState<string | undefined>(image);
@@ -33,9 +35,12 @@ const ImageInput: React.FC<ImageInputProps> = ({
   const handleHeaderImageChange: ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    console.log('test 1');
     if (event.target.files) {
       const file = event.target.files[0];
+      if (file) {
+        onFileChange && onFileChange(file);
+      }
+
       const reader = new FileReader();
       reader.onload = (e) => {
         setUploadedImage(e.target!!.result as string);

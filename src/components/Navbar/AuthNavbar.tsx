@@ -4,6 +4,7 @@ import { ChevronLeft } from 'react-feather';
 import { Typography } from '../Typography/Typography';
 import styles from './NavbarStyles.module.css';
 import styled from './AuthNavbarStyles.module.css';
+import siteLogo from '../../images/AlumniLogo.svg';
 
 type AuthNavbarProps = {
   onClick: () => void;
@@ -27,7 +28,7 @@ export const AuthNavbar: React.FC<AuthNavbarProps> = ({ onClick }) => {
           <Typography variant={'subHeadingNormal'}>Nazad</Typography>
         </div>
       </div>
-      <img src={logo} alt="Alumni" className={styles.logoStyle} />
+      <img src={siteLogo} alt="Alumni" className={styles.logoStyle} />
       <div style={{ flex: 1 }}></div>
     </>
   );

@@ -73,7 +73,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
           value: 'Vijesti'
         },
         pretraga: {
-          value: 'Pretraga'
+          value: 'Biznisi'
         },
         'moj-biznis': {
           title: 'Moj Biznis',
@@ -90,7 +90,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
           value: 'Vijesti'
         },
         pretraga: {
-          value: 'Pretraga'
+          value: 'Biznisi'
         }
       };
 

@@ -17,6 +17,7 @@ import instagram from '../../images/instagram.webp';
 import facebook from '../../images/facebook.png';
 import twitter from '../../images/twitter.png';
 import linkedIn from '../../images/linkedIn.png';
+import _ from 'lodash';
 
 type BusinessScreenProps = unknown;
 
@@ -96,12 +97,12 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
                       {business.name}
                     </Typography>
                     <Typography variant={'subHeadingBold'}>
-                      {business.category}
+                      {_.capitalize((business.category as any).name)}
                     </Typography>
                     <div className={styles.tagWrapper}>
                       {business.tags.map((tag) => (
                         <div className={styles.tagStyle}>
-                          <Tag text={tag} />
+                          <Tag text={_.capitalize((tag as any).name)} />
                         </div>
                       ))}
                     </div>
@@ -194,7 +195,10 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
                     />
                   </div>
                   <div style={{ marginBottom: '40px' }}>
-                    <TitleAndText title="Grad:" text={business.city} />
+                    <TitleAndText
+                      title="Grad:"
+                      text={_.capitalize((business.city as any).name)}
+                    />
                   </div>
                   <TitleAndText title="Država:" text={business.country} />
                 </div>
@@ -221,7 +225,10 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
                       text={business.year.toString()}
                     />
                   </div>
-                  <TitleAndText title="Program:" text={business.program} />
+                  <TitleAndText
+                    title="Program:"
+                    text={_.capitalize((business.program as any).name)}
+                  />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                   <div style={{ marginBottom: '26px' }}>

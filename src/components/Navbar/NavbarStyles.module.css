@@ -22,7 +22,7 @@
 }
 
 .logoStyle {
-  width: 248px;
+  width: 160px;
   height: 45px;
   object-fit: contain;
 }
@@ -42,7 +42,7 @@
 
 @media screen and (max-width: 750px) {
   .logoStyle {
-    width: 167px;
+    width: 110px;
     height: 30px;
   }
 }
@@ -52,7 +52,7 @@
     padding: 0px 34px;
   }
   .logoStyle {
-    width: 167px;
+    width: 110px;
     height: 30px;
   }
 }
@@ -65,7 +65,7 @@
 
 @media screen and (max-width: 900px) {
   .logoStyle {
-    width: 167px;
+    width: 110px;
     height: 30px;
   }
   .desktopNavbar {
