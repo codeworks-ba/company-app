@@ -1,6 +1,7 @@
 import {
   AuthUser,
   CompanyDto,
+  Filters,
   MyBusinessItems,
   NewsDto,
   PaginatedCompanyDto,
@@ -223,6 +224,13 @@ export const templateFilterData: SearchWithFilters = {
   service: '',
   tag: '',
   program: ''
+};
+
+export const templateFilters: Filters = {
+  categories: [],
+  programs: [],
+  cities: [],
+  tags: []
 };
 
 export const tempateUser: AuthUser = {

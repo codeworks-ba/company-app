@@ -3,6 +3,7 @@ import { AuthUser, MyBusiness, NavbarItems } from '../../../services/types';
 import menu from '../../../images/menu.svg';
 import { ProfileButton } from '../../ProfileButton/ProfileButton';
 import logo from '../../../images/logo.png';
+import siteLogo from '../../../images/AlumniLogo.svg';
 import styles from './MobileNavbarStyles.module.css';
 import navbarStyles from '../NavbarStyles.module.css';
 import { Typography } from '../../Typography/Typography';
@@ -56,7 +57,7 @@ export const MobileNavbar: React.FC<MobileNavbarProps> = ({
           )}
         </div>
         <div className={styles.logoContainer}>
-          <img src={logo} alt="Alumni" className={navbarStyles.logoStyle} />
+          <img src={siteLogo} alt="Alumni" className={navbarStyles.logoStyle} />
         </div>
         {user ? (
           <div className={styles.profileContainer}>

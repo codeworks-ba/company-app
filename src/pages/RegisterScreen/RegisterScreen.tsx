@@ -1,6 +1,5 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Typography } from '../../components/Typography/Typography';
-import plusCircle from '../../images/plusCircle.svg';
 import { ControlledInput } from '../../components/Input/Input';
 import { useForm } from 'react-hook-form';
 import { CreateUserDto } from '../../services/types';
@@ -14,6 +13,7 @@ import { AuthContext } from '../../providers/auth/authContext';
 import styles from './RegisterScreenStyles.module.css';
 import { ControlledImageInput } from '../../components/CircularImage/CircularImage';
 import { RadioButton } from '../../components/RadioButton/RadioButton';
+import axios from 'axios';
 
 type RegisterScreenProps = unknown;
 
@@ -46,7 +46,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
 
   const { signUp } = useContext(AuthContext);
 
-  const { control, handleSubmit, setValue } = useForm<CreateUserDto>({
+  const { control, handleSubmit, watch } = useForm<CreateUserDto>({
     resolver: yupResolver(validationSchema)
   });
 
@@ -61,46 +61,62 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
     signUp(userData);
   };
 
-  // THIS IS FOR LOGO IMAGE
-  const [profilePicture, setProfilePicture] = useState<string>();
-  const profilePictureRef = useRef(null);
+  const [profilePictureFile, setProfilePictureFile] = useState<File>();
 
-  const handleProfilePictureChange = (event: any) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setProfilePicture(e.target!!.result as string);
-        setValue('profilePicture', e.target!!.result as string);
-      };
-      reader.readAsDataURL(file);
+  useEffect(() => {
+    if (profilePictureFile) {
+      const formData = new FormData();
+      formData.append('image', profilePictureFile);
+
+      axios
+        .post('http://localhost:3000/image/upload', formData, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data'
+          },
+          params: { prefix: 'users' }
+        })
+        .then(function (response) {
+          if (response) {
+            console.log('RESPONSE IS WHAT: ', response);
+          } else {
+            console.log('NOT GOOD');
+          }
+        })
+        .catch(function (error) {
+          console.log('Error: ', error);
+        });
     }
-  };
+  }, [profilePictureFile]);
 
-  const handleProfilePictureButtonClick = () => {
-    //@ts-ignore
-    profilePictureRef.current!!.click();
-  };
-  //THIS IS FOR HEADER IMAGE
-  const [headerImage, setHeaderImage] = useState<string>();
-  const headerImageRef = useRef(null);
+  const [headerImageFile, setHeaderImageFile] = useState<File>();
 
-  const handleHeaderImageChange = (event: any) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setHeaderImage(e.target!!.result as string);
-        setValue('headerImage', e.target!!.result as string);
-      };
-      reader.readAsDataURL(file);
+  useEffect(() => {
+    if (headerImageFile) {
+      const formData = new FormData();
+      formData.append('image', headerImageFile);
+
+      // axios
+      //   .post('http://localhost:3000/image/upload', formData, {
+      //     headers: {
+      //       Accept: 'application/json',
+      //       'Content-Type': 'multipart/form-data'
+      //     },
+      //     params: {
+      //       prefix: 'users'
+      //     }
+      //   })
+      //   .then(function (response) {
+      //     if (response.data.user) {
+      //     } else {
+      //       console.log('NOT GOOD');
+      //     }
+      //   })
+      //   .catch(function (error) {
+      //     console.log('Error: ', error);
+      //   });
     }
-  };
-
-  const handleHeaderImageButtonClick = () => {
-    //@ts-ignore
-    headerImageRef.current!!.click();
-  };
+  }, [headerImageFile]);
 
   return (
     <div className={styles.mainContainer}>
@@ -120,6 +136,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
                 control={control}
                 name={'profilePicture'}
                 borderRadius="100px"
+                onFileChange={(file) => setProfilePictureFile(file)}
               />
             </div>
           </div>
@@ -182,6 +199,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
             control={control}
             name={'headerImage'}
             borderRadius="10px"
+            onFileChange={(file) => setHeaderImageFile(file)}
           />
         </div>
         <div style={{ width: '100%', marginTop: '12px' }}>
@@ -276,3 +294,44 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
     </div>
   );
 };
+
+// // THIS IS FOR LOGO IMAGE
+// const [profilePicture, setProfilePicture] = useState<string>();
+// const profilePictureRef = useRef(null);
+
+// const handleProfilePictureChange = (event: any) => {
+//   const file = event.target.files[0];
+//   if (file) {
+//     const reader = new FileReader();
+//     reader.onload = (e) => {
+//       setProfilePicture(e.target!!.result as string);
+//       setValue('profilePicture', e.target!!.result as string);
+//     };
+//     reader.readAsDataURL(file);
+//   }
+// };
+
+// const handleProfilePictureButtonClick = () => {
+//   //@ts-ignore
+//   profilePictureRef.current!!.click();
+// };
+// //THIS IS FOR HEADER IMAGE
+// const [headerImage, setHeaderImage] = useState<string>();
+// const headerImageRef = useRef(null);
+
+// const handleHeaderImageChange = (event: any) => {
+//   const file = event.target.files[0];
+//   if (file) {
+//     const reader = new FileReader();
+//     reader.onload = (e) => {
+//       setHeaderImage(e.target!!.result as string);
+//       setValue('headerImage', e.target!!.result as string);
+//     };
+//     reader.readAsDataURL(file);
+//   }
+// };
+
+// const handleHeaderImageButtonClick = () => {
+//   //@ts-ignore
+//   headerImageRef.current!!.click();
+// };

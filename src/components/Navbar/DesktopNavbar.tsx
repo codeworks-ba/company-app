@@ -1,6 +1,6 @@
 import React from 'react';
 import { AuthUser, MyBusiness, NavbarItems } from '../../services/types';
-import logo from '../../images/logo.png';
+import siteLogo from '../../images/AlumniLogo.svg';
 import styles from './NavbarStyles.module.css';
 import { TabGroup } from '../Tabs/TabGroup/TabGroup';
 import { ProfileButton } from '../ProfileButton/ProfileButton';
@@ -26,7 +26,7 @@ export const DesktopNavbar: React.FC<DesktopNavbarProps> = ({
   return (
     <>
       <div className={styles.titleWrapper}>
-        <img src={logo} alt="Alumni" className={styles.logoStyle} />
+        <img src={siteLogo} alt="Alumni" className={styles.logoStyle} />
       </div>
       <TabGroup tabs={tabs} defaultTab={defaultTab} />
       {user ? (

@@ -48,12 +48,14 @@
   display: flex;
   flex-direction: row;
   gap: 64px;
+  height: 100%;
 }
 
 .tagWrapper {
   margin-top: 16px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 7px;
 }
 
@@ -126,7 +128,13 @@
   height: 1px;
 }
 
-@media screen and (max-width: 1524px) {
+@media screen and (max-width: 1470px) {
+  .tagStyle {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 1367px) {
   .nameAndTagsWrapper {
     flex-direction: column;
     gap: 34px;
@@ -150,6 +158,9 @@
   }
   .mainDataWrapper {
     margin-top: 23px;
+  }
+  .tagWrapper {
+    justify-content: center;
   }
 }
 

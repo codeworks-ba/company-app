@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ScreenWrapper } from '../../components/ScreenWrapper/ScreenWrapper';
 import styles from './CreateBusinessScreenStyles.module.css';
 import { Typography } from '../../components/Typography/Typography';
@@ -187,53 +187,58 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
     name: 'services'
   });
 
-  const fileInputRef = useRef(null);
+  const [logoPictureFile, setLogoPictureFile] = useState<File>();
 
-  const handleButtonClick = (index: number) => {
-    setCurrentIndex(index);
-    //@ts-ignore
-    fileInputRef.current!!.click();
-  };
-  // THIS IS FOR LOGO IMAGE
-  const [logoImage, setLogoImage] = useState<string>();
-  const logoImageRef = useRef(null);
+  useEffect(() => {
+    if (logoPictureFile) {
+      const formData = new FormData();
+      formData.append('image', logoPictureFile);
 
-  const handleLogoImageChange = (event: any) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setLogoImage(e.target!!.result as string);
-        setValue('logoImage', e.target!!.result as string);
-      };
-      reader.readAsDataURL(file);
+      axios
+        .post('http://localhost:3000/image/upload', formData, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data'
+          },
+          params: { prefix: 'users' }
+        })
+        .then(function (response) {
+          if (response) {
+          } else {
+            console.log('NOT GOOD');
+          }
+        })
+        .catch(function (error) {
+          console.log('Error: ', error);
+        });
     }
-  };
+  }, [logoPictureFile]);
 
-  const handleLogoImageButtonClick = () => {
-    //@ts-ignore
-    logoImageRef.current!!.click();
-  };
-  //THIS IS FOR HEADER IMAGE
-  const [headerImage, setHeaderImage] = useState<string>();
-  const headerImageRef = useRef(null);
+  const [headerImageFile, setHeaderImageFile] = useState<File>();
 
-  const handleHeaderImageChange = (event: any) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setHeaderImage(e.target!!.result as string);
-        setValue('headerImage', e.target!!.result as string);
-      };
-      reader.readAsDataURL(file);
+  useEffect(() => {
+    if (headerImageFile) {
+      const formData = new FormData();
+      formData.append('image', headerImageFile);
+
+      // axios
+      //   .post('http://localhost:3000/image/upload', formData, {
+      //     headers: {
+      //       Accept: 'application/json',
+      //       'Content-Type': 'multipart/form-data'
+      //     }
+      //   })
+      //   .then(function (response) {
+      //     if (response.data.user) {
+      //     } else {
+      //       console.log('NOT GOOD');
+      //     }
+      //   })
+      //   .catch(function (error) {
+      //     console.log('Error: ', error);
+      //   });
     }
-  };
-
-  const handleHeaderImageButtonClick = () => {
-    //@ts-ignore
-    headerImageRef.current!!.click();
-  };
+  }, [headerImageFile]);
 
   return (
     <ScreenWrapper>
@@ -298,7 +303,7 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
                       control={control}
                       name={'headerImage'}
                       borderRadius="10px"
-                      image={headerImage}
+                      onFileChange={(file) => setHeaderImageFile(file)}
                     />
                   </div>
                 </div>
@@ -311,7 +316,7 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
                       control={control}
                       name={'logoImage'}
                       borderRadius="100px"
-                      image={logoImage}
+                      onFileChange={(file) => setLogoPictureFile(file)}
                     />
                   </div>
                 </div>
@@ -526,3 +531,51 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
     </ScreenWrapper>
   );
 };
+
+//   const fileInputRef = useRef(null);
+
+// const handleButtonClick = (index: number) => {
+//   setCurrentIndex(index);
+//   //@ts-ignore
+//   fileInputRef.current!!.click();
+// };
+// // THIS IS FOR LOGO IMAGE
+// const [logoImage, setLogoImage] = useState<string>();
+// const logoImageRef = useRef(null);
+
+// const handleLogoImageChange = (event: any) => {
+//   const file = event.target.files[0];
+//   if (file) {
+//     const reader = new FileReader();
+//     reader.onload = (e) => {
+//       setLogoImage(e.target!!.result as string);
+//       setValue('logoImage', e.target!!.result as string);
+//     };
+//     reader.readAsDataURL(file);
+//   }
+// };
+
+// const handleLogoImageButtonClick = () => {
+//   //@ts-ignore
+//   logoImageRef.current!!.click();
+// };
+// //THIS IS FOR HEADER IMAGE
+// const [headerImage, setHeaderImage] = useState<string>();
+// const headerImageRef = useRef(null);
+
+// const handleHeaderImageChange = (event: any) => {
+//   const file = event.target.files[0];
+//   if (file) {
+//     const reader = new FileReader();
+//     reader.onload = (e) => {
+//       setHeaderImage(e.target!!.result as string);
+//       setValue('headerImage', e.target!!.result as string);
+//     };
+//     reader.readAsDataURL(file);
+//   }
+// };
+
+// const handleHeaderImageButtonClick = () => {
+//   //@ts-ignore
+//   headerImageRef.current!!.click();
+// };

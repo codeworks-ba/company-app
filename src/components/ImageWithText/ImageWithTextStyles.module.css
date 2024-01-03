@@ -1,5 +1,5 @@
 .headingBold {
-  font: Oxygen;
+  font-family: InterBold;
   font-weight: bold;
   font-size: 32px;
   line-height: 41px;
@@ -8,7 +8,7 @@
 }
 
 .bodyNormal {
-  font: Inter;
+  font-family: InterRegular;
   font-size: 18px;
   line-height: 21px;
   font-weight: normal;

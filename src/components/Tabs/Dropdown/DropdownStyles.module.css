@@ -38,6 +38,7 @@
 }
 
 .menuItem {
+  font-family: InterRegular;
   font-size: 18px;
   white-space: nowrap;
   overflow: hidden;

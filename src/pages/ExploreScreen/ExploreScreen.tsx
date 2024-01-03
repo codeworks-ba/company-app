@@ -3,24 +3,24 @@ import styles from './ExploreScreenStyles.module.css';
 import { Typography } from '../../components/Typography/Typography';
 import { useForm } from 'react-hook-form';
 import { Button } from '../../components/Button/Button';
-import { ControlledSelect } from '../../components/Select/Select';
 import { ImageCard } from '../../components/ImageCard/ImageCard';
 import blankImage from '../../images/blankImage.png';
 import filterLogo from '../../images/filter.svg';
-import { companies, templateFilterData } from '../../dummyData/DummyData';
+import { templateFilterData, templateFilters } from '../../dummyData/DummyData';
 import { useNavigate } from 'react-router-dom';
 import { ScreenWrapper } from '../../components/ScreenWrapper/ScreenWrapper';
 import { ControlledSearchInput } from '../../components/Input/Search/SearchInput';
 import {
   CompanyDto,
+  Filters,
   PaginatedCompanyDto,
-  Search,
   SearchWithFilters
 } from '../../services/types';
 import axios from 'axios';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ControlledAutocomplete } from '../../components/Autocomplete/Autocomplete';
+import _ from 'lodash';
 
 type ExploreScreenProps = unknown;
 
@@ -41,6 +41,8 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
   const [businesses, setBusinesses] = useState<CompanyDto[]>([]);
   const [filters, setFilters] = useState<SearchWithFilters>(templateFilterData);
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
+  const [filtersData, setFiltersData] = useState<Filters>(templateFilters);
 
   const navigate = useNavigate();
 
@@ -69,7 +71,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
           sortBy: 'createdAt',
           category: filters.category,
           name: filters.input,
-          tags: filters.tag,
+          tag: filters.tag,
           program: filters.program,
           address: filters.input,
           country: filters.input,
@@ -82,9 +84,25 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
             setIsEmpty(true);
             setBusinesses([]);
           } else {
+            setIsFilterOpen(false);
             setIsEmpty(false);
             setBusinesses((response.data as PaginatedCompanyDto).data);
           }
+        } else {
+          console.log('NOT GOOD');
+        }
+      })
+      .catch(function (error) {
+        console.log('Error: ', error);
+      });
+  };
+
+  const getFilters = () => {
+    axios
+      .get('http://localhost:3000/filters')
+      .then(function (response) {
+        if (response.data) {
+          setFiltersData(response.data);
         } else {
           console.log('NOT GOOD');
         }
@@ -103,6 +121,10 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
   useEffect(() => {
     getVerifiedCompanies();
   }, []);
+
+  useEffect(() => {
+    getFilters();
+  }, [businesses]);
 
   useEffect(() => {
     searchCompanies();
@@ -156,13 +178,129 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
             <div className={styles.textContainer}>
               <Typography variant={'headingBold'}>Pretraga</Typography>
             </div>
-            <div className={styles.filterContainer}>
-              <img
-                src={filterLogo}
-                alt="filter"
-                style={{ height: '30px', width: '30px' }}
-              />
-              <Typography variant={'bodySmall'}>FILTERI</Typography>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                position: 'relative'
+              }}
+            >
+              <div
+                className={styles.filterContainer}
+                onClick={() => setIsFilterOpen(!isFilterOpen)}
+              >
+                <img
+                  src={filterLogo}
+                  alt="filter"
+                  style={{ height: '30px', width: '30px' }}
+                />
+                <Typography variant={'bodySmall'}>FILTERI</Typography>
+              </div>
+              {isFilterOpen && (
+                <div
+                  style={{
+                    width: '150px',
+                    backgroundColor: '#ebebeb',
+                    border: '1px solid #D4D4D4',
+                    borderRadius: '23px',
+                    zIndex: 999,
+                    position: 'absolute',
+                    top: '35px',
+                    left: '-85px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    padding: '10px',
+                    gap: '10px'
+                  }}
+                >
+                  <div
+                    style={{
+                      width: '100%',
+                      backgroundColor: 'white',
+                      borderRadius: '20px'
+                    }}
+                  >
+                    <ControlledAutocomplete
+                      control={control}
+                      name="category"
+                      label="Kategorije"
+                      options={filtersData.categories.map((category) => ({
+                        label: _.capitalize(category),
+                        value: category
+                      }))}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      width: '100%',
+                      backgroundColor: 'white',
+                      borderRadius: '20px'
+                    }}
+                  >
+                    <ControlledAutocomplete
+                      control={control}
+                      name="service"
+                      label="Usluga"
+                      options={[
+                        { label: 'Ten', value: '10' },
+                        { label: 'Twenty', value: '20' },
+                        { label: 'Thirty', value: '30' }
+                      ]}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      width: '100%',
+                      backgroundColor: 'white',
+                      borderRadius: '20px'
+                    }}
+                  >
+                    <ControlledAutocomplete
+                      control={control}
+                      name="tag"
+                      label="Tag"
+                      options={filtersData.tags.map((tag) => ({
+                        label: _.capitalize(tag),
+                        value: tag
+                      }))}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      width: '100%',
+                      backgroundColor: 'white',
+                      borderRadius: '20px'
+                    }}
+                  >
+                    <ControlledAutocomplete
+                      control={control}
+                      name="city"
+                      label="Grad"
+                      options={filtersData.cities.map((city) => ({
+                        label: _.capitalize(city),
+                        value: city
+                      }))}
+                    />
+                  </div>
+                  <div
+                    style={{
+                      width: '100%',
+                      backgroundColor: 'white',
+                      borderRadius: '20px'
+                    }}
+                  >
+                    <ControlledAutocomplete
+                      control={control}
+                      name="program"
+                      label="Program"
+                      options={filtersData.programs.map((program) => ({
+                        label: _.capitalize(program),
+                        value: program
+                      }))}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div className={styles.searchInputWrapper}>
@@ -191,11 +329,10 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
                 control={control}
                 name="category"
                 label="Kategorije"
-                options={[
-                  { label: 'Ten', value: '10' },
-                  { label: 'Twenty', value: '20' },
-                  { label: 'Thirty', value: '30' }
-                ]}
+                options={filtersData.categories.map((category) => ({
+                  label: _.capitalize(category),
+                  value: category
+                }))}
               />
               <ControlledAutocomplete
                 control={control}
@@ -211,31 +348,28 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
                 control={control}
                 name="tag"
                 label="Tag"
-                options={[
-                  { label: 'Ten', value: '10' },
-                  { label: 'Twenty', value: '20' },
-                  { label: 'Thirty', value: '30' }
-                ]}
+                options={filtersData.tags.map((tag) => ({
+                  label: _.capitalize(tag),
+                  value: tag
+                }))}
               />
               <ControlledAutocomplete
                 control={control}
                 name="city"
                 label="Grad"
-                options={[
-                  { label: 'Ten', value: '10' },
-                  { label: 'Twenty', value: '20' },
-                  { label: 'Thirty', value: '30' }
-                ]}
+                options={filtersData.cities.map((city) => ({
+                  label: _.capitalize(city),
+                  value: city
+                }))}
               />
               <ControlledAutocomplete
                 control={control}
                 name="program"
                 label="Program"
-                options={[
-                  { label: 'Ten', value: '10' },
-                  { label: 'Twenty', value: '20' },
-                  { label: 'Thirty', value: '30' }
-                ]}
+                options={filtersData.programs.map((program) => ({
+                  label: _.capitalize(program),
+                  value: program
+                }))}
               />
             </div>
           </div>
@@ -245,7 +379,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
                 <ImageCard
                   image={blankImage}
                   headerText={business.name}
-                  subtitleText={business.category}
+                  subtitleText={_.capitalize(business.category)}
                   onClick={() => navigate(`/biznis/${business._id}`)}
                   type={'headerAndSubtitle'}
                 />
