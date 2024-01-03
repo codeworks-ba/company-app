@@ -68,22 +68,24 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
       const formData = new FormData();
       formData.append('image', profilePictureFile);
 
-      // axios
-      //   .post('http://localhost:3000/image/upload', formData, {
-      //     headers: {
-      //       Accept: 'application/json',
-      //       'Content-Type': 'multipart/form-data'
-      //     }
-      //   })
-      //   .then(function (response) {
-      //     if (response.data.user) {
-      //     } else {
-      //       console.log('NOT GOOD');
-      //     }
-      //   })
-      //   .catch(function (error) {
-      //     console.log('Error: ', error);
-      //   });
+      axios
+        .post('http://localhost:3000/image/upload', formData, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data'
+          },
+          params: { prefix: 'users' }
+        })
+        .then(function (response) {
+          if (response) {
+            console.log('RESPONSE IS WHAT: ', response);
+          } else {
+            console.log('NOT GOOD');
+          }
+        })
+        .catch(function (error) {
+          console.log('Error: ', error);
+        });
     }
   }, [profilePictureFile]);
 
@@ -99,6 +101,9 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
       //     headers: {
       //       Accept: 'application/json',
       //       'Content-Type': 'multipart/form-data'
+      //     },
+      //     params: {
+      //       prefix: 'users'
       //     }
       //   })
       //   .then(function (response) {

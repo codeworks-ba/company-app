@@ -194,22 +194,23 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
       const formData = new FormData();
       formData.append('image', logoPictureFile);
 
-      // axios
-      //   .post('http://localhost:3000/image/upload', formData, {
-      //     headers: {
-      //       Accept: 'application/json',
-      //       'Content-Type': 'multipart/form-data'
-      //     }
-      //   })
-      //   .then(function (response) {
-      //     if (response.data.user) {
-      //     } else {
-      //       console.log('NOT GOOD');
-      //     }
-      //   })
-      //   .catch(function (error) {
-      //     console.log('Error: ', error);
-      //   });
+      axios
+        .post('http://localhost:3000/image/upload', formData, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data'
+          },
+          params: { prefix: 'users' }
+        })
+        .then(function (response) {
+          if (response) {
+          } else {
+            console.log('NOT GOOD');
+          }
+        })
+        .catch(function (error) {
+          console.log('Error: ', error);
+        });
     }
   }, [logoPictureFile]);
 
