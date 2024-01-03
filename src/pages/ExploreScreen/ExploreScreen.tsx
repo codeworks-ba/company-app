@@ -379,7 +379,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
                 <ImageCard
                   image={blankImage}
                   headerText={business.name}
-                  subtitleText={_.capitalize((business.category as any).name)}
+                  subtitleText={_.capitalize(business.category)}
                   onClick={() => navigate(`/biznis/${business._id}`)}
                   type={'headerAndSubtitle'}
                 />

@@ -97,12 +97,12 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
                       {business.name}
                     </Typography>
                     <Typography variant={'subHeadingBold'}>
-                      {_.capitalize((business.category as any).name)}
+                      {_.capitalize(business.category)}
                     </Typography>
                     <div className={styles.tagWrapper}>
                       {business.tags.map((tag) => (
                         <div className={styles.tagStyle}>
-                          <Tag text={_.capitalize((tag as any).name)} />
+                          <Tag text={_.capitalize(tag)} />
                         </div>
                       ))}
                     </div>
@@ -197,7 +197,7 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
                   <div style={{ marginBottom: '40px' }}>
                     <TitleAndText
                       title="Grad:"
-                      text={_.capitalize((business.city as any).name)}
+                      text={_.capitalize(business.city)}
                     />
                   </div>
                   <TitleAndText title="Država:" text={business.country} />
@@ -227,7 +227,7 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
                   </div>
                   <TitleAndText
                     title="Program:"
-                    text={_.capitalize((business.program as any).name)}
+                    text={_.capitalize(business.program)}
                   />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>

@@ -44,15 +44,8 @@
 }
 
 .profilePicture {
-  background-color: #ebebeb;
-  border: 1px solid #d4d4d4;
-  border-radius: 28px;
   height: 150px;
   width: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
 }
 
 @media screen and (max-width: 1230px) {

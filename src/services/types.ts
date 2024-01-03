@@ -56,6 +56,7 @@ export type CreatePostDto = {
   title: string;
   text: string;
   category: string;
+  image: string;
 };
 
 export type CreateCompanyDto = {
