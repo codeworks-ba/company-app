@@ -56,6 +56,7 @@ export type CreatePostDto = {
   title: string;
   text: string;
   category: string;
+  image: string;
 };
 
 export type CreateCompanyDto = {
@@ -163,6 +164,13 @@ export type SearchWithFilters = {
   tag?: string | undefined;
   city?: string | undefined;
   program?: string | undefined;
+};
+
+export type Filters = {
+  categories: string[];
+  tags: string[];
+  programs: string[];
+  cities: string[];
 };
 
 export type Service = {

@@ -17,73 +17,73 @@ export type TypographyVariants = keyof typeof typographyVariants;
 export const styles = () =>
   makeStyles({
     headingBold: {
-      font: 'Oxygen',
-      fontWeight: 'bold',
+      fontFamily: 'InterBold',
+      fontFamilyWeight: 'bold',
       fontSize: '32px',
       lineHeight: '41px',
       letterSpacing: '0px',
       color: '#0A0908'
     },
     subHeadingNormal: {
-      font: 'Inter',
+      fontFamily: 'InterRegular',
       fontSize: '24px',
       lineHeight: '29px',
-      fontWeight: 'normal',
+      fontFamilyWeight: 'normal',
       letterSpacing: '0px',
       color: '#0A0908'
     },
     subHeadingBold: {
-      font: 'Inter',
+      fontFamily: 'InterBold',
       fontSize: '24px',
       lineHeight: '29px',
-      fontWeight: 'bold',
+      fontFamilyWeight: 'bold',
       letterSpacing: '0px',
       color: '#0A0908'
     },
     bodyMedium: {
-      font: 'Inter',
+      fontFamily: 'InterRegular',
       fontSize: '18px',
       lineHeight: '21px',
       letterSpacing: '0px',
       color: '#FFFFFF'
     },
     bodyBold: {
-      font: 'Inter',
+      fontFamily: 'InterBold',
       fontSize: '18px',
       lineHeight: '21px',
-      fontWeight: 'bold',
+      fontFamilyWeight: 'bold',
       letterSpacing: '0px',
       color: '#0A0908'
     },
     bodyNormal: {
-      font: 'Inter',
+      fontFamily: 'InterRegular',
       fontSize: '18px',
       lineHeight: '21px',
-      fontWeight: 'normal',
+      fontFamilyWeight: 'normal',
       letterSpacing: '0px',
       color: '#0A0908'
     },
     smallButtonText: {
-      font: 'Inter',
+      fontFamily: 'InterRegular',
       fontSize: '14px',
       lineHeight: '0',
-      fontWeight: 'normal',
+      fontFamilyWeight: 'normal',
       letterSpacing: '0px',
       color: '#0A0908'
     },
     bodySmall: {
-      font: 'Inter',
+      fontFamily: 'InterRegular',
       fontSize: '14px',
       lineHeight: '1',
-      fontWeight: 'normal',
+      fontFamilyWeight: 'normal',
       letterSpacing: '0px',
       color: '#0A0908'
     },
     bodySmallBold: {
-      font: 'Inter',
+      fontFamily: 'InterBold',
       fontSize: '14px',
       lineHeight: '1',
-      fontWeight: 'bold',
+      fontFamilyWeight: 'bold',
       letterSpacing: '0px',
       color: '#0A0908'
     }

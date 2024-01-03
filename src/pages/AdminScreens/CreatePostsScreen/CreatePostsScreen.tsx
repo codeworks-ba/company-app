@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './CreatePostsScreenStyles.module.css';
 import { Typography } from '../../../components/Typography/Typography';
 import { Button } from '../../../components/Button/Button';
@@ -13,19 +13,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { TOKEN } from '../../../services/token';
 import { useNavigate } from 'react-router-dom';
+import { ControlledImageInput } from '../../../components/CircularImage/CircularImage';
 
 type CreatePostProps = unknown;
 
 const validationSchema = yup.object().shape({
   title: yup.string().required('Ovo polje je obavezno!'),
   text: yup.string().required('Ovo polje je obavezno!'),
-  category: yup.string().required('Ovo polje je obavezno!')
+  category: yup.string().required('Ovo polje je obavezno!'),
+  image: yup.string().required('Ovo polje je obavezno!')
 });
 
 export const CreatePostsScreen: React.FC<CreatePostProps> = () => {
   const { control, handleSubmit } = useForm<CreatePostDto>({
     resolver: yupResolver(validationSchema)
   });
+
+  const [headerImageFile, setHeaderImageFile] = useState<File>();
 
   const navigate = useNavigate();
 
@@ -46,7 +50,30 @@ export const CreatePostsScreen: React.FC<CreatePostProps> = () => {
       });
   };
 
-  const image = null;
+  useEffect(() => {
+    if (headerImageFile) {
+      const formData = new FormData();
+      formData.append('image', headerImageFile);
+
+      // axios
+      //   .post('http://localhost:3000/image/upload', formData, {
+      //     headers: {
+      //       Accept: 'application/json',
+      //       'Content-Type': 'multipart/form-data'
+      //     }
+      //   })
+      //   .then(function (response) {
+      //     if (response.data.user) {
+      //     } else {
+      //       console.log('NOT GOOD');
+      //     }
+      //   })
+      //   .catch(function (error) {
+      //     console.log('Error: ', error);
+      //   });
+    }
+  }, [headerImageFile]);
+
   return (
     <div className={styles.mainContainer}>
       <Typography variant={'headingBold'}>Admin Panel</Typography>
@@ -87,19 +114,12 @@ export const CreatePostsScreen: React.FC<CreatePostProps> = () => {
             <Typography variant={'bodyNormal'}>Dodaj sliku</Typography>
           </div>
           <div className={styles.profilePicture}>
-            {image ? (
-              <img
-                src={image}
-                alt=""
-                style={{
-                  height: '100%',
-                  width: '100%',
-                  objectFit: 'cover'
-                }}
-              />
-            ) : (
-              <img src={plusCircle} alt="" style={{ height: 80, width: 80 }} />
-            )}
+            <ControlledImageInput
+              control={control}
+              name={'image'}
+              borderRadius="10px"
+              onFileChange={(file) => setHeaderImageFile(file)}
+            />
           </div>
         </div>
       </div>

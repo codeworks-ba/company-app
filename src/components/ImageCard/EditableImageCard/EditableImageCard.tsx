@@ -32,6 +32,8 @@ const EditableImageCard: React.FC<ImageCardProps> = ({
 }) => {
   const [uploadedImage, setUploadedImage] = useState(image);
   const [value, setValue] = useState(defaultValue);
+  const [imageFile, setImageFile] = useState<File>();
+  const [imageFromApi, setImageFromApi] = useState<string>();
   const error = errorText ? errorText.message : undefined;
   const style = styles(error);
 
@@ -39,6 +41,7 @@ const EditableImageCard: React.FC<ImageCardProps> = ({
 
   const handleFileChange = (event: any) => {
     const file = event.target.files[0];
+    setImageFile(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -48,13 +51,38 @@ const EditableImageCard: React.FC<ImageCardProps> = ({
     }
   };
 
+  useEffect(() => {
+    if (imageFile) {
+      const formData = new FormData();
+      formData.append('image', imageFile);
+
+      // axios
+      //   .post('http://localhost:3000/image/upload', formData, {
+      //     headers: {
+      //       Accept: 'application/json',
+      //       'Content-Type': 'multipart/form-data'
+      //     }
+      //   })
+      //   .then(function (response) {
+      //     if (response.data) {
+      // setImageFromApi(response.data)
+      //     } else {
+      //       console.log('NOT GOOD');
+      //     }
+      //   })
+      //   .catch(function (error) {
+      //     console.log('Error: ', error);
+      //   });
+    }
+  }, [imageFile]);
+
   const onTextInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setValue(e.target.value);
   };
 
   useEffect(() => {
-    onChange && onChange({ service: value, image: uploadedImage });
-  }, [value, uploadedImage, onChange]);
+    onChange && onChange({ service: value, image: imageFromApi ?? '' });
+  }, [value, imageFromApi, onChange]);
 
   return (
     <div style={style.imageCardContainer}>

@@ -58,12 +58,13 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 23px;
-  overflow: scroll;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
 .imageCardStyle {
-  width: 305px;
-  height: 305px;
+  width: 260px;
+  height: 290px;
 }
 
 .searchContainer {

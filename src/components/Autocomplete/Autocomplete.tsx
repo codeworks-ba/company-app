@@ -31,6 +31,9 @@ const CustomAutocomplete: React.FC<AutocompleteProps> = ({
       {...rest}
       onOpen={() => setIsOpen(true)}
       onClose={() => setIsOpen(false)}
+      onChange={(e: any, newValue: { label: string; value: string } | null) =>
+        onChange && onChange(newValue?.value)
+      }
       disablePortal
       id="combo-box-demo"
       options={options}
