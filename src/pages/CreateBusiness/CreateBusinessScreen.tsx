@@ -128,13 +128,13 @@ const validationSchema = yup.object({
     .array()
     .of(
       yup.object().shape({
-        service: yup.string().required('Molimo unesite naziv usluge!'),
-        image: yup.string().optional()
+        name: yup.string().required('Molimo unesite naziv usluge!'),
+        imageUrl: yup.string().optional()
       })
     )
     .required(),
-  logoImage: yup.string().required('Logo je obavezan!'),
-  headerImage: yup.string().required('Naslovna slika je obavezna!')
+  logoImageUrl: yup.string().required('Logo je obavezan!'),
+  headerImageUrl: yup.string().required('Naslovna slika je obavezna!')
 });
 
 export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
@@ -145,11 +145,14 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
 
   const navigate = useNavigate();
 
+  const [profilePictureId, setProfilePictureId] = useState<string>();
+  const [headerImageId, setHeaderImageId] = useState<string>();
+
   const onSubmit = (data: CreateCompanyDto) => {
     let isOkay = true;
     data.services.forEach((service, index) => {
-      if (!service.image) {
-        setError(`services.${index}.service`, {
+      if (!service.imageUrl) {
+        setError(`services.${index}.imageUrl`, {
           message: 'Molimo dodajte sliku usluge!'
         });
         isOkay = false;
@@ -159,6 +162,9 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
       console.log('DATA: ', data);
       const dataToSend: any = data;
       dataToSend.year = Number(dataToSend.year);
+      dataToSend.headerImageUrl = headerImageId;
+      dataToSend.logoImageUrl = profilePictureId;
+
       axios
         .post('http://localhost:3000/companies', dataToSend, {
           headers: { Authorization: `Bearer ${TOKEN.get()}` }
@@ -200,10 +206,11 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
             Accept: 'application/json',
             'Content-Type': 'multipart/form-data'
           },
-          params: { prefix: 'users' }
+          params: { prefix: 'companies' }
         })
         .then(function (response) {
           if (response) {
+            setProfilePictureId(response.data._id);
           } else {
             console.log('NOT GOOD');
           }
@@ -221,22 +228,24 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
       const formData = new FormData();
       formData.append('image', headerImageFile);
 
-      // axios
-      //   .post('http://localhost:3000/image/upload', formData, {
-      //     headers: {
-      //       Accept: 'application/json',
-      //       'Content-Type': 'multipart/form-data'
-      //     }
-      //   })
-      //   .then(function (response) {
-      //     if (response.data.user) {
-      //     } else {
-      //       console.log('NOT GOOD');
-      //     }
-      //   })
-      //   .catch(function (error) {
-      //     console.log('Error: ', error);
-      //   });
+      axios
+        .post('http://localhost:3000/image/upload', formData, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data'
+          },
+          params: { prefix: 'companies' }
+        })
+        .then(function (response) {
+          if (response) {
+            setHeaderImageId(response.data._id);
+          } else {
+            console.log('NOT GOOD');
+          }
+        })
+        .catch(function (error) {
+          console.log('Error: ', error);
+        });
     }
   }, [headerImageFile]);
 
@@ -301,7 +310,7 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
                   <div className={styles.headerImageContainer}>
                     <ControlledImageInput
                       control={control}
-                      name={'headerImage'}
+                      name={'headerImageUrl'}
                       borderRadius="10px"
                       onFileChange={(file) => setHeaderImageFile(file)}
                     />
@@ -314,7 +323,7 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
                   <div className={styles.logoImageContainer}>
                     <ControlledImageInput
                       control={control}
-                      name={'logoImage'}
+                      name={'logoImageUrl'}
                       borderRadius="100px"
                       onFileChange={(file) => setLogoPictureFile(file)}
                     />
@@ -350,8 +359,8 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
                   headerText="Dodaj novu"
                   onClick={() => {
                     append({
-                      service: '',
-                      image: ''
+                      name: '',
+                      imageUrl: ''
                     });
                   }}
                 />

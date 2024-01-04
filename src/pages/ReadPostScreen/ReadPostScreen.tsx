@@ -57,7 +57,7 @@ export const ReadPostScreen: React.FC<ReadPostProps> = () => {
               gap: '30px'
             }}
           >
-            <img src={blankImage} alt="" className={styles.imageStyle} />
+            <img src={news.imageUrl} alt="" className={styles.imageStyle} />
             <div className={styles.postDataContainer}>
               <Typography variant="subHeadingNormal">
                 <b>Autor: </b>

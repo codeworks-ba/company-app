@@ -50,13 +50,15 @@ export type AuthUser = {
   shouldHideEmail: boolean;
   shouldHideAddress: boolean;
   shouldHidePhone: boolean;
+  profilePicture: string;
+  headerImage: string;
 };
 
 export type CreatePostDto = {
   title: string;
   text: string;
   category: string;
-  image: string;
+  imageUrl: string;
 };
 
 export type CreateCompanyDto = {
@@ -66,8 +68,8 @@ export type CreateCompanyDto = {
   program: string;
   year: string;
   about: string;
-  headerImage: string;
-  logoImage: string;
+  headerImageUrl: string;
+  logoImageUrl: string;
   address: string;
   city: string;
   zip: string;
@@ -88,8 +90,8 @@ export type CreateCompanyDto = {
   // createdAt: string;
   // status: string;
   services: {
-    service: string;
-    image: string;
+    name: string;
+    imageUrl: string;
   }[];
 };
 
@@ -101,8 +103,8 @@ export type CompanyDto = {
   program: string;
   year: number;
   about: string;
-  // headerImageUrl: string; //DODAJ KASNIJE
-  // logoImageUrl: string;
+  headerImageUrl: string;
+  logoImageUrl: string;
   address: string;
   city: string;
   zip: string;
@@ -121,9 +123,12 @@ export type CompanyDto = {
   thuWorkTime: string;
   friWorkTime: string;
   userId: string;
-  // createdAt: string;
-  // status: string;
-  // services: string[]; //DODAJ KASNIJE
+  createdAt: string;
+  status: string;
+  services: {
+    name: string;
+    imageUrl: string;
+  }[];
 };
 
 export type PaginatedCompanyDto = {

@@ -76,7 +76,7 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
         <div className={styles.flexColumn}>
           <div className={styles.headerImageContainer}>
             <img
-              src={blankImage}
+              src={business.headerImageUrl}
               alt="failedToRender"
               className={styles.imageStyle}
             />
@@ -85,7 +85,7 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
             <div className={styles.mainNameAndTagsWrapper}>
               <div className={styles.profilePictureContainer}>
                 <img
-                  src={whiteImage}
+                  src={business.logoImageUrl}
                   alt="failedToRender"
                   className={styles.profilePictureStyle}
                 />
@@ -168,12 +168,12 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
                 <Typography variant={'subHeadingBold'}>Usluge</Typography>
               </div>
               <div className={styles.servicesWrapper}>
-                {services.map((service) => (
+                {business.services.map((service) => (
                   <div className={styles.serviceStyle}>
                     <ImageCard
-                      image={blankImage}
+                      image={service.imageUrl}
                       type={'header'}
-                      headerText={service.text}
+                      headerText={service.name}
                       onClick={() => {}}
                     />
                   </div>

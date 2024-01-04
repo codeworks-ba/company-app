@@ -21,7 +21,7 @@ const validationSchema = yup.object().shape({
   title: yup.string().required('Ovo polje je obavezno!'),
   text: yup.string().required('Ovo polje je obavezno!'),
   category: yup.string().required('Ovo polje je obavezno!'),
-  image: yup.string().required('Ovo polje je obavezno!')
+  imageUrl: yup.string().required('Ovo polje je obavezno!')
 });
 
 export const CreatePostsScreen: React.FC<CreatePostProps> = () => {
@@ -34,8 +34,12 @@ export const CreatePostsScreen: React.FC<CreatePostProps> = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data: CreatePostDto) => {
+    const dataToSend = {
+      ...data,
+      imageUrl: newsPictureId
+    };
     axios
-      .post('http://localhost:3000/news', data, {
+      .post('http://localhost:3000/news', dataToSend, {
         headers: { Authorization: `Bearer ${TOKEN.get()}` }
       })
       .then(function (response) {
@@ -50,27 +54,33 @@ export const CreatePostsScreen: React.FC<CreatePostProps> = () => {
       });
   };
 
+  const [newsPictureId, setNewsPictureId] = useState<string>();
+
   useEffect(() => {
     if (headerImageFile) {
       const formData = new FormData();
       formData.append('image', headerImageFile);
 
-      // axios
-      //   .post('http://localhost:3000/image/upload', formData, {
-      //     headers: {
-      //       Accept: 'application/json',
-      //       'Content-Type': 'multipart/form-data'
-      //     }
-      //   })
-      //   .then(function (response) {
-      //     if (response.data.user) {
-      //     } else {
-      //       console.log('NOT GOOD');
-      //     }
-      //   })
-      //   .catch(function (error) {
-      //     console.log('Error: ', error);
-      //   });
+      axios
+        .post('http://localhost:3000/image/upload', formData, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data'
+          },
+          params: {
+            prefix: 'news'
+          }
+        })
+        .then(function (response) {
+          if (response) {
+            setNewsPictureId(response.data._id);
+          } else {
+            console.log('NOT GOOD');
+          }
+        })
+        .catch(function (error) {
+          console.log('Error: ', error);
+        });
     }
   }, [headerImageFile]);
 
@@ -116,7 +126,7 @@ export const CreatePostsScreen: React.FC<CreatePostProps> = () => {
           <div className={styles.profilePicture}>
             <ControlledImageInput
               control={control}
-              name={'image'}
+              name={'imageUrl'}
               borderRadius="10px"
               onFileChange={(file) => setHeaderImageFile(file)}
             />

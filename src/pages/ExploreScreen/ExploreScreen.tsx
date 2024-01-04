@@ -377,7 +377,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
             {businesses.map((business) => (
               <div className={styles.imageCardStyle}>
                 <ImageCard
-                  image={blankImage}
+                  image={business.logoImageUrl}
                   headerText={business.name}
                   subtitleText={_.capitalize(business.category)}
                   onClick={() => navigate(`/biznis/${business._id}`)}

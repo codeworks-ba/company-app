@@ -151,7 +151,7 @@ export const NewsScreen: React.FC<NewsScreenProps> = () => {
                   <ImageWithText
                     header={newsArray[0].title}
                     subtitle={newsArray[0].category}
-                    image={blankImage}
+                    image={newsArray[0].imageUrl}
                   />
                 </div>
                 <div className={styles.mainTextWrapper}>
@@ -179,7 +179,7 @@ export const NewsScreen: React.FC<NewsScreenProps> = () => {
             {newsArray.map((news) => (
               <div className={styles.secondaryNewsWrapper}>
                 <img
-                  src={blankImage}
+                  src={news.imageUrl}
                   alt="failedToRender"
                   className={styles.secondaryImage}
                   onClick={() => navigate(`${news._id}`)}

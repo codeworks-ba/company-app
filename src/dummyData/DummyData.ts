@@ -184,7 +184,12 @@ export const templateBusiness: CompanyDto = {
   thuWorkTime: '09:00 - 17:00',
   friWorkTime: '09:00 - 17:00',
   year: 2023,
-  userId: 'null'
+  userId: 'null',
+  headerImageUrl: 'null',
+  logoImageUrl: 'null',
+  services: [],
+  createdAt: new Date().toISOString(),
+  status: 'pending'
 };
 
 export const templateBusinessArray: PaginatedCompanyDto = {
@@ -212,7 +217,12 @@ export const templateBusinessArray: PaginatedCompanyDto = {
       thuWorkTime: '09:00 - 17:00',
       friWorkTime: '09:00 - 17:00',
       year: 2023,
-      userId: 'null'
+      userId: 'null',
+      headerImageUrl: 'null',
+      logoImageUrl: 'null',
+      services: [],
+      createdAt: new Date().toISOString(),
+      status: 'pending'
     }
   ]
 };
@@ -248,7 +258,9 @@ export const tempateUser: AuthUser = {
   occupation: 'Zanimanje',
   shouldHideAddress: false,
   shouldHideEmail: false,
-  shouldHidePhone: false
+  shouldHidePhone: false,
+  headerImage: 'test',
+  profilePicture: 'test'
 };
 
 export const tempateNews: NewsDto[] = [

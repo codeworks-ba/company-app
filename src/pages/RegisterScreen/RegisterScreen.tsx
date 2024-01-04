@@ -43,6 +43,8 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
   const [addressRadioSelected, setAddressRadioSelected] =
     useState<boolean>(false);
   const [telRadioSelected, setTelRadioSelected] = useState<boolean>(false);
+  const [profilePictureId, setProfilePictureId] = useState<string>();
+  const [headerImageId, setHeaderImageId] = useState<string>();
 
   const { signUp } = useContext(AuthContext);
 
@@ -56,7 +58,9 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
       ...data,
       shouldHideAddress: addressRadioSelected,
       shouldHideEmail: mailRadioSelected,
-      shouldHidePhone: telRadioSelected
+      shouldHidePhone: telRadioSelected,
+      profilePicture: profilePictureId!!,
+      headerImage: headerImageId!!
     };
     signUp(userData);
   };
@@ -78,7 +82,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
         })
         .then(function (response) {
           if (response) {
-            console.log('RESPONSE IS WHAT: ', response);
+            setProfilePictureId(response.data._id);
           } else {
             console.log('NOT GOOD');
           }
@@ -96,25 +100,26 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
       const formData = new FormData();
       formData.append('image', headerImageFile);
 
-      // axios
-      //   .post('http://localhost:3000/image/upload', formData, {
-      //     headers: {
-      //       Accept: 'application/json',
-      //       'Content-Type': 'multipart/form-data'
-      //     },
-      //     params: {
-      //       prefix: 'users'
-      //     }
-      //   })
-      //   .then(function (response) {
-      //     if (response.data.user) {
-      //     } else {
-      //       console.log('NOT GOOD');
-      //     }
-      //   })
-      //   .catch(function (error) {
-      //     console.log('Error: ', error);
-      //   });
+      axios
+        .post('http://localhost:3000/image/upload', formData, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data'
+          },
+          params: {
+            prefix: 'users'
+          }
+        })
+        .then(function (response) {
+          if (response) {
+            setHeaderImageId(response.data._id);
+          } else {
+            console.log('NOT GOOD');
+          }
+        })
+        .catch(function (error) {
+          console.log('Error: ', error);
+        });
     }
   }, [headerImageFile]);
 

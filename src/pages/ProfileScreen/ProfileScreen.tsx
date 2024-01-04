@@ -66,7 +66,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
         <div className={styles.flexColumn}>
           <div className={styles.headerImageContainer}>
             <img
-              src={blankImage}
+              src={authUser.headerImage}
               alt="failedToRender"
               className={styles.imageStyle}
             />
@@ -75,7 +75,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
             <div className={styles.imageAndNameWrapper}>
               <div className={styles.profilePictureContainer}>
                 <img
-                  src={whiteImage}
+                  src={authUser.profilePicture}
                   alt="failedToRender"
                   className={styles.profilePictureStyle}
                 />

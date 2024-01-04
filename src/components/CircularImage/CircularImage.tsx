@@ -39,14 +39,13 @@ const ImageInput: React.FC<ImageInputProps> = ({
       const file = event.target.files[0];
       if (file) {
         onFileChange && onFileChange(file);
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setUploadedImage(e.target!!.result as string);
+          onChange && onChange(e.target!!.result as string);
+        };
+        reader.readAsDataURL(file);
       }
-
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setUploadedImage(e.target!!.result as string);
-        onChange && onChange(e.target!!.result as string);
-      };
-      reader.readAsDataURL(file);
     }
   };
 

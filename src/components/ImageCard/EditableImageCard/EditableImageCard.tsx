@@ -8,11 +8,12 @@ import {
   UseControllerProps
 } from 'react-hook-form';
 import styled from './EditableImageCardStyles.module.css';
+import axios from 'axios';
 
 type ControlledEditableImageCardProps<T extends FieldValues> =
   UseControllerProps<T> & ImageCardProps;
 
-type CardValueType = { service: string | undefined; image: string | null };
+type CardValueType = { name: string | undefined; imageUrl: string | null };
 
 type ImageCardProps = {
   image?: string;
@@ -56,23 +57,24 @@ const EditableImageCard: React.FC<ImageCardProps> = ({
       const formData = new FormData();
       formData.append('image', imageFile);
 
-      // axios
-      //   .post('http://localhost:3000/image/upload', formData, {
-      //     headers: {
-      //       Accept: 'application/json',
-      //       'Content-Type': 'multipart/form-data'
-      //     }
-      //   })
-      //   .then(function (response) {
-      //     if (response.data) {
-      // setImageFromApi(response.data)
-      //     } else {
-      //       console.log('NOT GOOD');
-      //     }
-      //   })
-      //   .catch(function (error) {
-      //     console.log('Error: ', error);
-      //   });
+      axios
+        .post('http://localhost:3000/image/upload', formData, {
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data'
+          },
+          params: { prefix: 'services' }
+        })
+        .then(function (response) {
+          if (response.data) {
+            setImageFromApi(response.data._id);
+          } else {
+            console.log('NOT GOOD');
+          }
+        })
+        .catch(function (error) {
+          console.log('Error: ', error);
+        });
     }
   }, [imageFile]);
 
@@ -81,7 +83,7 @@ const EditableImageCard: React.FC<ImageCardProps> = ({
   };
 
   useEffect(() => {
-    onChange && onChange({ service: value, image: imageFromApi ?? '' });
+    onChange && onChange({ name: value, imageUrl: imageFromApi ?? null });
   }, [value, imageFromApi, onChange]);
 
   return (
@@ -157,13 +159,13 @@ export const ControlledEditableImageCard = <T extends FieldValues>({
       name={name}
       render={({ field, fieldState }) => {
         const { value, ...restField } = field;
-        const { service, image } = value;
+        const { name, imageUrl } = value;
         return (
           <EditableImageCard
             {...restField}
             {...rest}
-            defaultValue={service}
-            image={image}
+            defaultValue={name}
+            image={imageUrl}
             errorText={fieldState.error}
           />
         );
