@@ -18,6 +18,7 @@ import facebook from '../../images/facebook.png';
 import twitter from '../../images/twitter.png';
 import linkedIn from '../../images/linkedIn.png';
 import _ from 'lodash';
+import { config } from '../../config/config';
 
 type BusinessScreenProps = unknown;
 
@@ -50,7 +51,7 @@ export const BusinessScreen: React.FC<BusinessScreenProps> = () => {
 
   const getBusiness = () => {
     axios
-      .get(`http://localhost:3000/companies/get/${id}`)
+      .get(`${config.API_URL}companies/get/${id}`)
       .then(function (response) {
         if (response.data) {
           modifyBusinessLinks(response.data as CompanyDto);

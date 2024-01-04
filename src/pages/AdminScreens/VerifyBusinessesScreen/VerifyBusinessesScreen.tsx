@@ -7,6 +7,7 @@ import { AuthUser, CompanyDto } from '../../../services/types';
 import { AuthContext } from '../../../providers/auth/authContext';
 import { TOKEN } from '../../../services/token';
 import { useNavigate } from 'react-router-dom';
+import { config } from '../../../config/config';
 
 type VerifyProps = unknown;
 
@@ -24,7 +25,7 @@ export const VerifyScreen: React.FC<VerifyProps> = () => {
       status: status
     };
     axios
-      .put(`http://localhost:3000/companies/update/${companyId}`, data)
+      .put(`${config.API_URL}companies/update/${companyId}`, data)
       .then(function (response) {
         if (response.data) {
           getUnverifiedBusinesses();
@@ -39,7 +40,7 @@ export const VerifyScreen: React.FC<VerifyProps> = () => {
 
   const getUnverifiedBusinesses = () => {
     axios
-      .get('http://localhost:3000/companies/get-unverified', {
+      .get(`${config.API_URL}companies/get-unverified`, {
         params: { status: 'pending' },
         headers: { Authorization: `Bearer ${TOKEN.get()}` }
       })

@@ -8,6 +8,7 @@ import { AuthUser, NewsDto } from '../../services/types';
 import { templateStory } from '../../dummyData/DummyData';
 import axios from 'axios';
 import { formatDate } from '../../services/dayjs';
+import { config } from '../../config/config';
 
 type ReadPostProps = unknown;
 
@@ -18,7 +19,7 @@ export const ReadPostScreen: React.FC<ReadPostProps> = () => {
 
   const getNewsArticle = () => {
     axios
-      .get(`http://localhost:3000/news/get/${id}`)
+      .get(`${config.API_URL}news/get/${id}`)
       .then(function (response) {
         if (response.data) {
           setNews(response.data as NewsDto);

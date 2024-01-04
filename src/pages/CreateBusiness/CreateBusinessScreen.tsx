@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { TOKEN } from '../../services/token';
 import { ControlledEditableImageCard } from '../../components/ImageCard/EditableImageCard/EditableImageCard';
 import { ControlledImageInput } from '../../components/CircularImage/CircularImage';
+import { config } from '../../config/config';
 
 type CreateBusinessProps = unknown;
 
@@ -166,7 +167,7 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
       dataToSend.logoImageUrl = profilePictureId;
 
       axios
-        .post('http://localhost:3000/companies', dataToSend, {
+        .post(`${config.API_URL}companies`, dataToSend, {
           headers: { Authorization: `Bearer ${TOKEN.get()}` }
         })
         .then(function (response) {
@@ -201,7 +202,7 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
       formData.append('image', logoPictureFile);
 
       axios
-        .post('http://localhost:3000/image/upload', formData, {
+        .post(`${config.API_URL}image/upload`, formData, {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'multipart/form-data'
@@ -229,7 +230,7 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
       formData.append('image', headerImageFile);
 
       axios
-        .post('http://localhost:3000/image/upload', formData, {
+        .post(`${config.API_URL}image/upload`, formData, {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'multipart/form-data'

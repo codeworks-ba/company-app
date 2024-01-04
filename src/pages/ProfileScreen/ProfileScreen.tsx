@@ -17,6 +17,7 @@ import {
 } from '../../services/types';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/Button/Button';
+import { config } from '../../config/config';
 
 type ProfileScreenProps = unknown;
 
@@ -34,7 +35,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
 
   const getUserCompanies = () => {
     axios
-      .get('http://localhost:3000/companies', {
+      .get(`${config.API_URL}companies`, {
         params: { userId: user?._id }
       })
       .then(function (response) {

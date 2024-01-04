@@ -39,7 +39,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const signIn = (data: LoginUserDto) => {
     axios
-      .post(`http://localhost:3000/auth/login`, data) //OVO TREBA PROMJENITI
+      .post(`${config.API_URL}auth/login`, data) //OVO TREBA PROMJENITI
       .then(function (response) {
         if (response.data.user) {
           TOKEN.set((response.data as AuthResponseDto).token);
@@ -56,7 +56,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const getMe = () => {
     axios
-      .get(`http://localhost:3000/auth/get-me`, {
+      .get(`${config.API_URL}auth/get-me`, {
         headers: { Authorization: `Bearer ${TOKEN.get()}` }
       })
       .then(function (response) {
@@ -75,7 +75,7 @@ export const AuthProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const signUp = (data: CreateUserDto) => {
     axios
-      .post(`http://localhost:3000/auth/`, data)
+      .post(`${config.API_URL}auth/`, data)
       .then(function (response) {
         if (response.data.user) {
           TOKEN.set((response.data as AuthResponseDto).token);

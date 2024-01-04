@@ -20,6 +20,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ControlledSearchInput } from '../../components/Input/Search/SearchInput';
 import { AlertTriangle } from 'react-feather';
+import { config } from '../../config/config';
 
 type NewsScreenProps = unknown;
 
@@ -40,7 +41,7 @@ export const NewsScreen: React.FC<NewsScreenProps> = () => {
 
   const getUserCompanies = () => {
     axios
-      .get('http://localhost:3000/news', {
+      .get(`${config.API_URL}news`, {
         params: { sortBy: 'createdAt' }
       })
       .then(function (response) {
@@ -68,7 +69,7 @@ export const NewsScreen: React.FC<NewsScreenProps> = () => {
     }
 
     axios
-      .get('http://localhost:3000/news/search', {
+      .get(`${config.API_URL}news/search`, {
         params: {
           sortBy: 'createdAt',
           title: input,

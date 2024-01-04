@@ -9,6 +9,7 @@ import {
 } from 'react-hook-form';
 import styled from './EditableImageCardStyles.module.css';
 import axios from 'axios';
+import { config } from '../../../config/config';
 
 type ControlledEditableImageCardProps<T extends FieldValues> =
   UseControllerProps<T> & ImageCardProps;
@@ -58,7 +59,7 @@ const EditableImageCard: React.FC<ImageCardProps> = ({
       formData.append('image', imageFile);
 
       axios
-        .post('http://localhost:3000/image/upload', formData, {
+        .post(`${config.API_URL}image/upload`, formData, {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'multipart/form-data'

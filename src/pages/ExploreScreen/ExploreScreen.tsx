@@ -21,6 +21,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ControlledAutocomplete } from '../../components/Autocomplete/Autocomplete';
 import _ from 'lodash';
+import { config } from '../../config/config';
 
 type ExploreScreenProps = unknown;
 
@@ -48,7 +49,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
 
   const getVerifiedCompanies = () => {
     axios
-      .get('http://localhost:3000/companies', {
+      .get(`${config.API_URL}companies`, {
         params: { status: 'approved', sortBy: 'createdAt' }
       })
       .then(function (response) {
@@ -65,7 +66,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
 
   const searchCompanies = () => {
     axios
-      .get('http://localhost:3000/companies/search', {
+      .get(`${config.API_URL}companies/search`, {
         params: {
           status: 'approved',
           sortBy: 'createdAt',
@@ -99,7 +100,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
 
   const getFilters = () => {
     axios
-      .get('http://localhost:3000/filters')
+      .get(`${config.API_URL}filters`)
       .then(function (response) {
         if (response.data) {
           setFiltersData(response.data);

@@ -12,6 +12,7 @@ import {
   PaginatedCompanyDto
 } from '../../services/types';
 import axios from 'axios';
+import { config } from '../../config/config';
 
 type NavbarProps = unknown;
 
@@ -28,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = () => {
   const getMyBusinesses = () => {
     const myBusinessesArray: MyBusinessItems[] = [];
     axios
-      .get('http://localhost:3000/companies', {
+      .get(`${config.API_URL}companies`, {
         params: { userId: user?._id }
       })
       .then(function (response) {

@@ -14,6 +14,7 @@ import styles from './RegisterScreenStyles.module.css';
 import { ControlledImageInput } from '../../components/CircularImage/CircularImage';
 import { RadioButton } from '../../components/RadioButton/RadioButton';
 import axios from 'axios';
+import { config } from '../../config/config';
 
 type RegisterScreenProps = unknown;
 
@@ -73,7 +74,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
       formData.append('image', profilePictureFile);
 
       axios
-        .post('http://localhost:3000/image/upload', formData, {
+        .post(`${config.API_URL}image/upload`, formData, {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'multipart/form-data'
@@ -101,7 +102,7 @@ export const RegisterScreen: React.FC<RegisterScreenProps> = () => {
       formData.append('image', headerImageFile);
 
       axios
-        .post('http://localhost:3000/image/upload', formData, {
+        .post(`${config.API_URL}image/upload`, formData, {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'multipart/form-data'

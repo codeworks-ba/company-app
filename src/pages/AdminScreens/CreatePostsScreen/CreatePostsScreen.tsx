@@ -14,6 +14,7 @@ import axios from 'axios';
 import { TOKEN } from '../../../services/token';
 import { useNavigate } from 'react-router-dom';
 import { ControlledImageInput } from '../../../components/CircularImage/CircularImage';
+import { config } from '../../../config/config';
 
 type CreatePostProps = unknown;
 
@@ -39,7 +40,7 @@ export const CreatePostsScreen: React.FC<CreatePostProps> = () => {
       imageUrl: newsPictureId
     };
     axios
-      .post('http://localhost:3000/news', dataToSend, {
+      .post(`${config.API_URL}news`, dataToSend, {
         headers: { Authorization: `Bearer ${TOKEN.get()}` }
       })
       .then(function (response) {
@@ -62,7 +63,7 @@ export const CreatePostsScreen: React.FC<CreatePostProps> = () => {
       formData.append('image', headerImageFile);
 
       axios
-        .post('http://localhost:3000/image/upload', formData, {
+        .post(`${config.API_URL}image/upload`, formData, {
           headers: {
             Accept: 'application/json',
             'Content-Type': 'multipart/form-data'
