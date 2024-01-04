@@ -5,16 +5,9 @@ import { styles } from './Tag.styles';
 
 type TagProps = {
   text: string;
-  textSize?: Size;
-  textFont?: Font;
 };
 
-export const Tag: React.FC<TagProps> = ({
-  text,
-  textSize = 's',
-  textFont = 'InterRegular',
-  ...rest
-}) => {
+export const Tag: React.FC<TagProps> = ({ text, ...rest }) => {
   return (
     <div style={styles.tagContainer}>
       <Typography>{text}</Typography>

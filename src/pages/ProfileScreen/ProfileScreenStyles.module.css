@@ -1,0 +1,139 @@
+.mainContainer {
+  padding: 0px 180px;
+}
+
+.screenWrapper {
+  height: 100%;
+  overflow: scroll;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.nameAndProfession {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageAndNameWrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.headerImageContainer {
+  width: 100%;
+  height: 365px;
+}
+
+.imageStyle {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profilePictureContainer {
+  width: 350px;
+  height: 350px;
+  transform: translateY(-50%);
+}
+
+.profilePictureStyle {
+  border-radius: 200px;
+  border: 1px solid #707070;
+  width: 100%;
+  height: 100%;
+}
+
+.nameAndProfessionContainer {
+  margin-left: 60px;
+  margin-top: 44px;
+  flex: 1;
+}
+
+.dataAndBusinessesWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 45px;
+  margin-bottom: 36px;
+  margin-top: -86px;
+}
+
+.mainInformationWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 100px;
+  margin-bottom: 36px;
+}
+
+.informationContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.informationContainerWithGap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 40px;
+}
+
+.myBusinessesContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 34px;
+  flex-wrap: wrap;
+}
+
+.businessStyle {
+  height: 250px;
+  width: 220px;
+}
+
+.bioContainer {
+  margin-bottom: 36px;
+}
+
+.lineContainer {
+  height: 1px;
+}
+
+@media screen and (max-width: 1230px) {
+  .mainContainer {
+    padding: 0px 34px;
+  }
+  .imageAndNameWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .nameAndProfessionContainer {
+    margin: 0px;
+    text-align: center;
+  }
+  .nameAndProfession {
+    margin-top: -70px;
+  }
+  .lineContainer {
+    display: none;
+  }
+  .dataAndBusinessesWrapper {
+    flex-direction: column;
+    margin-top: 23px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .mainInformationWrapper {
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+@media screen and (max-width: 565px) {
+  .businessStyle {
+    width: 100%;
+  }
+}

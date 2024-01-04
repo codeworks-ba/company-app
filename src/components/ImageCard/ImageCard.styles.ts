@@ -38,7 +38,8 @@ export const styles = ({ type }: ImageCardStyleProps) =>
       height: '100%',
       border: '1px solid #D4D4D4',
       borderRadius: 10,
-      overflow: 'hidden'
+      overflow: 'hidden',
+      cursor: 'pointer'
     },
     imageContainer: {
       width: '100%',
@@ -47,7 +48,7 @@ export const styles = ({ type }: ImageCardStyleProps) =>
     imageStyle: {
       width: '100%',
       height: '100%',
-      objectFit: 'fill'
+      objectFit: 'cover'
     },
     addImageContainer: {
       width: '100%',

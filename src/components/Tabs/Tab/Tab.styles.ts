@@ -8,6 +8,7 @@ export const styles = ({ selected }: { selected: boolean }) =>
       alignItems: 'center',
       height: '100%',
       cursor: 'pointer',
+      boxSizing: 'border-box',
       ...(selected
         ? {
             borderBottom: `4px solid ${themeColors.primaryColor}`

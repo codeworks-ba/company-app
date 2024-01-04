@@ -1,0 +1,129 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.headerContainer {
+  margin-top: 46px;
+  margin-bottom: 64px;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  width: 764px;
+}
+
+.firstAndLastNameContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.basicDataWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.profilePictureAndBasicDataContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 60px;
+}
+
+.emailAndPasswordContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.flexColumnWithGap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profilePictureContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
+
+.basicDataTextContainer {
+  display: flex;
+  align-items: flex-start;
+}
+.profilePicture {
+  height: 150px;
+  width: 150px;
+}
+
+.headerImageText {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.headerImageContainer {
+  height: 150px;
+  width: 100%;
+}
+
+.headerImage {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.addProfileTextContainer {
+  width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+  .flexColumn {
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .mainContainer {
+    padding: 0px 55px;
+  }
+  .flexColumn {
+    width: auto;
+  }
+  .profilePictureAndBasicDataContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+  }
+  .profilePicture {
+    height: 171px;
+    width: 171px;
+  }
+  .addProfileTextContainer {
+    text-align: center;
+  }
+  .basicDataTextContainer {
+    align-items: center;
+  }
+  .firstAndLastNameContainer {
+    flex-direction: column;
+    gap: 0px;
+  }
+  .emailAndPasswordContainer {
+    flex-direction: column;
+    gap: 0px;
+  }
+}

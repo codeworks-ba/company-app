@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter as BrowserRouter } from 'react-router-dom';
 import { AppRoutes } from './routes';
 import { AuthProvider } from './providers/auth/authContext';
 

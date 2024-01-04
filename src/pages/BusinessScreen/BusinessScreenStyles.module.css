@@ -1,0 +1,197 @@
+.mainContainer {
+  padding: 0px 180px;
+}
+
+.screenWrapper {
+  height: 100%;
+  overflow: scroll;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.mainNameAndTagsWrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.headerImageContainer {
+  width: 100%;
+  height: 365px;
+}
+
+.imageStyle {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profilePictureContainer {
+  width: 350px;
+  height: 350px;
+  transform: translateY(-50%);
+}
+
+.profilePictureStyle {
+  border-radius: 200px;
+  border: 1px solid #707070;
+  width: 100%;
+  height: 100%;
+}
+
+.nameAndTagsWrapper {
+  margin-left: 60px;
+  margin-top: 44px;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 64px;
+  height: 100%;
+}
+
+.tagWrapper {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.tagStyle {
+  width: 150px;
+  height: 40px;
+}
+
+.nameAndTagsContainer {
+  flex: 1;
+}
+
+.socialMediaWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.mainDataWrapper {
+  margin-top: -86px;
+}
+
+.socialMediaContainer {
+  width: 70px;
+  height: 70px;
+}
+
+.socialMediaImageStyle {
+  width: 100%;
+  height: 100%;
+  border-radius: 200px;
+  border: 1px solid #707070;
+}
+
+.servicesWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 34px;
+  flex-wrap: wrap;
+}
+
+.serviceStyle {
+  height: 250px;
+  width: 232px;
+}
+
+.mainInformationWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 70px;
+  margin-bottom: 36px;
+}
+
+.informationContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.informationContainerWithGap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 40px;
+}
+
+.lineContainer {
+  height: 1px;
+}
+
+@media screen and (max-width: 1470px) {
+  .tagStyle {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 1367px) {
+  .nameAndTagsWrapper {
+    flex-direction: column;
+    gap: 34px;
+  }
+  .nameAndTagsContainer {
+    flex: 0;
+  }
+}
+
+@media screen and (max-width: 1180px) {
+  .mainNameAndTagsWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .nameAndTagsWrapper {
+    align-items: center;
+    text-align: center;
+    margin-left: 0px;
+    margin-top: -130px;
+    margin-bottom: 23px;
+  }
+  .mainDataWrapper {
+    margin-top: 23px;
+  }
+  .tagWrapper {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 1230px) {
+  .mainContainer {
+    padding: 0px 34px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .lineContainer {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .mainInformationWrapper {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .serviceStyle {
+    width: 100%;
+  }
+  .socialMediaContainer {
+    width: 55px;
+    height: 55px;
+  }
+  .tagWrapper {
+    flex-direction: column;
+  }
+  .tagStyle {
+    width: 300px;
+  }
+}

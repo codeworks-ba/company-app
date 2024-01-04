@@ -20,10 +20,11 @@ export const Button: React.FC<ButtonProps> = ({
   text,
   onClick,
   variant,
+  customStyle,
   textVariant = 'bodyNormal',
   color = '#009FB7'
 }) => {
-  const style = styles({ variant });
+  const style = styles({ variant, customStyle });
 
   return (
     <button onClick={onClick} style={style(color).buttonComponent}>

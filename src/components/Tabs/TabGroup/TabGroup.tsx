@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tab } from '../Tab/Tab';
-import { styles } from './TabGroup.styles';
+import styles from './TabGroupStyles.module.css';
 import { useNavigate } from 'react-router-dom';
+import { MyBusiness, NavbarItems } from '../../../services/types';
+import { DropdownTab } from '../Dropdown/Dropdown';
 
 type TabGroupProps<T = string> = {
-  tabs: Record<string, string>;
+  tabs: Record<string, NavbarItems | MyBusiness>;
   defaultTab?: T;
 };
 
 export const TabGroup: React.FC<TabGroupProps> = ({ tabs, defaultTab }) => {
-  const [selected, setSelected] = useState<string>(defaultTab ?? tabs[0]);
+  const [selected, setSelected] = useState<string | undefined>(defaultTab);
 
   const navigate = useNavigate();
 
@@ -18,16 +20,29 @@ export const TabGroup: React.FC<TabGroupProps> = ({ tabs, defaultTab }) => {
     navigate(tab);
   };
 
+  useEffect(() => {
+    setSelected(defaultTab);
+  }, [defaultTab]);
+
   return (
-    <div style={styles.wrapper}>
-      {Object.entries(tabs).map(([key, value]) => (
-        <Tab
-          key={key}
-          text={value}
-          selected={selected === key}
-          onClick={() => navigateTo(key)}
-        />
-      ))}
+    <div className={styles.wrapper}>
+      {Object.entries(tabs).map(([key, value]) =>
+        'value' in value ? (
+          <Tab
+            key={key}
+            text={(value as NavbarItems).value}
+            selected={selected?.toLocaleLowerCase() === key.toLocaleLowerCase()}
+            onClick={() => navigateTo(key)}
+          />
+        ) : (
+          <DropdownTab
+            key={key}
+            text={(value as MyBusiness).title}
+            dropdownItems={(value as MyBusiness).submenuItems}
+            onClick={(id: string) => navigate(`/biznis/${id}`)}
+          />
+        )
+      )}
     </div>
   );
 };

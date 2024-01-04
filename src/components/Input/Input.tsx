@@ -4,10 +4,9 @@ import {
   FieldValues,
   UseControllerProps
 } from 'react-hook-form';
-import React from 'react';
-import UilSearch from '@iconscout/react-unicons/icons/uil-search';
+import React, { HTMLInputTypeAttribute } from 'react';
 import { InputStyleProps, styles } from './Input.styles';
-import { SearchInput } from './Search/SearchInput';
+import './Input.styled.css';
 
 type ControlledInputProps<T extends FieldValues> = UseControllerProps<T> &
   InputProps;
@@ -16,55 +15,39 @@ type InputProps = {
   errorText?: FieldError;
   label?: string;
   startAdornment?: React.ReactElement;
+  textType?: HTMLInputTypeAttribute;
 } & InputStyleProps;
 
 export const Input: React.FC<InputProps> = ({
   errorText,
   label,
-  inputType,
   startAdornment,
+  customStyle,
+  textType = 'text',
   ...rest
 }) => {
-  const style = styles({ inputType });
+  const style = styles({ customStyle });
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {inputType === 'search' ? (
-        <>
-          {startAdornment ? (
-            <SearchInput
-              errorText={errorText}
-              label={label}
-              startAdornment={startAdornment}
-              inputType={'search'}
-            />
-          ) : (
-            <SearchInput
-              errorText={errorText}
-              label={label}
-              startAdornment={<UilSearch size="15" />}
-              inputType={'search'}
-            />
-          )}
-        </>
-      ) : (
-        <>
-          <input
-            {...rest}
-            placeholder={label || 'Email'}
-            style={style(errorText).inputComponent}
-          />
-          <span
-            style={{
-              color: 'red',
-              fontSize: '12px',
-              lineHeight: '12px',
-              height: '12px'
-            }}
-          >
-            {errorText?.message ?? ''}
-          </span>
-        </>
-      )}
+      <input
+        {...rest}
+        type={textType}
+        placeholder={label || 'Email'}
+        style={style(errorText).inputComponent}
+        className="input"
+      />
+      <span
+        style={{
+          color: 'red',
+          fontSize: '12px',
+          lineHeight: '12px',
+          height: '12px'
+        }}
+      >
+        {errorText?.message ?? ''}
+      </span>
+      {/* </>
+      )} */}
     </div>
   );
 };

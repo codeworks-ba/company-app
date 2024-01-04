@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ControlledInput } from '../../components/Input/Input';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
@@ -15,6 +15,7 @@ import { ImageWithText } from '../../components/ImageWithText/ImageWithText';
 import { Link } from '../../components/Link/Link';
 import { Tag } from '../../components/Tag/Tag';
 import { ControlledDatePicker } from '../../components/DatePicker/DatePicker';
+import { RadioButton } from '../../components/RadioButton/RadioButton';
 
 type LoginScreenProps = unknown;
 const validationSchema = yup.object({
@@ -28,13 +29,19 @@ const validationSchema = yup.object({
 });
 
 export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
-  const { control, handleSubmit } = useForm<LoginUserDto>({
+  const { control, handleSubmit } = useForm<any>({
     resolver: yupResolver(validationSchema)
   });
 
-  const onSubmit = (data: LoginUserDto) => {
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+
+  const onSubmit = (data: any) => {
     console.log('DATA: ', data.test3.toISOString());
   };
+
+  useEffect(() => {
+    console.log('IS CHECKED: ', isChecked);
+  }, [isChecked]);
 
   return (
     <div style={{ padding: 12 }}>
@@ -49,11 +56,7 @@ export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
         }}
       >
         <div style={{ flex: 1 }}>
-          <ControlledInput
-            control={control}
-            name={'email'}
-            inputType={'input'}
-          />
+          <ControlledInput control={control} name={'email'} />
         </div>
         <div style={{ flex: 1 }}>
           <ControlledDatePicker
@@ -86,11 +89,7 @@ export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
       </div>
       <br />
       <div style={{ width: '100%' }}>
-        <ControlledInput
-          control={control}
-          name={'test3'}
-          inputType={'search'}
-        />
+        <ControlledInput control={control} name={'test3'} />
       </div>
 
       <br />
@@ -244,6 +243,10 @@ export const DummyComponentScreen: React.FC<LoginScreenProps> = () => {
       </div>
       <br />
       <Link text={'Go to google'} link={'https://www.google.com/'} />
+      <br />
+      <div style={{ width: '100px', height: '100px' }}>
+        <RadioButton onChange={(value) => setIsChecked(value)} />
+      </div>
       <br />
       <div style={{ width: '20%' }}>
         <Button
