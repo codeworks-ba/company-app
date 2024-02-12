@@ -8,12 +8,15 @@ import { ControlledMultilineInput } from '../../../components/Input/Multiline/Mu
 import plusCircle from '../../../images/plusCircle.svg';
 import { ControlledSelect } from '../../../components/Select/Select';
 import * as yup from 'yup';
-import { CreatePostDto } from '../../../services/types';
+import { CreatePostDto, Filters } from '../../../services/types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { TOKEN } from '../../../services/token';
 import { useNavigate } from 'react-router-dom';
 import { ControlledImageInput } from '../../../components/CircularImage/CircularImage';
+import { config } from '../../../config/config';
+import _ from 'lodash';
+import { templateFilters } from '../../../dummyData/DummyData';
 
 type CreatePostProps = unknown;
 
@@ -53,6 +56,27 @@ export const CreatePostsScreen: React.FC<CreatePostProps> = () => {
         console.log('Error: ', error);
       });
   };
+
+  const [filtersData, setFiltersData] = useState<Filters>(templateFilters);
+
+  const getFilters = () => {
+    axios
+      .get(`${config.API_URL}filters`)
+      .then(function (response) {
+        if (response.data) {
+          setFiltersData(response.data);
+        } else {
+          console.log('NOT GOOD');
+        }
+      })
+      .catch(function (error) {
+        console.log('Error: ', error);
+      });
+  };
+
+  useEffect(() => {
+    getFilters();
+  }, []);
 
   const [newsPictureId, setNewsPictureId] = useState<string>();
 
@@ -109,14 +133,13 @@ export const CreatePostsScreen: React.FC<CreatePostProps> = () => {
         />
         <div style={{ width: '300px' }}>
           <ControlledSelect
-            name={'category'}
             control={control}
-            label="Kategorija objave"
-            options={[
-              { label: 'Ten', value: 10 },
-              { label: 'Twenty', value: 20 },
-              { label: 'Thirty', value: 30 }
-            ]}
+            name="category"
+            label="Kategorije"
+            options={filtersData.categories.map((category) => ({
+              label: _.capitalize(category),
+              value: category
+            }))}
           />
         </div>
         <div className={styles.profilePictureContainer}>

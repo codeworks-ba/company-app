@@ -21,6 +21,8 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ControlledAutocomplete } from '../../components/Autocomplete/Autocomplete';
 import _ from 'lodash';
+import { config } from '../../config/config';
+import { capitalize } from '../../services/capitalize';
 
 type ExploreScreenProps = unknown;
 
@@ -260,7 +262,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
                       name="tag"
                       label="Tag"
                       options={filtersData.tags.map((tag) => ({
-                        label: _.capitalize(tag),
+                        label: capitalize(tag),
                         value: tag
                       }))}
                     />
@@ -277,7 +279,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
                       name="city"
                       label="Grad"
                       options={filtersData.cities.map((city) => ({
-                        label: _.capitalize(city),
+                        label: capitalize(city),
                         value: city
                       }))}
                     />
@@ -294,7 +296,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
                       name="program"
                       label="Program"
                       options={filtersData.programs.map((program) => ({
-                        label: _.capitalize(program),
+                        label: capitalize(program),
                         value: program
                       }))}
                     />
@@ -349,7 +351,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
                 name="tag"
                 label="Tag"
                 options={filtersData.tags.map((tag) => ({
-                  label: _.capitalize(tag),
+                  label: capitalize(tag),
                   value: tag
                 }))}
               />
@@ -358,7 +360,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
                 name="city"
                 label="Grad"
                 options={filtersData.cities.map((city) => ({
-                  label: _.capitalize(city),
+                  label: capitalize(city),
                   value: city
                 }))}
               />
@@ -367,7 +369,7 @@ export const ExploreScreen: React.FC<ExploreScreenProps> = () => {
                 name="program"
                 label="Program"
                 options={filtersData.programs.map((program) => ({
-                  label: _.capitalize(program),
+                  label: capitalize(program),
                   value: program
                 }))}
               />

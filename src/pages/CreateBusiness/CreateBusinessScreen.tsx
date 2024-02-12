@@ -8,16 +8,20 @@ import { ControlledSelect } from '../../components/Select/Select';
 import { ControlledMultilineInput } from '../../components/Input/Multiline/MultilineInput';
 import plusCircle from '../../images/plusCircle.svg';
 import { ImageCard } from '../../components/ImageCard/ImageCard';
-import { services } from '../../dummyData/DummyData';
+import { services, templateFilters } from '../../dummyData/DummyData';
 import { Button } from '../../components/Button/Button';
 import * as yup from 'yup';
-import { CreateCompanyDto } from '../../services/types';
+import { CreateCompanyDto, Filters } from '../../services/types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { TOKEN } from '../../services/token';
 import { ControlledEditableImageCard } from '../../components/ImageCard/EditableImageCard/EditableImageCard';
 import { ControlledImageInput } from '../../components/CircularImage/CircularImage';
+import { config } from '../../config/config';
+import { ControlledAutocomplete } from '../../components/Autocomplete/Autocomplete';
+import _ from 'lodash';
+import { capitalize } from '../../services/capitalize';
 
 type CreateBusinessProps = unknown;
 
@@ -182,6 +186,27 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
     }
   };
 
+  const [filtersData, setFiltersData] = useState<Filters>(templateFilters);
+
+  const getFilters = () => {
+    axios
+      .get(`${config.API_URL}filters`)
+      .then(function (response) {
+        if (response.data) {
+          setFiltersData(response.data);
+        } else {
+          console.log('NOT GOOD');
+        }
+      })
+      .catch(function (error) {
+        console.log('Error: ', error);
+      });
+  };
+
+  useEffect(() => {
+    getFilters();
+  }, []);
+
   // THIS BELOW IS FOR SERVICES PICTURES
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [imagesArray, setImagesArray] = useState<
@@ -271,14 +296,13 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
                 label="Naziv biznisa"
               />
               <ControlledSelect
-                name="category"
                 control={control}
-                label="Kategorija biznisa"
-                options={[
-                  { label: 'Ten', value: 10 },
-                  { label: 'Twenty', value: 20 },
-                  { label: 'Thirty', value: 30 }
-                ]}
+                name="category"
+                label="Kategorije"
+                options={filtersData.categories.map((category) => ({
+                  label: _.capitalize(category),
+                  value: category
+                }))}
               />
               <ControlledInput
                 name="tags"
@@ -286,14 +310,13 @@ export const CreateBusinessScreen: React.FC<CreateBusinessProps> = () => {
                 label="Dodaj tag-ove, odvajaj zarezima (max 4)"
               />
               <ControlledSelect
-                name="program"
                 control={control}
+                name="program"
                 label="Program"
-                options={[
-                  { label: 'Ten', value: 10 },
-                  { label: 'Twenty', value: 20 },
-                  { label: 'Thirty', value: 30 }
-                ]}
+                options={filtersData.programs.map((program) => ({
+                  label: capitalize(program),
+                  value: program
+                }))}
               />
               <ControlledInput
                 name="year"
